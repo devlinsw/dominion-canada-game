@@ -1,671 +1,620 @@
 # 🍁 Dominion — Decision Tree & Game Flow
 
-> **Dominion** is a Canadian political simulator where you become Prime Minister in 1968 and play through real historical decisions through 2025, discovering what your Canada looks like in 2030.
->
-> This document maps every decision, every choice, every metric impact, and how the game flows from start to finish.
+> **Generated file — do not edit by hand.** Run `node tools/build-docs.mjs` after
+> changing `index.html`. Every number below is read out of the live `DECISIONS`
+> array, so this document cannot drift from the game.
 
 ---
 
-## Table of Contents
+## Game Flow
 
-1. [Game Flow Overview](#game-flow-overview)
-2. [Metrics](#metrics)
-3. [Election Mechanics](#election-mechanics)
-4. [End-Game Scoring](#end-game-scoring)
-5. [Full Decision Map (Mermaid)](#full-decision-map-mermaid)
-6. [Decision-by-Decision Breakdown](#decision-by-decision-breakdown)
-
----
-
-## Game Flow Overview
-
-The game is **linear**: you face 23 decision points in chronological order (1968 → 2025). Each decision offers 2–3 choices. After each choice, you see the consequence and metric changes, then move to the next decision. Four of these decisions are **elections** where your approval rating determines whether you stay in power.
+The game is linear: 25 decision points in chronological order (1968 → 2025), of which 4 are elections. Each decision offers 2–3 choices; the choice order is shuffled per run, so screen position carries no information.
 
 ```
 START
   │
+  ├─ [1968] 📜 The Just Society                        ► 3 choices
+  │
+  ├─ [1970] 📜 The October Crisis                      ► 3 choices
+  │
+  ├─ [1971] 📜 A Multicultural Country                 ► 3 choices
+  │
+  ├─ [1972] 🗳️ Election of 1972                        ► 2 choices
+  │
+  ├─ [1976] 📜 The Montreal Olympics                   ► 2 choices
+  │
+  ├─ [1977] 📜 The Berger Inquiry                      ► 3 choices
+  │
+  ├─ [1980] 📜 The National Energy Program             ► 3 choices
+  │
+  ├─ [1980] 🗳️ The Quebec Referendum                   ► 2 choices
+  │
+  ├─ [1982] 📜 Bringing the Constitution Home          ► 3 choices
+  │
+  ├─ [1984] 🗳️ Election of 1984                        ► 3 choices
+  │
+  ├─ [1988] 📜 Free Trade with America                 ► 3 choices
+  │
+  ├─ [1991] 📜 The GST                                 ► 3 choices
+  │
+  ├─ [1992] 📜 The Meech Lake Accord                   ► 3 choices
+  │
+  ├─ [1992] 📜 The Cod Moratorium                      ► 3 choices
+  │
+  ├─ [1995] 📜 The Quebec Referendum, Round Two        ► 3 choices
+  │
+  ├─ [1995] 📜 The Deficit                             ► 3 choices
+  │
+  ├─ [2002] 📜 Kyoto or Not                            ► 3 choices
+  │
+  ├─ [2005] 📜 Same-Sex Marriage                       ► 3 choices
+  │
+  ├─ [2008] 📜 The Global Financial Crisis             ► 3 choices
+  │
+  ├─ [2012] 📜 The Oil Sands                           ► 3 choices
+  │
+  ├─ [2015] 🗳️ Election of 2015                        ► 3 choices
+  │
+  ├─ [2018] 📜 Cannabis Legalization                   ► 3 choices
+  │
+  ├─ [2019] 📜 The Carbon Tax                          ► 3 choices
+  │
+  ├─ [2020] 📜 The Pandemic                            ► 3 choices
+  │
+  ├─ [2025] 📜 The Trump Tariffs                       ► 3 choices
+  │
   ▼
-[1968] The Just Society ──────────────► 3 choices
-  │
-[1970] The October Crisis ────────────► 3 choices
-  │
-[1971] A Multicultural Country ───────► 3 choices
-  │
-[1972] 🗳️ ELECTION ────────────────────► 2 choices (win/minority/lose)
-  │
-[1976] The Montreal Olympics ──────────► 2 choices
-  │
-[1980] The National Energy Program ───► 3 choices
-  │
-[1980] 🗳️ ELECTION: Quebec Referendum ► 2 choices (win/lose)
-  │
-[1982] Bringing the Constitution Home ─► 3 choices
-  │
-[1984] 🗳️ ELECTION ────────────────────► 2 choices (lose/lose)
-  │
-[1988] Free Trade with America ───────► 3 choices
-  │
-[1991] The GST ────────────────────────► 3 choices
-  │
-[1992] The Meech Lake Accord ─────────► 3 choices
-  │
-[1995] The Quebec Referendum, Round 2 ─► 3 choices
-  │
-[1997] The Deficit ────────────────────► 3 choices
-  │
-[2002] Kyoto or Not ──────────────────► 3 choices
-  │
-[2005] Same-Sex Marriage ─────────────► 3 choices
-  │
-[2008] The Global Financial Crisis ───► 3 choices
-  │
-[2012] The Oil Sands ─────────────────► 3 choices
-  │
-[2015] 🗳️ ELECTION ────────────────────► 3 choices (win/minority/lose)
-  │
-[2018] Cannabis Legalization ─────────► 3 choices
-  │
-[2019] The Carbon Tax ────────────────► 3 choices
-  │
-[2020] The Pandemic ───────────────────► 3 choices
-  │
-[2025] The Trump Tariffs ─────────────► 3 choices
-  │
-  ▼
-END SCREEN — "Your Canada, 2030"
+END — "Your Canada, 2030"
 ```
 
 ---
 
 ## Metrics
 
-Seven metrics are tracked throughout the game, each starting at **50/100**:
+All metrics start at **50** and are clamped to **0–100**. The first six determine the
+final score; **Approval** gates elections but is excluded from scoring.
 
-| Metric | Description | Color |
-|--------|-------------|-------|
-| 🟡 **National Unity** | How cohesive is the federation? Quebec, West, Indigenous relations | Gold |
-| 🟢 **Economy** | GDP growth, employment, fiscal health | Teal |
-| 🔵 **Rights & Liberties** | Charter strength, civil rights, minority protections | Light Teal |
-| 🟢 **Environment** | Climate policy, emissions, clean energy transition | Teal |
-| 🔴 **Sovereignty** | Independence from US/UK, control over own destiny | Red |
-| 🟠 **Social Wellbeing** | Health care, education, housing, social safety net | Amber |
-| 🔴 **Approval** | Voter approval rating — gates elections | Red |
-
-All metrics are clamped to **0–100**. The first six determine your final score. **Approval** gates elections but is not part of the final score.
-
----
-
-## Election Mechanics
-
-There are **4 election decisions** at years: **1972, 1980, 1984, 2015**.
-
-Each election has an `approvalNeeded` threshold:
-
-| Election Year | Title | Approval Needed |
-|---------------|-------|----------------|
-| 1972 | Election of 1972 | 30% |
-| 1980 | The Quebec Referendum | 25% |
-| 1984 | Election of 1984 | 35% |
-| 2015 | Election of 2015 | 30% |
-
-**How it works:**
-- Your current **Approval** metric is compared to the threshold
-- Each election choice has a pre-defined `result` (win / minority / lose)
-- If your approval ≥ threshold AND the choice's result is "win" → you win
-- If your approval < threshold → you lose regardless of choice
-- The 1984 election is scripted as a **loss** regardless (16 years in power, country wants change)
-
-**Election outcomes affect the game:**
-- **Win** → `electionsWon++`, term continues
-- **Minority** → `electionsWon++`, term continues (reduced mandate)
-- **Lose** → `electionsLost++`, you still continue playing (the game doesn't end — you're now in opposition but the country's trajectory continues)
+| Metric | Reachable range | Decisions that move it | Controllable swing |
+|---|---|---|---|
+| **National Unity** | 0–100 | 24/25 | 253 |
+| **Economy** | 0–100 | 19/25 | 172 |
+| **Rights & Liberties** | 0–100 | 17/25 | 151 |
+| **Environment** | 0–100 | 7/25 | 113 |
+| **Sovereignty** | 9–100 | 22/25 | 139 |
+| **Social Wellbeing** | 0–100 | 24/25 | 205 |
+| **Approval** | 0–100 | 24/25 | 228 |
 
 ---
 
-## End-Game Scoring
+## Elections
 
-After all 23 decisions are complete, the end screen calculates:
+| Year | Title | Approval needed | Approval reachable at that point | Gate binds? |
+|---|---|---|---|---|
+| 1972 | Election of 1972 | 41% | 34–73 | yes |
+| 1980 | The Quebec Referendum | 28% | 26–84 | yes |
+| 1984 | Election of 1984 | 49% | 18–92 | yes |
+| 2015 | Election of 2015 | 30% | 0–100 | yes |
 
-```
-finalScore = average(unity, economy, rights, enviro, sovereign, social)
+**Resolution** (single implementation, shared by the UI and the analyzer):
+
+```js
+function resolveElection(decision, choice, approvalAtBallot) {
+  const needed = decision.approvalNeeded ?? 30;
+  if (choice.result === 'lose') return 'lose';
+  if (approvalAtBallot < needed) return 'lose';
+  return choice.result === 'minority' ? 'minority' : 'win';
+}
 ```
 
-**Approval is excluded from the final score** — it's a political metric, not a national outcome.
-
-### Score Thresholds
-
-| Score | Rating | Narrative |
-|-------|--------|-----------|
-| ≥ 75 | **Extraordinary** | "Your Canada is extraordinary." |
-| ≥ 60 | **Strong** | "Your Canada is strong." |
-| ≥ 45 | **Familiar** | "Your Canada is... familiar." |
-| ≥ 30 | **Struggling** | "Your Canada is struggling." |
-| < 30 | **Broken** | "Your Canada is broken." |
-
-### The 6% Stat
-
-If `finalScore > 50` → you're in the **6%** who left Canada better than real history.
-If `finalScore ≤ 50` → you're in the **94%** — "Governing is harder than it looks."
-
-The end screen also generates a tailored narrative based on each individual metric (unity, economy, rights, enviro, sovereignty, social) with different text for high (≥70), medium (40–69), and low (<40) values.
+**Defeat has teeth.** Losing puts you in opposition for the next 2 decisions: you are still asked, but your choice lands at 50% strength.
 
 ---
 
-## Full Decision Map (Mermaid)
+## Scoring
 
-```mermaid
-graph TD
-    Start((START)) --> D1968
-
-    D1968["📜 1968: The Just Society"] -->|Pass Official Languages Act| C1968a
-    D1968 -->|Delay — focus on economy| C1968b
-    D1968 -->|Dual federalism| C1968c
-    C1968a["unity+12, rights+5, approval+3,<br>sovereign+5, social-2"] --> D1970
-    C1968b["unity-8, approval+2,<br>economy+3, social-3"] --> D1970
-    C1968c["unity+6, approval-5, sovereign-3,<br>social+2, rights+2"] --> D1970
-
-    D1970["📜 1970: The October Crisis"] -->|Invoke War Measures Act| C1970a
-    D1970 -->|Police & negotiation only| C1970b
-    D1970 -->|Sunset clause| C1970c
-    C1970a["approval+10, unity-3,<br>rights-10, social-5"] --> D1971
-    C1970b["approval-8, rights+8,<br>unity-5, social+3"] --> D1971
-    C1970c["approval+5, rights-4,<br>unity-1, social-2"] --> D1971
-
-    D1971["📜 1971: A Multicultural Country"] -->|Adopt multiculturalism| C1971a
-    D1971 -->|Bilingualism only| C1971b
-    D1971 -->|Multiculturalism w/ integration| C1971c
-    C1971a["social+8, unity+4, approval+5,<br>rights+5, economy+2"] --> E1972
-    C1971b["social-5, unity-3,<br>approval-3, rights-3"] --> E1972
-    C1971c["social+5, unity+2, approval+3,<br>rights+2, economy+1"] --> E1972
-
-    E1972["🗳️ 1972: ELECTION<br/>approval needed: 30%"] -->|Campaign on record| EC1972a
-    E1972 -->|Pivot to economy| EC1972b
-    EC1972a["→ minority govt"] --> D1976
-    EC1972b["economy+2, approval-2<br/>→ minority govt"] --> D1976
-
-    D1976["📜 1976: The Montreal Olympics"] -->|Bail out the Games| C1976a
-    D1976 -->|Let Montreal pay| C1976b
-    C1976a["approval+5, unity+5, economy-8,<br>social+3, sovereign+2"] --> D1980NEP
-    C1976b["approval-5, unity-8,<br>economy+3, sovereign-2"] --> D1980NEP
-
-    D1980NEP["📜 1980: National Energy Program"] -->|Implement NEP fully| C1980a
-    D1980NEP -->|Revenue-sharing deal| C1980b
-    D1980NEP -->|Let market sort it out| C1980c
-    C1980a["economy-5, approval-3, unity-12,<br>sovereign+8, social+5"] --> E1980
-    C1980b["economy+3, unity+2, approval+3,<br>sovereign+3, social+2"] --> E1980
-    C1980c["economy+5, unity-5, approval-5,<br>sovereign-8, social-5"] --> E1980
-
-    E1980["🗳️ 1980: QUEBEC REFERENDUM<br/>approval needed: 25%"] -->|Campaign hard for Canada| EC1980a
-    E1980 -->|Let Quebec decide| EC1980b
-    EC1980a["unity+8, approval+5, sovereign+3<br/>→ WIN"] --> D1982
-    EC1980b["unity-15, approval-3, sovereign-8<br/>→ LOSE"] --> D1982
-
-    D1982["📜 1982: Bringing the Constitution Home"] -->|Patriate + Charter| C1982a
-    D1982 -->|Negotiate until Quebec agrees| C1982b
-    D1982 -->|Patriate without Charter| C1982c
-    C1982a["rights+12, sovereign+10, unity-8,<br>approval+3, social+3"] --> E1984
-    C1982b["rights+3, unity+5, sovereign+5,<br>approval-5"] --> E1984
-    C1982c["sovereign+10, rights-8,<br>unity+2, approval+2"] --> E1984
-
-    E1984["🗳️ 1984: ELECTION<br/>approval needed: 35%<br/> scripted: LOSE"] -->|Campaign on Charter| EC1984a
-    E1984 -->|Campaign on stability| EC1984b
-    EC1984a["→ LOSE"] --> D1988
-    EC1984b["approval+3 → LOSE"] --> D1988
-
-    D1988["📜 1988: Free Trade with America"] -->|Support free trade| C1988a
-    D1988 -->|Renegotiate w/ exemptions| C1988b
-    D1988 -->|Kill the deal| C1988c
-    C1988a["economy+10, sovereign-10, unity-3,<br>approval+3, social-2"] --> D1991
-    C1988b["economy+4, sovereign+3, unity+2,<br>social+3, approval-2"] --> D1991
-    C1988c["economy-10, sovereign+8, unity+5,<br>approval-5, social+3"] --> D1991
-
-    D1991["📜 1991: The GST"] -->|Implement GST| C1991a
-    D1991 -->|Hidden manufacturer's tax| C1991b
-    D1991 -->|Cut spending instead| C1991c
-    C1991a["economy+5, approval-12,<br>social+3, unity-3"] --> D1992
-    C1991b["economy+3, approval+2,<br>social+1, unity+1"] --> D1992
-    C1991c["economy+2, approval+3, social-10,<br>unity-5, rights-2"] --> D1992
-
-    D1992["📜 1992: The Meech Lake Accord"] -->|Push it through| C1992a
-    D1992 -->|Let it die| C1992b
-    D1992 -->|Include Indigenous nations| C1992c
-    C1992a["unity+10, approval-3, rights-3,<br>social-2, sovereign+2"] --> D1995
-    C1992b["unity-10, approval+2, rights+3,<br>social+2, sovereign-2"] --> D1995
-    C1992c["unity+8, rights+8, approval-2,<br>social+5, sovereign+3"] --> D1995
-
-    D1995["📜 1995: Quebec Referendum, Round 2"] -->|Fight with everything| C1995a
-    D1995 -->|Let Quebec decide| C1995b
-    D1995 -->|Clear reform offer| C1995c
-    C1995a["unity+10, approval+5,<br>sovereign+5, social+2"] --> D1997
-    C1995b["unity-20, approval-3,<br>sovereign-15, social-5"] --> D1997
-    C1995c["unity+5, approval+3,<br>sovereign+3, rights+3"] --> D1997
-
-    D1997["📜 1997: The Deficit"] -->|Cut transfers| C1997a
-    D1997 -->|Balanced approach| C1997b
-    D1997 -->|Invest in growth| C1997c
-    C1997a["economy+10, social-12, unity-5,<br>approval-3, rights-5"] --> D2002
-    C1997b["economy+5, social-4, approval-5,<br>unity+1, rights-2"] --> D2002
-    C1997c["economy-5, social+5, approval+5,<br>unity+3, rights+2"] --> D2002
-
-    D2002["📜 2002: Kyoto or Not"] -->|Ratify Kyoto| C2002a
-    D2002 -->|Ratify w/ concessions| C2002b
-    D2002 -->|Don't ratify| C2002c
-    C2002a["enviro+12, economy-5, approval-2,<br>sovereign+3, social+2"] --> D2005
-    C2002b["enviro+4, economy+2, approval+2,<br>sovereign+1"] --> D2005
-    C2002c["enviro-10, economy+6, approval+3,<br>sovereign-2, social-2"] --> D2005
-
-    D2005["📜 2005: Same-Sex Marriage"] -->|Pass Civil Marriage Act| C2005a
-    D2005 -->|Civil unions only| C2005b
-    D2005 -->|Defend traditional marriage| C2005c
-    C2005a["rights+10, social+8, approval-3,<br>unity-2, sovereign+3"] --> D2008
-    C2005b["rights+4, social+4, approval+2,<br>unity+1, sovereign+1"] --> D2008
-    C2005c["rights-10, social-8, approval+3,<br>unity+3, sovereign-3"] --> D2008
-
-    D2008["📜 2008: The Global Financial Crisis"] -->|Stimulate| C2008a
-    D2008 -->|Modest support| C2008b
-    D2008 -->|Austerity| C2008c
-    C2008a["economy+5, social+5, approval+8,<br>unity+3, enviro-2, sovereign+2"] --> D2012
-    C2008b["economy+2"] --> D2012
-    C2008c["economy-10, social-10, approval-10,<br>unity-5, sovereign-2"] --> D2012
-
-    D2012["📜 2012: The Oil Sands"] -->|Regulate and cap| C2012a
-    D2012 -->|Approve pipelines| C2012b
-    D2012 -->|Clean growth strategy| C2012c
-    C2012a["enviro+10, economy-5, approval-5,<br>unity-5, social+2, sovereign+3"] --> E2015
-    C2012b["enviro-12, economy+10, approval+3,<br>unity+3, social-3, sovereign-2"] --> E2015
-    C2012c["enviro+2, economy+5, approval+5,<br>unity+5, social+3, sovereign+2"] --> E2015
-
-    E2015["🗳️ 2015: ELECTION<br/>approval needed: 30%"] -->|Progressive era| EC2015a
-    E2015 -->|Steady management| EC2015b
-    E2015 -->|Pivot right| EC2015c
-    EC2015a["rights+5, social+5, enviro+3, approval+5,<br>unity+2, sovereign+2 → WIN"] --> D2018
-    EC2015b["economy+3, unity+1 → MINORITY"] --> D2018
-    EC2015c["economy+5, enviro-5, social-5, rights-5,<br>approval-3, unity-3 → LOSE"] --> D2018
-
-    D2018["📜 2018: Cannabis Legalization"] -->|Legalize & regulate| C2018a
-    D2018 -->|Decriminalize only| C2018b
-    D2018 -->|Keep criminal| C2018c
-    C2018a["rights+5, social+5, approval-2,<br>economy+3, sovereign+3, unity+1"] --> D2019
-    C2018b["rights+3, social+3, approval+2,<br>sovereign+1"] --> D2019
-    C2018c["rights-5, social-3, approval-2,<br>economy-3, sovereign-2, unity-2"] --> D2019
-
-    D2019["📜 2019: The Carbon Tax"] -->|Hold firm| C2019a
-    D2019 -->|Pause increases| C2019b
-    D2019 -->|Scrap the tax| C2019c
-    C2019a["enviro+8, economy-3, approval-5,<br>unity-5, sovereign+3, social+2"] --> D2020
-    C2019b["enviro+3, economy+2, approval+3,<br>unity+2"] --> D2020
-    C2019c["enviro-5, economy+5, approval+5,<br>unity+5, sovereign-2, social-2"] --> D2020
-
-    D2020["📜 2020: The Pandemic"] -->|Go big — CERB| C2020a
-    D2020 -->|Moderate support| C2020b
-    D2020 -->|Minimal response| C2020c
-    C2020a["economy-5, social+10, approval+10,<br>unity+5, rights-3, sovereign+3"] --> D2025
-    C2020b["economy-2, social+3, approval+3,<br>unity+2, rights+2, sovereign+1"] --> D2025
-    C2020c["economy+3, social-15, approval-5,<br>unity-8, rights+5, sovereign-2"] --> D2025
-
-    D2025["📜 2025: The Trump Tariffs"] -->|Retaliate & diversify| C2025a
-    D2025 -->|Negotiate| C2025b
-    D2025 -->|Full integration| C2025c
-    C2025a["sovereign+12, economy-5, approval+10,<br>unity+10, social-2, rights+2"] --> End
-    C2025b["sovereign-8, economy+5, approval-5,<br>unity-5, rights-2"] --> End
-    C2025c["sovereign-20, economy+15, approval-8,<br>unity-15, social+2, rights-5"] --> End
-
-    End((END SCREEN<br/>"Your Canada, 2030"))
-
-    style Start fill:#2a9d8f,color:#fff
-    style End fill:#d62828,color:#fff
-    style E1972 fill:#e9c46a,color:#000
-    style E1980 fill:#e9c46a,color:#000
-    style E1984 fill:#e9c46a,color:#000
-    style E2015 fill:#e9c46a,color:#000
+```
+finalScore = mean(unity, economy, rights, enviro, sovereign, social)
 ```
 
+The real timeline — the choices Canada actually made — scores **81.0** under these
+same rules. That, not 50, is the bar for "you beat history".
+
+| Metric | Real history, 2030 |
+|---|---|
+| National Unity | 59 |
+| Economy | 62 |
+| Rights & Liberties | 95 |
+| Environment | 83 |
+| Sovereignty | 100 |
+| Social Wellbeing | 87 |
+| Approval | 97 |
+
 ---
 
-## Decision-by-Decision Breakdown
+## Decision-by-decision
 
 ### 📜 1968 — The Just Society
 
-> Quebec is restless. The Quiet Revolution has transformed the province. You promised a "just society."
+> You've just been elected Prime Minister. Quebec is restless — the Quiet Revolution has transformed the province, and the separatist movement is gaining steam. The Royal Commission on Bilingualism and Biculturalism has reported that Canada is in crisis. You promised a *'just society'* in your campaign. What do you do first?
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Pass the Official Languages Act | +12 | — | +5 | — | +5 | -2 | +3 |
-| 2 | Delay — focus on the economy | -8 | +3 | — | — | — | -3 | +2 |
-| 3 | Go further — dual federalism | +6 | — | +2 | — | -3 | +2 | -5 |
+**Term 1**
 
-**Historical basis:** Trudeau passed the Official Languages Act in 1969, making English and French equal in federal institutions.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Pass the Official Languages Act | +12 | — | +5 | — | +5 | -2 | +3 | +20 | **✓ actual** |
+| 2 | Delay — focus on the economy instead | -8 | +3 | — | — | — | -3 | +2 | -8 |  |
+| 3 | Go further — dual federalism | +6 | — | +2 | — | -3 | +2 | -5 | +7 |  |
 
 ### 📜 1970 — The October Crisis
 
-> The FLQ has kidnapped James Cross and Pierre Laporte. Quebec's Premier asks you to invoke the War Measures Act.
+> October 1970. The FLQ has kidnapped British diplomat James Cross and Quebec Labour Minister Pierre Laporte. Bombs have been going off in Montreal for months. The Premier of Quebec, Robert Bourassa, asks you to invoke the *War Measures Act* — peacetime martial law, never used before. 500 people could be arrested overnight. A reporter asks how far you'll go. *'Just watch me,'* you say.
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Invoke the War Measures Act | -3 | — | -10 | — | — | -5 | +10 |
-| 2 | Use police and negotiation only | -5 | — | +8 | — | — | +3 | -8 |
-| 3 | Sunset clause (temporary powers) | -1 | — | -4 | — | — | -2 | +5 |
+**Term 1**
 
-**Historical basis:** Trudeau invoked the War Measures Act on Oct 16, 1970. 497 people arrested. Laporte was murdered. "Just watch me" became the most famous phrase in Canadian political history.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Invoke the War Measures Act | +2 | — | -10 | — | +3 | -5 | +15 | -10 | **✓ actual** |
+| 2 | Use police and negotiation only | -5 | — | +8 | — | -3 | +3 | -8 | +3 |  |
+| 3 | Invoke the Act but with a sunset clause | -1 | — | -4 | — | +1 | -2 | +5 | -6 |  |
 
 ### 📜 1971 — A Multicultural Country
 
-> Canada isn't just English and French. You're about to announce the world's first official multiculturalism policy.
+> The Royal Commission on Biculturalism revealed a third reality: Canada isn't just English and French. It's Ukrainian, Italian, Chinese, Indigenous, dozens of peoples. You're about to announce a new policy — the first official multiculturalism policy in the world. Some say it dilutes the French-English compact. Others say it's the only honest description of what Canada already is.
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Adopt official multiculturalism | +4 | +2 | +5 | — | — | +8 | +5 |
-| 2 | Bilingualism is enough | -3 | — | -3 | — | — | -5 | -3 |
-| 3 | Multiculturalism w/ integration | +2 | +1 | +2 | — | — | +5 | +3 |
+**Term 1**
 
-**Historical basis:** October 1971, Canada became the first country to adopt multiculturalism as official policy.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Adopt official multiculturalism | +6 | +2 | +5 | — | — | +8 | +5 | +21 | **✓ actual** |
+| 2 | Bilingualism is enough — reject multiculturalism | +5 | +5 | -3 | — | +2 | -5 | -3 | +4 |  |
+| 3 | Adopt it but with integration requirements | +6 | +3 | +2 | — | — | +5 | +3 | +16 |  |
 
 ### 🗳️ 1972 — Election of 1972
 
-> Your first election. The opposition says you're arrogant. The economy is softening.
+> Your first election as Prime Minister. The opposition says you're arrogant, too intellectual, out of touch. The economy is softening. But your language policy and the October Crisis response are still fresh. Do you campaign on your record, or pivot?
 
-| # | Choice | Effects | Result |
-|---|--------|---------|--------|
-| 1 | Campaign on the record | — | minority |
-| 2 | Pivot to economic competence | economy +2, approval -2 | minority |
+**Approval needed:** 41%
 
-**Approval needed:** 30%. Both choices lead to minority — it's a close election either way.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Result | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Campaign on the record — 'A Just Society' | +3 | — | — | — | — | +2 | +3 | +5 | minority | **✓ actual** |
+| 2 | Pivot to economic competence | — | +5 | — | — | — | — | +2 | +5 | minority |  |
 
 ### 📜 1976 — The Montreal Olympics
 
-> The facilities are spectacular but costs are spiraling. The debt won't be paid off until 2006.
+> Montreal is hosting the 1976 Olympics. The facilities are spectacular — but the costs are spiraling. Mayor Jean Drapeau promised the Games would pay for themselves. They won't. The final bill will be billions. Do you bail out the Games?
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Bail out the Games | +5 | -8 | — | — | +2 | +3 | +5 |
-| 2 | Let Montreal pay | -8 | +3 | — | — | -2 | — | -5 |
+**Term 2**
 
-**Historical basis:** The 1976 Olympics left Montreal with ~$1.5 billion in debt, paid off in 2006. The Big Owe.
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Yes — Canada must not be embarrassed | +5 | -8 | — | — | +2 | +3 | +5 | +2 |  |
+| 2 | No — let Montreal handle its own mess | -8 | +3 | — | — | -2 | — | -5 | -7 | **✓ actual** |
 
----
+### 📜 1977 — The Berger Inquiry
+
+> A pipeline company wants to build across the Mackenzie Valley — through Dene and Inuit land, unceded and untouched. Justice Thomas Berger has held hearings across the North — the first time Indigenous voices were heard on a resource project. His report recommends a 10-year moratorium. The pipeline would open the Arctic to industry. *The world is watching: what does Canada value more — energy or land?*
+
+**Term 2**
+
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Accept the moratorium — listen to the land | +3 | -5 | +8 | +12 | +3 | +5 | — | +26 | **✓ actual** |
+| 2 | Build the pipeline — the North needs development | -3 | +8 | -5 | -12 | +5 | +2 | — | -5 |  |
+| 3 | Build it with Indigenous co-ownership | +4 | +5 | +5 | -4 | +3 | +6 | — | +19 |  |
 
 ### 📜 1980 — The National Energy Program
 
-> Oil prices have quadrupled. Alberta is booming. You propose the NEP — "a declaration of economic war."
+> Oil prices have quadrupled. Alberta is swimming in revenue while the rest of Canada pays through the nose. You propose the National Energy Program (NEP) — a made-in-Canada oil policy that would control prices, promote Canadian ownership, and keep energy affordable for Eastern Canada. Alberta's Premier Peter Lougheed calls it *'a declaration of economic war.'*
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Implement the NEP fully | -12 | -5 | — | — | +8 | +5 | -3 |
-| 2 | Revenue-sharing deal | +2 | +3 | — | — | +3 | +2 | +3 |
-| 3 | Let the market sort it out | -5 | +5 | — | — | -8 | -5 | -5 |
+**Term 3**
 
-**Historical basis:** The NEP (1980–1985) caused massive Western alienation. Alberta's unemployment jumped from 4% to 12%. Bumper stickers: "Let the Eastern Bastards Freeze in the Dark."
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Implement the NEP fully | -12 | -5 | — | — | +8 | +5 | -3 | -4 | **✓ actual** |
+| 2 | Negotiate a revenue-sharing deal with provinces | +2 | +3 | — | — | +3 | +2 | +3 | +10 |  |
+| 3 | Let the market sort it out | -5 | +5 | — | — | -8 | -5 | -5 | -13 |  |
 
 ### 🗳️ 1980 — The Quebec Referendum
 
-> May 1980. René Lévesque has called a referendum on sovereignty-association.
+> May 1980. Quebec Premier René Lévesque has called a referendum on sovereignty-association. The question: should Quebec negotiate a new relationship with the rest of Canada? You're a federalist from Montreal. How hard do you campaign?
 
-| # | Choice | Effects | Result |
-|---|--------|---------|--------|
-| 1 | Campaign hard for Canada | unity +8, approval +5, sovereign +3 | **win** |
-| 2 | Let Quebec decide | unity -15, approval -3, sovereign -8 | **lose** |
+**Approval needed:** 28%
 
-**Approval needed:** 25%. In real history, the Non side won with 59.6%.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Result | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Campaign hard — 'My country is my country' | +8 | — | — | — | +3 | — | +5 | +11 | win | **✓ actual** |
+| 2 | Let Quebecers decide for themselves | -8 | — | +5 | — | +4 | +2 | -3 | +3 | lose |  |
 
 ### 📜 1982 — Bringing the Constitution Home
 
-> The constitution is still a British law. You want to patriate it with a Charter of Rights. Quebec has never signed.
+> The British North America Act — Canada's constitution — is still a British law. You want to patriate it: bring it home, with a Canadian amending formula and a *Charter of Rights and Freedoms*. Eight premiers oppose you. Quebec has never signed the 1982 Constitution. This is the biggest constitutional moment since 1867.
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Patriate + Charter (without Quebec) | -8 | — | +12 | — | +10 | +3 | +3 |
-| 2 | Negotiate until Quebec agrees | +5 | — | +3 | — | +5 | — | -5 |
-| 3 | Patriate without Charter | +2 | — | -8 | — | +10 | — | +2 |
+**Term 3**
 
-**Historical basis:** April 17, 1982. Queen Elizabeth signed the Constitution Act on Parliament Hill. Quebec never signed. The Charter became the most beloved document in Canadian life.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Patriate with the Charter — with or without Quebec | -8 | — | +12 | — | +10 | +3 | +3 | +17 | **✓ actual** |
+| 2 | Negotiate until Quebec agrees | +5 | — | +3 | — | +5 | — | -5 | +13 |  |
+| 3 | Patriate without the Charter | +2 | — | -8 | — | +10 | — | +2 | +4 |  |
 
 ### 🗳️ 1984 — Election of 1984
 
-> You've been PM for 16 years. The country wants change.
+> You've been PM for 16 years. The economy has struggled. The NEP angered the West. Quebec is still out of the constitution. But you patriated the Constitution and gave Canadians the Charter. The voters are tired of you. *It's time.*
 
-| # | Choice | Effects | Result |
-|---|--------|---------|--------|
-| 1 | Campaign on the Charter | — | **lose** |
-| 2 | Campaign on stability | approval +3 | **lose** |
+**Approval needed:** 49%
 
-**Approval needed:** 35%. Scripted as a loss — 16 years is a long time. In real history, Mulroney's PCs won the largest majority in history.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Result | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Campaign on the Charter and sovereignty | — | — | +2 | — | — | — | +5 | +2 | win | **✓ actual** |
+| 2 | Campaign on experience and stability | — | +2 | — | — | — | — | +8 | +2 | minority |  |
+| 3 | Step aside — let a new leader carry the banner | +2 | — | — | — | — | — | +3 | +2 | lose |  |
 
 ### 📜 1988 — Free Trade with America
 
-> The FTA with the US: "the beginning of the end of Canadian sovereignty" or a transformative economic boom?
+> The new Progressive Conservative government has negotiated a Free Trade Agreement with the United States. It's the defining issue of the era. Free traders say it will transform the economy. Critics say it's the *beginning of the end of Canadian sovereignty* — a slow absorption into the American orbit. The election is a referendum on free trade.
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Support free trade | -3 | +10 | — | — | -10 | -2 | +3 |
-| 2 | Renegotiate w/ exemptions | +2 | +4 | — | — | +3 | +3 | -2 |
-| 3 | Kill the deal | +5 | -10 | — | — | +8 | +3 | -5 |
+**Term 4**
 
-**Historical basis:** The Canada-US FTA was signed Jan 2, 1988, later expanded into NAFTA. Mulroney won the 1988 election on this issue.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Support free trade — the deal is done | -3 | +10 | — | — | -10 | -2 | +3 | -5 | **✓ actual** |
+| 2 | Oppose — renegotiate for cultural exemptions | +2 | +4 | — | — | +3 | +3 | -2 | +12 |  |
+| 3 | Kill the deal — build east-west trade instead | +5 | -10 | — | — | +8 | +3 | -5 | +6 |  |
 
 ### 📜 1991 — The GST
 
-> A 7% Goods and Services Tax on almost everything. Unpopular but necessary for fiscal stability.
+> The government needs revenue. The deficit is enormous. The proposal: a 7% Goods and Services Tax on almost everything. It's deeply unpopular — every Canadian will see it on every receipt. But it will fund the social state for a generation.
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Implement the GST | -3 | +5 | — | — | — | +3 | -12 |
-| 2 | Hidden manufacturer's tax | +1 | +3 | — | — | — | +1 | +2 |
-| 3 | Cut spending instead | -5 | +2 | -2 | — | — | -10 | +3 |
+**Term 5**
 
-**Historical basis:** The GST passed in 1991. Most hated tax in Canadian history, but it stabilized government revenues and helped eliminate the deficit.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Implement the GST | -3 | +5 | — | — | — | +3 | -12 | +5 | **✓ actual** |
+| 2 | Replace with a hidden manufacturer's tax | +1 | +3 | — | — | — | +1 | +2 | +5 |  |
+| 3 | Cut spending instead — no new tax | -5 | +6 | -2 | — | +2 | -10 | +3 | -9 |  |
 
 ### 📜 1992 — The Meech Lake Accord
 
-> Quebec still hasn't signed the Constitution. The Accord would recognize Quebec as a "distinct society."
+> June 1990. Quebec still hasn't signed the Constitution. The Meech Lake Accord — negotiated in 1987 — would bring them in, recognizing Quebec as a *'distinct society'* with new powers. But it required unanimous provincial consent by June 23, 1990, and it's dying. Elijah Harper, a Cree MLA in Manitoba, is blocking it. Indigenous leaders, women's groups, and English-Canadian nationalists all oppose it. *The clock runs out at midnight.*
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Push it through | +10 | — | -3 | — | +2 | -2 | -3 |
-| 2 | Let it die | -10 | — | +3 | — | -2 | +2 | +2 |
-| 3 | Include Indigenous nations | +8 | — | +8 | — | +3 | +5 | -2 |
+**Term 5**
 
-**Historical basis:** Meech Lake died in 1990 when Elijah Harper's filibuster killed it in Manitoba. Quebec was wounded again. The 1995 referendum became inevitable.
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Push it through — Quebec must be inside | +10 | — | -3 | — | +2 | -2 | -3 | +7 |  |
+| 2 | Let it die — the deal is flawed | -10 | — | +9 | — | +4 | +6 | +2 | +9 | **✓ actual** |
+| 3 | Renegotiate — include Indigenous nations | +8 | — | +8 | — | +3 | +5 | -2 | +24 |  |
 
----
+### 📜 1992 — The Cod Moratorium
+
+> July 1992. The cod stocks off Newfoundland and Labrador have collapsed — 500 years of fishing, gone. 40,000 people are about to lose their livelihood overnight. The science is clear: the fishery must close to save the stock. But the culture, the communities, the identity of Atlantic Canada is built on cod. *This is not a policy decision — it's a funeral.*
+
+**Term 5**
+
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Close the fishery — the cod must recover | -3 | -8 | — | +12 | +2 | -8 | -3 | -5 | **✓ actual** |
+| 2 | Keep the fishery open — let the communities survive | +2 | +3 | — | -10 | -2 | +5 | +5 | -2 |  |
+| 3 | Close it — but buy the licences and invest in transition | +4 | -3 | — | +10 | +3 | +3 | +2 | +17 |  |
 
 ### 📜 1995 — The Quebec Referendum, Round Two
 
-> October 30, 1995. The polls are dead even. This is the night Canada almost breaks apart.
+> October 30, 1995. The Parti Québécois has called a second referendum. The question is vague — sovereignty with an offer of partnership. The polls are dead even. You're watching the results come in from Ottawa. *This is the night Canada almost breaks apart.*
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Fight with everything | +10 | — | — | — | +5 | +2 | +5 |
-| 2 | Let Quebec decide | -20 | — | — | — | -15 | -5 | -3 |
-| 3 | Clear reform offer | +5 | — | +3 | — | +3 | — | +3 |
+**Term 6**
 
-**Historical basis:** The Non won by 53,000 votes (50.58% to 49.42%). Parizeau blamed "money and the ethnic vote." Canada survived by a razor's margin.
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Fight with everything — a passionate Canada | +10 | — | — | — | +5 | +2 | +5 | +17 | **✓ actual** |
+| 2 | Let Quebec decide — minimal federal involvement | -20 | — | +8 | — | +6 | -5 | -3 | -11 |  |
+| 3 | Offer clear constitutional reform — the clarity path | +5 | — | +3 | — | +3 | — | +3 | +11 |  |
 
----
+### 📜 1995 — The Deficit
 
-### 📜 1997 — The Deficit
+> February 1995. Canada's debt is approaching 70% of GDP. The bond rating agencies are making noise. Your Finance Minister proposes slashing the deficit — by cutting the Canada Health and Social Transfer (CHST), $7 billion out of provincial transfers for health and education. It will balance the budget. It will also gut the social contract that holds Canada together. *The budget is in two weeks.*
 
-> Canada's debt is approaching 70% of GDP. Bond rating agencies are making noise.
+**Term 7**
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Cut transfers | -5 | +10 | -5 | — | — | -12 | -3 |
-| 2 | Balanced approach | +1 | +5 | -2 | — | — | -4 | -5 |
-| 3 | Invest in growth | +3 | -5 | +2 | — | — | +5 | +5 |
-
-**Historical basis:** The Chrétien government cut $7 billion from provincial transfers (CHST). Canada led the G7 in deficit reduction, but health care wait times doubled.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Cut transfers — balance the budget | -5 | +10 | -5 | — | — | -12 | -3 | -12 | **✓ actual** |
+| 2 | Balanced approach — tax increases + moderate cuts | +1 | +5 | -2 | — | — | -4 | -5 | — |  |
+| 3 | Invest in growth — let the deficit ride | +3 | -5 | +2 | — | — | +5 | +5 | +5 |  |
 
 ### 📜 2002 — Kyoto or Not
 
-> The Kyoto Protocol asks for 6% below 1990 emissions by 2012. Alberta's oil sands are just starting to boom.
+> Climate change is becoming a mainstream issue. The Kyoto Protocol asks developed countries to reduce greenhouse gas emissions to 6% below 1990 levels by 2012. Canada's economy is resource-heavy — Alberta's oil sands are just beginning their boom. Ratifying Kyoto means constraining that growth.
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Ratify Kyoto | — | -5 | — | +12 | +3 | +2 | -2 |
-| 2 | Ratify w/ concessions | — | +2 | — | +4 | +1 | — | +2 |
-| 3 | Don't ratify | — | +6 | — | -10 | -2 | -2 | +3 |
+**Term 8**
 
-**Historical basis:** Canada ratified Kyoto in 2002 but missed targets badly. Later withdrew under Harper.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Ratify Kyoto — lead on climate | — | -5 | — | +12 | +3 | +2 | -2 | +12 | **✓ actual** |
+| 2 | Ratify with concessions for the energy sector | — | +2 | — | +4 | +1 | — | +2 | +7 |  |
+| 3 | Don't ratify — the economy needs oil | — | +6 | — | -10 | -2 | -2 | +3 | -8 |  |
 
 ### 📜 2005 — Same-Sex Marriage
 
-> Courts have already legalized it in several provinces. The Civil Marriage Act would make Canada the 4th country nationwide.
+> Courts in Ontario, BC, and Quebec have already legalized same-sex marriage. The Supreme Court has said Parliament has the power to extend it nationwide. The Civil Marriage Act would make Canada the fourth country in the world to legalize same-sex marriage. It's a free vote in Parliament. Your minority government is fragile.
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Pass the Civil Marriage Act | -2 | — | +10 | — | +3 | +8 | -3 |
-| 2 | Civil unions only | +1 | — | +4 | — | +1 | +4 | +2 |
-| 3 | Defend traditional marriage | +3 | — | -10 | — | -3 | -8 | +3 |
+**Term 9**
 
-**Historical basis:** July 20, 2005. Canada became the 4th country to legalize same-sex marriage nationwide.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Pass the Civil Marriage Act | -2 | — | +10 | — | +3 | +8 | -3 | +19 | **✓ actual** |
+| 2 | Civil unions only — not marriage | +1 | — | +4 | — | +1 | +4 | +2 | +10 |  |
+| 3 | Defend traditional marriage | +3 | — | -10 | — | -3 | -8 | +3 | -18 |  |
 
 ### 📜 2008 — The Global Financial Crisis
 
-> Lehman Brothers has collapsed. Canada's banks are relatively solid but the real economy is tanking.
+> September 2008. Lehman Brothers has collapsed. The global financial system is in cardiac arrest. Canada's banks are relatively solid — stricter regulation kept them from the worst subprime excesses — but the real economy is tanking. Auto manufacturing in Ontario is hemorrhaging jobs. Do you stimulate or do you cut?
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Stimulate (Economic Action Plan) | +3 | +5 | — | -2 | +2 | +5 | +8 |
-| 2 | Modest support | — | +2 | — | — | — | — | — |
-| 3 | Austerity | -5 | -10 | — | — | -2 | -10 | -10 |
+**Term 10**
 
-**Historical basis:** Canada's Economic Action Plan included infrastructure spending, auto bailouts, and tax cuts. Canada recovered faster than any other G7 country.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Stimulate — the Economic Action Plan | +3 | +5 | — | -2 | +2 | +5 | +8 | +13 | **✓ actual** |
+| 2 | Steady as she goes — modest support | — | +2 | — | — | — | — | — | +2 |  |
+| 3 | Austerity — balance the budget through the recession | -5 | +3 | -2 | — | +3 | -10 | -10 | -11 |  |
 
 ### 📜 2012 — The Oil Sands
 
-> The third-largest oil reserve in the world. Also Canada's largest source of emissions.
+> The Alberta oil sands are the third-largest oil reserve in the world. They're also Canada's largest source of emissions. Northern Alberta is a boom economy — Fort McMurray is growing faster than any city in Canada. But the environmental cost is visible from space: tailings ponds, deforestation, carbon. The proposed pipelines to the coast would lock in decades of oil extraction. *What is Canada's future economy?*
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Regulate and cap | -5 | -5 | — | +10 | +3 | +2 | -5 |
-| 2 | Approve pipelines | +3 | +10 | — | -12 | -2 | -3 | +3 |
-| 3 | Clean growth strategy | +5 | +5 | — | +2 | +2 | +3 | +5 |
+**Term 11**
 
-**Historical basis:** The Northern Gateway and Keystone XL pipeline debates defined the era. Canada had the highest per-capita emissions in the G7 by 2030.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Regulate and cap — transition starts now | -5 | -5 | — | +10 | +3 | +2 | -5 | +5 |  |
+| 2 | Approve pipelines — let the boom continue | +3 | +10 | — | -12 | -2 | -3 | +3 | -4 | **✓ actual** |
+| 3 | Clean growth strategy — diversify while extracting | +5 | +5 | — | +2 | +2 | +3 | +5 | +17 |  |
 
 ### 🗳️ 2015 — Election of 2015
 
-> A decade of Conservative government. The opposition campaigns on "Real Change."
+> It's been a decade of Conservative government. The country is divided — Alberta vs. the rest, resource economy vs. environment, the old Canada vs. the new. The opposition campaign is *'Real Change'* — a young, photogenic leader promising a new era. You need to decide what kind of Canada you're offering.
 
-| # | Choice | Effects | Result |
-|---|--------|---------|--------|
-| 1 | Progressive era | rights +5, social +5, enviro +3, approval +5, unity +2, sovereign +2 | **win** |
-| 2 | Steady management | economy +3, unity +1 | **minority** |
-| 3 | Pivot right | economy +5, enviro -5, social -5, rights -5, approval -3, unity -3 | **lose** |
+**Approval needed:** 30%
 
-**Approval needed:** 30%. In real history, the Liberals won a majority with 184 seats.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Result | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Promise a progressive era — climate, reconciliation, diversity | +2 | — | +5 | +3 | +2 | +5 | +5 | +17 | win | **✓ actual** |
+| 2 | Steady management — incremental change | +1 | +3 | — | — | — | — | — | +4 | minority |  |
+| 3 | Pivot right — resource economy and security | -3 | +5 | -5 | -5 | — | -5 | -3 | -13 | lose |  |
 
 ### 📜 2018 — Cannabis Legalization
 
-> The first major country to legalize recreational cannabis. Second worldwide after Uruguay.
+> You promised to legalize recreational cannabis. The first major country to do so. The arguments: end the black market, keep money away from organized crime, regulate quality, stop criminalizing young people. The opposition: it normalizes drug use, endangers youth, displeases the international community. *Canada would be the second country in the world, after Uruguay.*
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Legalize — regulate & tax | +1 | +3 | +5 | — | +3 | +5 | -2 |
-| 2 | Decriminalize only | — | — | +3 | — | +1 | +3 | +2 |
-| 3 | Keep criminal | -2 | -3 | -5 | — | -2 | -3 | -2 |
+**Term 12**
 
-**Historical basis:** October 17, 2018. Cannabis legalized across Canada. Arrests plummeted, tax revenues flowed.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Legalize — regulate and tax | +1 | +3 | +5 | — | +3 | +5 | -2 | +17 | **✓ actual** |
+| 2 | Decriminalize only — no retail market | +2 | — | +6 | — | +4 | +3 | +2 | +15 |  |
+| 3 | Keep it criminal — not now | +3 | -3 | +2 | — | +2 | -3 | +3 | +1 |  |
 
 ### 📜 2019 — The Carbon Tax
 
-> A national carbon price rising to $170/tonne by 2030. Alberta calls it "the second NEP."
+> You've implemented a national carbon price — $20 per tonne in 2019, rising to $50 by 2022, and $170 by 2030. It's the most controversial climate policy in Canadian history. Alberta calls it *'the second NEP.'* The Conservatives make it their central attack. But economists say it's the most efficient way to cut emissions. The revenue goes back to Canadians as a dividend check. *Six years from now, a new government will scrap the consumer fuel charge entirely — but right now, in 2019, you're setting the course.*
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Hold firm | -5 | -3 | — | +8 | +3 | +2 | -5 |
-| 2 | Pause increases | +2 | +2 | — | +3 | — | — | +3 |
-| 3 | Scrap the tax | +5 | +5 | — | -5 | -2 | -2 | +5 |
+**Term 13**
 
-**Historical basis:** The federal carbon price started at $20/tonne in 2019, rising to $170 by 2030. Revenue returned as dividend checks.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Hold firm — the price rises as planned | -5 | -3 | — | +8 | +3 | +2 | -5 | +5 | **✓ actual** |
+| 2 | Pause the increases — freeze at $50 | +2 | +2 | — | +3 | — | — | +3 | +7 |  |
+| 3 | Scrap the carbon tax — use regulations instead | +5 | +5 | — | -5 | -2 | -2 | +5 | +1 |  |
 
 ### 📜 2020 — The Pandemic
 
-> COVID-19 arrives. Borders close, businesses shutter. How big is the response?
+> March 2020. COVID-19 arrives in Canada. Borders close, businesses shutter, the economy freezes. You're looking at potential unemployment not seen since the 1930s. The choice: how big is the response? How much debt? How much control?
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Go big — CERB | +5 | -5 | -3 | — | +3 | +10 | +10 |
-| 2 | Moderate support | +2 | -2 | +2 | — | +1 | +3 | +3 |
-| 3 | Minimal response | -8 | +3 | +5 | — | -2 | -15 | -5 |
+**Term 14**
 
-**Historical basis:** CERB sent $2,000/month to 8 million Canadians. Wage subsidies kept businesses alive. The deficit hit $380 billion.
-
----
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Go big — CERB and massive support | +5 | -5 | -3 | — | +3 | +10 | +10 | +10 | **✓ actual** |
+| 2 | Moderate — targeted support only | +2 | -2 | +2 | — | +1 | +3 | +3 | +6 |  |
+| 3 | Minimal — let people make their own choices | -8 | +3 | +5 | — | -2 | -15 | -5 | -17 |  |
 
 ### 📜 2025 — The Trump Tariffs
 
-> 25% tariffs on Canadian goods. Open threats of annexation. "The 51st state." The most serious threat since 1812.
+> January 2025. The new US president has imposed 25% tariffs on Canadian goods and is openly threatening annexation — calling Canada *the 51st state* and the Prime Minister *'Governor.'* The trade war is here. This is the most serious threat to Canadian sovereignty since 1812. How do you respond?
 
-| # | Choice | Unity | Economy | Rights | Enviro | Sovereign | Social | Approval |
-|---|--------|-------|---------|--------|--------|-----------|--------|----------|
-| 1 | Retaliate & diversify | +10 | -5 | +2 | — | +12 | -2 | +10 |
-| 2 | Negotiate | -5 | +5 | -2 | — | -8 | — | -5 |
-| 3 | Full integration | -15 | +15 | -5 | — | -20 | +2 | -8 |
+**Term 15**
 
-**Historical basis:** Trump imposed 25% tariffs, called Canada the "51st state," and referred to Trudeau as "Governor." Canada retaliated with $60B in counter-tariffs.
-
----
-
-## End Screen Logic
-
-After all 23 decisions:
-
-```
-finalScore = (unity + economy + rights + enviro + sovereign + social) / 6
-```
-
-| Score Range | Rating | "6% or 94%?" |
-|-------------|--------|---------------|
-| ≥ 75 | Extraordinary | Likely 6% |
-| 60–74 | Strong | Likely 6% |
-| 45–59 | Familiar | Likely 94% |
-| 30–44 | Struggling | 94% |
-| < 30 | Broken | 94% |
-
-If `finalScore > 50` → **"You are in the 6%"** (left Canada better than real history)
-If `finalScore ≤ 50` → **"You are in the 94%"** (governing is harder than it looks)
-
-The end screen also generates per-metric narratives:
-- **≥ 70**: positive (e.g., "The Charter is stronger than ever")
-- **40–69**: neutral (e.g., "Rights exist but are contested")
-- **< 40**: negative (e.g., "Rights are conditional")
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Retaliate and diversify — 'Canada Strong' | +10 | -5 | +2 | — | +12 | -2 | +10 | +17 | **✓ actual** |
+| 2 | Negotiate — find a deal, avoid escalation | -5 | +5 | -2 | — | -8 | — | -5 | -10 |  |
+| 3 | Full economic integration — embrace the future | -15 | +15 | -5 | — | -20 | +2 | -8 | -23 |  |
 
 ---
 
-*Generated from `index.html` game logic. For the live game, visit the [GitHub repo](https://github.com/devlinsw/dominion-canada-game).*
+## Full decision map
+
+```mermaid
+graph TD
+    Start((START))
+    Start --> D0["📜 1968: The Just Society"]
+    D0 -->|"Pass the Official Languages Act"| D0c0["unity+12, rights+5, sovereign+5, social-2, approval+3"]
+    D0c0 --> D1
+    D0 -->|"Delay - focus on the economy instead"| D0c1["unity-8, economy+3, social-3, approval+2"]
+    D0c1 --> D1
+    D0 -->|"Go further - dual federalism"| D0c2["unity+6, rights+2, sovereign-3, social+2, approval-5"]
+    D0c2 --> D1
+    D1["📜 1970: The October Crisis"]
+    D1 -->|"Invoke the War Measures Act"| D1c0["unity+2, rights-10, sovereign+3, social-5, approval+15"]
+    D1c0 --> D2
+    D1 -->|"Use police and negotiation only"| D1c1["unity-5, rights+8, sovereign-3, social+3, approval-8"]
+    D1c1 --> D2
+    D1 -->|"Invoke the Act but with a sunset clause"| D1c2["unity-1, rights-4, sovereign+1, social-2, approval+5"]
+    D1c2 --> D2
+    D2["📜 1971: A Multicultural Country"]
+    D2 -->|"Adopt official multiculturalism"| D2c0["unity+6, economy+2, rights+5, social+8, approval+5"]
+    D2c0 --> D3
+    D2 -->|"Bilingualism is enough - reject multiculturalism"| D2c1["unity+5, economy+5, rights-3, sovereign+2, social-5, approval-3"]
+    D2c1 --> D3
+    D2 -->|"Adopt it but with integration requirements"| D2c2["unity+6, economy+3, rights+2, social+5, approval+3"]
+    D2c2 --> D3
+    D3["🗳️ 1972: Election of 1972"]
+    D3 -->|"Campaign on the record - 'A Just Society'"| D3c0["unity+3, social+2, approval+3"]
+    D3c0 --> D4
+    D3 -->|"Pivot to economic competence"| D3c1["economy+5, approval+2"]
+    D3c1 --> D4
+    D4["📜 1976: The Montreal Olympics"]
+    D4 -->|"Yes - Canada must not be embarrassed"| D4c0["unity+5, economy-8, sovereign+2, social+3, approval+5"]
+    D4c0 --> D5
+    D4 -->|"No - let Montreal handle its own mess"| D4c1["unity-8, economy+3, sovereign-2, approval-5"]
+    D4c1 --> D5
+    D5["📜 1977: The Berger Inquiry"]
+    D5 -->|"Accept the moratorium - listen to the land"| D5c0["unity+3, economy-5, rights+8, enviro+12, sovereign+3, social+5"]
+    D5c0 --> D6
+    D5 -->|"Build the pipeline - the North needs development"| D5c1["unity-3, economy+8, rights-5, enviro-12, sovereign+5, social+2"]
+    D5c1 --> D6
+    D5 -->|"Build it with Indigenous co-ownership"| D5c2["unity+4, economy+5, rights+5, enviro-4, sovereign+3, social+6"]
+    D5c2 --> D6
+    D6["📜 1980: The National Energy Program"]
+    D6 -->|"Implement the NEP fully"| D6c0["unity-12, economy-5, sovereign+8, social+5, approval-3"]
+    D6c0 --> D7
+    D6 -->|"Negotiate a revenue-sharing deal with provinces"| D6c1["unity+2, economy+3, sovereign+3, social+2, approval+3"]
+    D6c1 --> D7
+    D6 -->|"Let the market sort it out"| D6c2["unity-5, economy+5, sovereign-8, social-5, approval-5"]
+    D6c2 --> D7
+    D7["🗳️ 1980: The Quebec Referendum"]
+    D7 -->|"Campaign hard - 'My country is my country'"| D7c0["unity+8, sovereign+3, approval+5"]
+    D7c0 --> D8
+    D7 -->|"Let Quebecers decide for themselves"| D7c1["unity-8, rights+5, sovereign+4, social+2, approval-3"]
+    D7c1 --> D8
+    D8["📜 1982: Bringing the Constitution Home"]
+    D8 -->|"Patriate with the Charter - with or without Quebec"| D8c0["unity-8, rights+12, sovereign+10, social+3, approval+3"]
+    D8c0 --> D9
+    D8 -->|"Negotiate until Quebec agrees"| D8c1["unity+5, rights+3, sovereign+5, approval-5"]
+    D8c1 --> D9
+    D8 -->|"Patriate without the Charter"| D8c2["unity+2, rights-8, sovereign+10, approval+2"]
+    D8c2 --> D9
+    D9["🗳️ 1984: Election of 1984"]
+    D9 -->|"Campaign on the Charter and sovereignty"| D9c0["rights+2, approval+5"]
+    D9c0 --> D10
+    D9 -->|"Campaign on experience and stability"| D9c1["economy+2, approval+8"]
+    D9c1 --> D10
+    D9 -->|"Step aside - let a new leader carry the banner"| D9c2["unity+2, approval+3"]
+    D9c2 --> D10
+    D10["📜 1988: Free Trade with America"]
+    D10 -->|"Support free trade - the deal is done"| D10c0["unity-3, economy+10, sovereign-10, social-2, approval+3"]
+    D10c0 --> D11
+    D10 -->|"Oppose - renegotiate for cultural exemptions"| D10c1["unity+2, economy+4, sovereign+3, social+3, approval-2"]
+    D10c1 --> D11
+    D10 -->|"Kill the deal - build east-west trade instead"| D10c2["unity+5, economy-10, sovereign+8, social+3, approval-5"]
+    D10c2 --> D11
+    D11["📜 1991: The GST"]
+    D11 -->|"Implement the GST"| D11c0["unity-3, economy+5, social+3, approval-12"]
+    D11c0 --> D12
+    D11 -->|"Replace with a hidden manufacturer's tax"| D11c1["unity+1, economy+3, social+1, approval+2"]
+    D11c1 --> D12
+    D11 -->|"Cut spending instead - no new tax"| D11c2["unity-5, economy+6, rights-2, sovereign+2, social-10, approval+3"]
+    D11c2 --> D12
+    D12["📜 1992: The Meech Lake Accord"]
+    D12 -->|"Push it through - Quebec must be inside"| D12c0["unity+10, rights-3, sovereign+2, social-2, approval-3"]
+    D12c0 --> D13
+    D12 -->|"Let it die - the deal is flawed"| D12c1["unity-10, rights+9, sovereign+4, social+6, approval+2"]
+    D12c1 --> D13
+    D12 -->|"Renegotiate - include Indigenous nations"| D12c2["unity+8, rights+8, sovereign+3, social+5, approval-2"]
+    D12c2 --> D13
+    D13["📜 1992: The Cod Moratorium"]
+    D13 -->|"Close the fishery - the cod must recover"| D13c0["unity-3, economy-8, enviro+12, sovereign+2, social-8, approval-3"]
+    D13c0 --> D14
+    D13 -->|"Keep the fishery open - let the communities survive"| D13c1["unity+2, economy+3, enviro-10, sovereign-2, social+5, approval+5"]
+    D13c1 --> D14
+    D13 -->|"Close it - but buy the licences and invest in transition"| D13c2["unity+4, economy-3, enviro+10, sovereign+3, social+3, approval+2"]
+    D13c2 --> D14
+    D14["📜 1995: The Quebec Referendum, Round Two"]
+    D14 -->|"Fight with everything - a passionate Canada"| D14c0["unity+10, sovereign+5, social+2, approval+5"]
+    D14c0 --> D15
+    D14 -->|"Let Quebec decide - minimal federal involvement"| D14c1["unity-20, rights+8, sovereign+6, social-5, approval-3"]
+    D14c1 --> D15
+    D14 -->|"Offer clear constitutional reform - the clarity path"| D14c2["unity+5, rights+3, sovereign+3, approval+3"]
+    D14c2 --> D15
+    D15["📜 1995: The Deficit"]
+    D15 -->|"Cut transfers - balance the budget"| D15c0["unity-5, economy+10, rights-5, social-12, approval-3"]
+    D15c0 --> D16
+    D15 -->|"Balanced approach - tax increases + moderate cuts"| D15c1["unity+1, economy+5, rights-2, social-4, approval-5"]
+    D15c1 --> D16
+    D15 -->|"Invest in growth - let the deficit ride"| D15c2["unity+3, economy-5, rights+2, social+5, approval+5"]
+    D15c2 --> D16
+    D16["📜 2002: Kyoto or Not"]
+    D16 -->|"Ratify Kyoto - lead on climate"| D16c0["economy-5, enviro+12, sovereign+3, social+2, approval-2"]
+    D16c0 --> D17
+    D16 -->|"Ratify with concessions for the energy sector"| D16c1["economy+2, enviro+4, sovereign+1, approval+2"]
+    D16c1 --> D17
+    D16 -->|"Don't ratify - the economy needs oil"| D16c2["economy+6, enviro-10, sovereign-2, social-2, approval+3"]
+    D16c2 --> D17
+    D17["📜 2005: Same-Sex Marriage"]
+    D17 -->|"Pass the Civil Marriage Act"| D17c0["unity-2, rights+10, sovereign+3, social+8, approval-3"]
+    D17c0 --> D18
+    D17 -->|"Civil unions only - not marriage"| D17c1["unity+1, rights+4, sovereign+1, social+4, approval+2"]
+    D17c1 --> D18
+    D17 -->|"Defend traditional marriage"| D17c2["unity+3, rights-10, sovereign-3, social-8, approval+3"]
+    D17c2 --> D18
+    D18["📜 2008: The Global Financial Crisis"]
+    D18 -->|"Stimulate - the Economic Action Plan"| D18c0["unity+3, economy+5, enviro-2, sovereign+2, social+5, approval+8"]
+    D18c0 --> D19
+    D18 -->|"Steady as she goes - modest support"| D18c1["economy+2"]
+    D18c1 --> D19
+    D18 -->|"Austerity - balance the budget through the recession"| D18c2["unity-5, economy+3, rights-2, sovereign+3, social-10, approval-10"]
+    D18c2 --> D19
+    D19["📜 2012: The Oil Sands"]
+    D19 -->|"Regulate and cap - transition starts now"| D19c0["unity-5, economy-5, enviro+10, sovereign+3, social+2, approval-5"]
+    D19c0 --> D20
+    D19 -->|"Approve pipelines - let the boom continue"| D19c1["unity+3, economy+10, enviro-12, sovereign-2, social-3, approval+3"]
+    D19c1 --> D20
+    D19 -->|"Clean growth strategy - diversify while extracting"| D19c2["unity+5, economy+5, enviro+2, sovereign+2, social+3, approval+5"]
+    D19c2 --> D20
+    D20["🗳️ 2015: Election of 2015"]
+    D20 -->|"Promise a progressive era - climate, reconciliation, diversity"| D20c0["unity+2, rights+5, enviro+3, sovereign+2, social+5, approval+5"]
+    D20c0 --> D21
+    D20 -->|"Steady management - incremental change"| D20c1["unity+1, economy+3"]
+    D20c1 --> D21
+    D20 -->|"Pivot right - resource economy and security"| D20c2["unity-3, economy+5, rights-5, enviro-5, social-5, approval-3"]
+    D20c2 --> D21
+    D21["📜 2018: Cannabis Legalization"]
+    D21 -->|"Legalize - regulate and tax"| D21c0["unity+1, economy+3, rights+5, sovereign+3, social+5, approval-2"]
+    D21c0 --> D22
+    D21 -->|"Decriminalize only - no retail market"| D21c1["unity+2, rights+6, sovereign+4, social+3, approval+2"]
+    D21c1 --> D22
+    D21 -->|"Keep it criminal - not now"| D21c2["unity+3, economy-3, rights+2, sovereign+2, social-3, approval+3"]
+    D21c2 --> D22
+    D22["📜 2019: The Carbon Tax"]
+    D22 -->|"Hold firm - the price rises as planned"| D22c0["unity-5, economy-3, enviro+8, sovereign+3, social+2, approval-5"]
+    D22c0 --> D23
+    D22 -->|"Pause the increases - freeze at $50"| D22c1["unity+2, economy+2, enviro+3, approval+3"]
+    D22c1 --> D23
+    D22 -->|"Scrap the carbon tax - use regulations instead"| D22c2["unity+5, economy+5, enviro-5, sovereign-2, social-2, approval+5"]
+    D22c2 --> D23
+    D23["📜 2020: The Pandemic"]
+    D23 -->|"Go big - CERB and massive support"| D23c0["unity+5, economy-5, rights-3, sovereign+3, social+10, approval+10"]
+    D23c0 --> D24
+    D23 -->|"Moderate - targeted support only"| D23c1["unity+2, economy-2, rights+2, sovereign+1, social+3, approval+3"]
+    D23c1 --> D24
+    D23 -->|"Minimal - let people make their own choices"| D23c2["unity-8, economy+3, rights+5, sovereign-2, social-15, approval-5"]
+    D23c2 --> D24
+    D24["📜 2025: The Trump Tariffs"]
+    D24 -->|"Retaliate and diversify - 'Canada Strong'"| D24c0["unity+10, economy-5, rights+2, sovereign+12, social-2, approval+10"]
+    D24c0 --> End
+    D24 -->|"Negotiate - find a deal, avoid escalation"| D24c1["unity-5, economy+5, rights-2, sovereign-8, approval-5"]
+    D24c1 --> End
+    D24 -->|"Full economic integration - embrace the future"| D24c2["unity-15, economy+15, rights-5, sovereign-20, social+2, approval-8"]
+    D24c2 --> End
+    End((END: Your Canada, 2030))
+    style Start fill:#2a9d8f,color:#fff
+    style End fill:#d62828,color:#fff
+    style D3 fill:#e9c46a,color:#000
+    style D7 fill:#e9c46a,color:#000
+    style D9 fill:#e9c46a,color:#000
+    style D20 fill:#e9c46a,color:#000
+```
+
+---
+
+*Generated 2026-08-21 from `index.html` by `tools/build-docs.mjs`.*

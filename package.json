@@ -1,0 +1,16 @@
+{
+  "name": "dominion-canada-game",
+  "version": "1.1.0",
+  "description": "Dominion — a Canadian political simulator. Replay Canada, 1968–2030.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node tools/game.test.mjs",
+    "balance": "node tools/balance.mjs",
+    "check": "node tools/balance.mjs --check && node tools/build-docs.mjs --check && node tools/game.test.mjs",
+    "docs": "node tools/build-docs.mjs",
+    "suggest": "node tools/suggest-fixes.mjs",
+    "serve": "python3 -m http.server 8080"
+  },
+  "devDependencies": { "jsdom": "^26.0.0" }
+}

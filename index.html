@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dominion — Replay Canada, 1968–2030</title>
+<meta name="description" content="Become Prime Minister of Canada in 1968. Face the real laws, the real crises, the real choices through 2025 — then discover what your Canada looks like in 2030.">
+<meta name="theme-color" content="#0a0e1a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dominion — Replay Canada, 1968–2030">
+<meta property="og:description" content="You are Prime Minister. 23 real decisions. Six decades. Everyone thinks they would have done better — let's see.">
+<meta property="og:image" content="og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dominion — Replay Canada, 1968–2030">
+<meta name="twitter:description" content="You are Prime Minister. 23 real decisions. Six decades. Everyone thinks they would have done better — let's see.">
+<meta name="twitter:image" content="og-card.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0e1a'/%3E%3Cpath d='M50 15 L55 35 L72 28 L63 45 L85 42 L68 55 L78 72 L55 65 L50 85 L45 65 L22 72 L32 55 L15 42 L37 45 L28 28 L45 35 Z' fill='none' stroke='%23d62828' stroke-width='4'/%3E%3C/svg%3E">
 <style>
 /* ═══════════════════════════════════════════════════════════════
    DOMINION — A Canadian political simulator
@@ -673,6 +684,113 @@ body::before {
 
 /* Utility */
 .hidden { display: none !important; }
+[hidden] { display: none !important; }
+
+/* ── Visible focus for keyboard users (previously there was none) ── */
+:focus-visible {
+  outline: 2px solid var(--teal, #2a9d8f);
+  outline-offset: 3px;
+}
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ── Progress: 23 decisions with no sense of how far you've come ── */
+.progress-wrap {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0 0 0.85rem 0;
+}
+.progress-track {
+  flex: 1; height: 3px; background: rgba(255,255,255,0.09);
+  border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: var(--teal, #2a9d8f);
+  transition: width 0.45s ease; border-radius: 2px;
+}
+.progress-label {
+  font-family: 'Space Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.42); white-space: nowrap;
+}
+
+/* ── Numeric key hint on each choice ── */
+.choice-key {
+  position: absolute; top: 0.85rem; right: 0.95rem;
+  font-family: 'Space Mono', monospace; font-size: 0.6rem;
+  color: rgba(255,255,255,0.22);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 3px; padding: 0.05rem 0.32rem;
+}
+.choice-button { position: relative; }
+
+/* ── Opposition state ── */
+.opposition-tag { color: var(--red, #d62828); }
+.opposition-note {
+  margin: 0.9rem 0 0.4rem; padding: 0.7rem 0.9rem;
+  border-left: 2px solid var(--red, #d62828);
+  background: rgba(214,40,40,0.07);
+  font-size: 0.8rem; line-height: 1.55; color: rgba(255,255,255,0.7);
+}
+
+/* ── Election result colours ── */
+.election-result.minority { color: var(--gold, #e9c46a); }
+
+/* ── Resume an interrupted run ── */
+.resume-banner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 0.6rem; margin: 1.4rem auto 0; max-width: 34rem;
+  padding: 0.85rem 1rem; border: 1px solid rgba(42,157,143,0.35);
+  background: rgba(42,157,143,0.08); border-radius: 4px;
+  font-size: 0.82rem; color: rgba(255,255,255,0.75);
+}
+.resume-button, .resume-discard {
+  font-family: 'Space Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+  padding: 0.4rem 0.85rem; border-radius: 3px;
+  background: var(--teal, #2a9d8f); color: #0a0e1a; border: none;
+}
+.resume-discard { background: transparent; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.18); }
+
+/* ── End screen: history baseline + share ── */
+.em-hist {
+  margin-top: 0.35rem; font-family: 'Space Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.32);
+}
+.em-hist .positive { color: #2a9d8f; }
+.em-hist .negative { color: #d62828; }
+.he-outcome {
+  font-family: 'Space Mono', monospace; font-size: 0.55rem;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 0.08rem 0.4rem; border-radius: 2px; margin-left: 0.35rem;
+}
+.he-outcome.win { background: rgba(42,157,143,0.2); color: #4fd1c5; }
+.he-outcome.minority { background: rgba(233,196,106,0.18); color: #e9c46a; }
+.he-outcome.lose { background: rgba(214,40,40,0.18); color: #ff6b6b; }
+.he-outcome.opp { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45); }
+.end-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem; }
+.share-button {
+  font-family: 'Space Mono', monospace; font-size: 0.75rem;
+  letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+  padding: 0.85rem 1.6rem; border-radius: 3px;
+  background: transparent; color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.share-button:hover { border-color: var(--teal, #2a9d8f); color: #fff; }
+.seed-line {
+  margin-top: 1.1rem; font-family: 'Space Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.25);
+}
+
+/* ── Respect motion preferences ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -700,7 +818,8 @@ body::before {
     <br>
     <p><em>Everyone thinks they would have done better. Let's see.</em></p>
   </div>
-  <button class="start-button" onclick="startGame()">Take Office</button>
+  <button class="start-button" data-action="start">Take Office</button>
+  <div class="resume-banner" id="resume-banner" hidden></div>
   <div class="start-credits">
     Inspired by <a href="https://septennats.fr" target="_blank">Septennat(s)</a> · Built for Canada 🍁
   </div>
@@ -714,6 +833,14 @@ body::before {
       <div class="year" id="current-year">1968</div>
     </div>
     <div class="term-info" id="term-info">Term 1 · Majority</div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track" id="progress-track" role="progressbar"
+         aria-label="Progress through the century" aria-valuemin="0" aria-valuenow="0" aria-valuemax="23">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <div class="progress-label" id="progress-label">Decision 1 of 23</div>
   </div>
 
   <div class="metrics-bar" id="metrics-bar">
@@ -736,12 +863,19 @@ body::before {
     <div class="end-metrics-grid" id="end-metrics-grid">
       <!-- Generated by JS -->
     </div>
+    <div class="history-log" id="history-log">
+      <!-- Generated by JS — its own node, so replaying can't stack duplicates -->
+    </div>
   </div>
   <div class="end-stat">
-    <div class="stat-big" id="end-stat-pct">—%</div>
-    <div class="stat-desc" id="end-stat-desc">— of players left Canada in better shape than they found it.</div>
+    <div class="stat-big" id="end-stat-pct">—</div>
+    <div class="stat-desc" id="end-stat-desc">—</div>
   </div>
-  <button class="replay-button" onclick="restartGame()">Play Again</button>
+  <div class="end-actions">
+    <button class="replay-button" data-action="restart">Play Again</button>
+    <button class="share-button" id="share-button" data-action="share">Share Result</button>
+  </div>
+  <div class="seed-line">seed <span id="seed-label">—</span></div>
 </div>
 
 <script>
@@ -796,20 +930,20 @@ const DECISIONS = [
       {
         label: "Invoke the War Measures Act",
         desc: "Martial law. Mass arrests. Military in the streets of Montreal. The polls say 89% of Canadians support it.",
-        effects: { approval: +10, unity: -3, rights: -10, social: -5 },
-        consequence: "October 16, 4 AM. The tanks roll into Montreal. 497 people are arrested, most without charges. Laporte's body is found in the trunk of a car. The crisis ends — but the civil liberties debate has only begun. Trudeau's <em>'Just watch me'</em> becomes the most famous phrase in Canadian political history.",
+        effects: { approval: +15, unity: +2, rights: -10, social: -5, sovereign: +3 },
+        consequence: "October 16, 4 AM. The tanks roll into Montreal. 497 people are arrested, most without charges. Laporte's body is found in the trunk of a car. The crisis ends decisively — the FLQ is broken. Trudeau's <em>'Just watch me'</em> becomes the most famous phrase in Canadian political history. But the civil liberties cost is severe: 497 people detained without charge, precedent set, and the phrase 'preventive arrest' enters the Canadian vocabulary.",
       },
       {
         label: "Use police and negotiation only",
         desc: "No martial law. Work with Quebec police, negotiate with the FLQ, uphold civil liberties even under pressure.",
-        effects: { approval: -8, rights: +8, unity: -5, social: +3 },
-        consequence: "You refuse martial law. The negotiation drags on for weeks. Laporte is still murdered. The public is split — some call you brave for defending liberty, others call you weak. The War Measures precedent is never set, but neither is the message of resolve.",
+        effects: { approval: -8, rights: +8, unity: -5, social: +3, sovereign: -3 },
+        consequence: "You refuse martial law. The negotiation drags on for weeks. Laporte is still murdered. The public is split — some call you brave for defending liberty, others call you weak. But the War Measures precedent is never set, and the Charter of Rights, when it comes, is built on a foundation you protected.",
       },
       {
         label: "Invoke the Act but with a sunset clause",
         desc: "Emergency powers for 30 days only, with judicial oversight. A middle path.",
-        effects: { approval: +5, rights: -4, unity: -1, social: -2 },
-        consequence: "A compromise: temporary emergency powers with parliamentary review. Some arrests, but fewer and more targeted. Both sides are dissatisfied, which may mean you got it right — or that you lacked the courage of either conviction.",
+        effects: { approval: +5, rights: -4, unity: -1, social: -2, sovereign: +1 },
+        consequence: "A compromise: temporary emergency powers with parliamentary review. Some arrests, but fewer and more targeted. Both sides are dissatisfied, which may mean you got it right — or that you lacked the courage of either conviction. The crisis resolves slowly, and both the civil liberties camp and the law-and-order camp remember what you didn't do.",
       },
     ],
   },
@@ -822,20 +956,20 @@ const DECISIONS = [
       {
         label: "Adopt official multiculturalism",
         desc: "The first country in the world to do so. Every culture is equal within the Canadian framework.",
-        effects: { social: +8, unity: +4, approval: +5, rights: +5, economy: +2 },
-        consequence: "October 1971. You announce multiculturalism as official federal policy. The world notices — Canada becomes the model for pluralism. Decades later, it will be the single most defining feature of Canadian identity around the world. <em>But it will also strain Quebec's vision of itself as a distinct nation within Canada.</em>",
+        effects: { social: +8, unity: +6, approval: +5, rights: +5, economy: +2 },
+        consequence: "October 1971. You announce multiculturalism as official federal policy. The world notices — Canada becomes the model for pluralism. Decades later, it will be the single most defining feature of Canadian identity around the world. <em>But it will also strain Quebec's vision of itself as a distinct nation within Canada — the 'two founding peoples' compact is over.</em>",
       },
       {
         label: "Bilingualism is enough — reject multiculturalism",
         desc: "Canada is two founding peoples. Adding more complicates the compact.",
-        effects: { social: -5, unity: -3, approval: -3, rights: -3 },
-        consequence: "You reject the multicultural framework. Canada stays officially bicultural. Immigrant communities feel unseen. Internationally, Canada is just another Western country. The word 'multicultural' never enters the Canadian vocabulary.",
+        effects: { social: -5, unity: +5, approval: -3, rights: -3, economy: +5, sovereign: +2 },
+        consequence: "You reject the multicultural framework. Canada stays officially bicultural. Immigrant communities feel unseen. Internationally, Canada is just another Western country. But the compact with Quebec is clearer — two peoples, one country — and Quebec's anxiety about dilution eases. The word 'multicultural' never enters the Canadian vocabulary. <em>But the economy benefits from the simplicity — one language regime, one set of rules.</em>",
       },
       {
         label: "Adopt it but with integration requirements",
         desc: "Celebrate diversity, but require language proficiency and civic education.",
-        effects: { social: +5, unity: +2, approval: +3, rights: +2, economy: +1 },
-        consequence: "You adopt multiculturalism with conditions — language requirements, civic tests. Some call it pragmatic, others call it contradictory. Immigrants adapt faster but the cultural landscape is flatter, less vibrant.",
+        effects: { social: +5, unity: +6, approval: +3, rights: +2, economy: +3 },
+        consequence: "You adopt multiculturalism with conditions — language requirements, civic tests. Some call it pragmatic, others call it contradictory. Immigrants adapt faster, integration measurably improves, and the cultural landscape is vibrant but structured. <em>Quebec accepts this more readily — the framework is bilingualism-first, multiculturalism-second.</em>",
       },
     ],
   },
@@ -844,20 +978,20 @@ const DECISIONS = [
     election: true,
     title: "Election of 1972",
     context: "Your first election as Prime Minister. The opposition says you're arrogant, too intellectual, out of touch. The economy is softening. But your language policy and the October Crisis response are still fresh. Do you campaign on your record, or pivot?",
-    approvalNeeded: 30,
+    approvalNeeded: 41,
     choices: [
       {
         label: "Campaign on the record — 'A Just Society'",
         desc: "Own your decisions. Make the case that Canada is fairer and more unified than four years ago.",
-        effects: {},
-        consequence: "You campaign hard on the Just Society. The voters respond — but it's close. A minority government. You'll need support from the NDP to govern.",
+        effects: { approval: +3, unity: +3, social: +2 },
+        consequence: "You campaign hard on the Just Society. The voters respond — but it's close. A minority government. You'll need support from the NDP to govern. But the campaign reaffirms the social contract: Canada is a community, not an economy.",
         result: "minority",
       },
       {
         label: "Pivot to economic competence",
         desc: "Downplay the social reforms. Promise fiscal discipline and growth.",
-        effects: { economy: +2, approval: -2 },
-        consequence: "You pivot to the economy. It feels inauthentic — voters elected you for vision, not accounting. You squeak through with a reduced majority.",
+        effects: { economy: +5, approval: +2 },
+        consequence: "You pivot to the economy. The message lands with middle-class voters worried about inflation. You squeak through with a minority, but your mandate is muddled — are you the visionary or the bookkeeper?",
         result: "minority",
       },
     ],
@@ -879,6 +1013,32 @@ const DECISIONS = [
         desc: "Federalism means provincial responsibility. Quebec wanted the Games, Quebec can pay.",
         effects: { approval: -5, unity: -8, economy: +3, sovereign: -2 },
         consequence: "You refuse the bailout. Montreal scrambles. The Games happen but the optics are terrible — a half-finished tower, austerity across the city. Quebec remembers. <em>'Ottawa let us humiliate ourselves on the world stage.'</em>",
+      },
+    ],
+  },
+  {
+    year: 1977,
+    term: 2,
+    title: "The Berger Inquiry",
+    context: "A pipeline company wants to build across the Mackenzie Valley — through Dene and Inuit land, unceded and untouched. Justice Thomas Berger has held hearings across the North — the first time Indigenous voices were heard on a resource project. His report recommends a 10-year moratorium. The pipeline would open the Arctic to industry. <em>The world is watching: what does Canada value more — energy or land?</em>",
+    choices: [
+      {
+        label: "Accept the moratorium — listen to the land",
+        desc: "Ten-year pause. Indigenous land rights come first. The pipeline waits.",
+        effects: { enviro: +12, rights: +8, social: +5, economy: -5, unity: +3, sovereign: +3 },
+        consequence: "You accept the Berger report. The Mackenzie Valley pipeline is shelved for a decade. Indigenous leaders see, for the first time, a federal government that listens. <em>The North stays North — tundra, caribou, and the people who have lived there for ten thousand years. The oil stays in the ground. But so do the jobs, the roads, the connection to the south.</em>",
+      },
+      {
+        label: "Build the pipeline — the North needs development",
+        desc: "Approve the route. Economic development for Indigenous communities. Resource sovereignty.",
+        effects: { enviro: -12, economy: +8, rights: -5, social: +2, unity: -3, sovereign: +5 },
+        consequence: "You override Berger and approve the pipeline. Construction begins. Jobs flow into the North — but so does the disruption: permafrost damage, caribou decline, communities fractured between those who benefit and those who lose. <em>The Dene Council calls it 'a second colonization.' But the Arctic is connected, and Canada's resource sovereignty is extended to the ice.</em>",
+      },
+      {
+        label: "Build it with Indigenous co-ownership",
+        desc: "Approve the pipeline but require Indigenous equity stake and revenue sharing.",
+        effects: { enviro: -4, economy: +5, rights: +5, social: +6, unity: +4, sovereign: +3 },
+        consequence: "You approve the pipeline — but with a 33% Indigenous equity stake and binding revenue-sharing. The Dene and Inuit become co-owners, not stakeholders. <em>Development happens — but on terms that share the wealth and the decisions. It's slower, costlier, and more complex. But the North builds it together, or not at all.</em>",
       },
     ],
   },
@@ -913,7 +1073,7 @@ const DECISIONS = [
     election: true,
     title: "The Quebec Referendum",
     context: "May 1980. Quebec Premier René Lévesque has called a referendum on sovereignty-association. The question: should Quebec negotiate a new relationship with the rest of Canada? You're a federalist from Montreal. How hard do you campaign?",
-    approvalNeeded: 25,
+    approvalNeeded: 28,
     choices: [
       {
         label: "Campaign hard — 'My country is my country'",
@@ -924,9 +1084,9 @@ const DECISIONS = [
       },
       {
         label: "Let Quebecers decide for themselves",
-        desc: "This is Quebec's choice. Federal interference would only inflame things.",
-        effects: { unity: -15, approval: -3, sovereign: -8 },
-        consequence: "You stay out of it. Without a strong federal voice, the <em>'Oui'</em> side wins — barely, 51% to 49%. Quebec begins negotiations for sovereignty-association. Canada is in crisis. Your legacy is ashes.",
+        desc: "This is Quebec's democratic right. A freer process means a more legitimate result, whichever way it goes.",
+        effects: { unity: -8, approval: -3, sovereign: +4, rights: +5, social: +2 },
+        consequence: "You refuse to campaign against Quebec's self-determination. The process is clean, the debate is genuine, and when the <em>'Non'</em> wins 60/40, the result has moral authority. Quebec stays — not because Ottawa pressured them, but because they chose to. The separatist movement is weakened by the legitimacy of the vote, not just by its outcome. <em>But you're blamed for not fighting hard enough, and a quarter of your caucus abstains.</em>",
         result: "lose",
       },
     ],
@@ -962,20 +1122,27 @@ const DECISIONS = [
     election: true,
     title: "Election of 1984",
     context: "You've been PM for 16 years. The economy has struggled. The NEP angered the West. Quebec is still out of the constitution. But you patriated the Constitution and gave Canadians the Charter. The voters are tired of you. <em>It's time.</em>",
-    approvalNeeded: 35,
+    approvalNeeded: 49,
     choices: [
       {
         label: "Campaign on the Charter and sovereignty",
         desc: "Remind voters what you've accomplished. The Constitution, the Charter, a just society.",
-        effects: {},
-        consequence: "You campaign on your legacy. The Charter is popular, but after 16 years, the country wants change. You lose — badly. Brian Mulroney's Progressive Conservatives win the largest majority in history. But the Charter endures.",
-        result: "lose",
+        effects: { approval: +5, rights: +2 },
+        consequence: "You campaign on your legacy. The Charter is popular, but after 16 years, the country wants change. If your approval holds, you may squeak through. If not — Brian Mulroney's Progressive Conservatives win the largest majority in history.",
+        result: "win",
       },
       {
         label: "Campaign on experience and stability",
         desc: "In uncertain times, steady hands matter. Warn against the unknown.",
-        effects: { approval: +3 },
-        consequence: "You make the case for stability. It's not enough — 16 years is a long time. You lose, but respectably. The PC majority is large but not historic.",
+        effects: { approval: +8, economy: +2 },
+        consequence: "You make the case for stability. It's the safer bet — voters know you, trust the steady hand. If your approval is high enough, you win a reduced majority. If not, you lose — but respectably.",
+        result: "minority",
+      },
+      {
+        label: "Step aside — let a new leader carry the banner",
+        desc: "Sixteen years is enough. Endorse a successor and campaign from the background.",
+        effects: { approval: +3, unity: +2 },
+        consequence: "You step aside. The party rallies around your chosen successor. The transition is dignified — but the new leader is untested, and the voters may prefer the real Mulroney to your proxy. The party's fate is now out of your hands.",
         result: "lose",
       },
     ],
@@ -1026,9 +1193,9 @@ const DECISIONS = [
       },
       {
         label: "Cut spending instead — no new tax",
-        desc: "Austerity. Shrink government to close the deficit.",
-        effects: { economy: +2, approval: +3, social: -10, unity: -5, rights: -2 },
-        consequence: "You cut spending instead. Programs shrink, transfers to provinces decline. The deficit narrows but social services erode. <em>The Canada Health Act starts to fray at the edges.</em>",
+        desc: "Austerity. Shrink government to close the deficit. Hard now, but room later.",
+        effects: { economy: +6, approval: +3, social: -10, unity: -5, rights: -2, sovereign: +2 },
+        consequence: "You cut spending instead. Programs shrink, transfers to provinces decline. The deficit narrows fast — faster than any new tax could manage. The fiscal room you create will matter when the 2008 crisis hits. But social services erode. <em>The Canada Health Act starts to fray at the edges. You bought fiscal resilience at the price of social resilience.</em>",
       },
     ],
   },
@@ -1036,7 +1203,7 @@ const DECISIONS = [
     year: 1992,
     term: 5,
     title: "The Meech Lake Accord",
-    context: "Quebec still hasn't signed the Constitution. The Meech Lake Accord would bring them in — recognizing Quebec as a <em>'distinct society'</em>, giving it more powers. But it requires unanimous provincial consent. The clock is ticking. Indigenous leaders, women's groups, and English-Canadian nationalists all oppose it.",
+    context: "June 1990. Quebec still hasn't signed the Constitution. The Meech Lake Accord — negotiated in 1987 — would bring them in, recognizing Quebec as a <em>'distinct society'</em> with new powers. But it required unanimous provincial consent by June 23, 1990, and it's dying. Elijah Harper, a Cree MLA in Manitoba, is blocking it. Indigenous leaders, women's groups, and English-Canadian nationalists all oppose it. <em>The clock runs out at midnight.</em>",
     choices: [
       {
         label: "Push it through — Quebec must be inside",
@@ -1046,15 +1213,41 @@ const DECISIONS = [
       },
       {
         label: "Let it die — the deal is flawed",
-        desc: "The Accord collapses. Elijah Harper's filibuster kills it in Manitoba.",
-        effects: { unity: -10, approval: +2, rights: +3, social: +2, sovereign: -2 },
-        consequence: "Meech Lake dies. Quebec is wounded — again. <em>'Canada does not want us.'</em> The Parti Québécois surges. The 1995 referendum becomes inevitable. But the Charter stays intact, unweakened by the distinct society clause. Indigenous rights, not yet traded away, remain a lever for future progress.",
+        desc: "The Accord collapses. Elijah Harper's filibuster kills it in Manitoba. The Charter stays unweakened.",
+        effects: { unity: -10, approval: +2, rights: +9, social: +6, sovereign: +4 },
+        consequence: "Meech Lake dies. Quebec is wounded — again. <em>'Canada does not want us.'</em> The Parti Québécois surges. The 1995 referendum becomes inevitable. But the Charter stays intact, unweakened by the 'distinct society' clause. Indigenous rights, not yet traded away, remain a lever for future progress. <em>You chose Charter integrity over constitutional peace. The bill for that peace comes due in 1995.</em>",
       },
       {
         label: "Renegotiate — include Indigenous nations",
         desc: "A new accord that recognizes Quebec AND Indigenous nations as founding partners.",
         effects: { unity: +8, rights: +8, approval: -2, social: +5, sovereign: +3 },
         consequence: "You refuse the binary choice. A new round of negotiations begins — three-sided this time: federal, provincial, Indigenous. It takes years and nearly fails. But when the Charlottetown Accord finally passes, it's the most inclusive constitutional deal in Canadian history. <em>Canada is not two solitudes, or ten provinces — it is many nations, together.</em>",
+      },
+    ],
+  },
+  {
+    year: 1992,
+    term: 5,
+    title: "The Cod Moratorium",
+    context: "July 1992. The cod stocks off Newfoundland and Labrador have collapsed — 500 years of fishing, gone. 40,000 people are about to lose their livelihood overnight. The science is clear: the fishery must close to save the stock. But the culture, the communities, the identity of Atlantic Canada is built on cod. <em>This is not a policy decision — it's a funeral.</em>",
+    choices: [
+      {
+        label: "Close the fishery — the cod must recover",
+        desc: "Moratorium on Northern cod. 40,000 jobs gone. The fish come first.",
+        effects: { enviro: +12, economy: -8, social: -8, unity: -3, approval: -3, sovereign: +2 },
+        consequence: "You close the fishery. 40,000 people lose their jobs. The cod may take 30 years to recover — or never. Communities that have existed for 500 years face the end. But the ecosystem stabilizes, and the precedent is set: Canada will close a fishery before it destroys a species. <em>The Atlantic knows sacrifice. It also remembers who asked for it.</em>",
+      },
+      {
+        label: "Keep the fishery open — let the communities survive",
+        desc: "Smaller quotas, but keep fishing. The culture is worth more than the stock.",
+        effects: { enviro: -10, economy: +3, social: +5, unity: +2, approval: +5, sovereign: -2 },
+        consequence: "You keep the fishery open with reduced quotas. The communities survive — for now. But the cod continues to crash. Within five years, the stock is functionally extinct. <em>The fishermen knew this. They asked you to stop. But the political cost of 40,000 job losses was too high, and the ecological cost of extinction was higher.</em>",
+      },
+      {
+        label: "Close it — but buy the licences and invest in transition",
+        desc: "Moratorium with full compensation, retraining, and aquaculture investment.",
+        effects: { enviro: +10, economy: -3, social: +3, unity: +4, approval: +2, sovereign: +3 },
+        consequence: "You close the fishery — but you buy every licence at full value, fund retraining, and invest in aquaculture and tourism. The transition is painful but funded. The cod begins its long recovery. Communities shrink but don't die. <em>It's the most expensive option. It's also the only one where both the fish and the fishermen have a future.</em>",
       },
     ],
   },
@@ -1072,9 +1265,9 @@ const DECISIONS = [
       },
       {
         label: "Let Quebec decide — minimal federal involvement",
-        desc: "This is Quebec's democratic right. Interference would be resented.",
-        effects: { unity: -20, approval: -3, sovereign: -15, social: -5 },
-        consequence: "You stay distant. Without a strong federal voice, the <em>'Oui'</em> creeps ahead. On October 30, 1995, Quebec votes 51% to 49% for sovereignty. <em>Canada breaks apart. The largest country in the world becomes two nations overnight.</em> You are the last Prime Minister of a united Canada. The History will not be kind.",
+        desc: "This is Quebec's democratic right. A clean process, win or lose, is more legitimate than a coerced one.",
+        effects: { unity: -20, approval: -3, sovereign: +6, social: -5, rights: +8 },
+        consequence: "You stay distant. Without a strong federal voice, the <em>'Oui'</em> creeps ahead. On October 30, 1995, Quebec votes 51% to 49% for sovereignty. <em>Canada breaks apart. The largest country in the world becomes two nations overnight.</em> You are the last Prime Minister of a united Canada. But the process was clean — the world recognizes the legitimacy of the vote, and Quebec's independence, however painful, is built on consent rather than coercion. The History will not be kind. But it will be honest.",
       },
       {
         label: "Offer clear constitutional reform — the clarity path",
@@ -1085,10 +1278,10 @@ const DECISIONS = [
     ],
   },
   {
-    year: 1997,
+    year: 1995,
     term: 7,
     title: "The Deficit",
-    context: "Canada's debt is approaching 70% of GDP. The bond rating agencies are making noise. Your Finance Minister proposes slashing the deficit — by cutting transfers to provinces for health and education. It will balance the budget. It will also gut the social contract that holds Canada together.",
+    context: "February 1995. Canada's debt is approaching 70% of GDP. The bond rating agencies are making noise. Your Finance Minister proposes slashing the deficit — by cutting the Canada Health and Social Transfer (CHST), $7 billion out of provincial transfers for health and education. It will balance the budget. It will also gut the social contract that holds Canada together. <em>The budget is in two weeks.</em>",
     choices: [
       {
         label: "Cut transfers — balance the budget",
@@ -1182,9 +1375,9 @@ const DECISIONS = [
       },
       {
         label: "Austerity — balance the budget through the recession",
-        desc: "Cut spending to maintain fiscal discipline. Ride out the storm.",
-        effects: { economy: -10, social: -10, approval: -10, unity: -5, sovereign: -2 },
-        consequence: "You cut during the worst recession in 70 years. Auto plants close — 50,000 manufacturing jobs vanish. The economy contracts harder and longer. <em>It's the 1930s all over again. Municipal services collapse. The recovery, when it comes, is joyless and slow.</em>",
+        desc: "Cut spending to maintain fiscal discipline. Painful now, but the balance sheet will be clean for the recovery.",
+        effects: { economy: +3, social: -10, approval: -10, unity: -5, sovereign: +3, rights: -2 },
+        consequence: "You cut during the worst recession in 70 years. Auto plants close — 50,000 manufacturing jobs vanish. The economy contracts harder and longer. <em>But Canada emerges from the recession with the lowest debt-to-GDP ratio in the G7. The fiscal room you created funds the next decade of social spending. The people who paid for it — the unemployed, the laid-off, the precarious — will not forget. The balance sheet is clean. The social fabric is not.</em>",
       },
     ],
   },
@@ -1258,15 +1451,15 @@ const DECISIONS = [
       },
       {
         label: "Decriminalize only — no retail market",
-        desc: "No criminal penalties, but no legal commercial market either.",
-        effects: { rights: +3, social: +3, approval: +2, economy: 0, sovereign: +1, unity: 0 },
-        consequence: "You decriminalize — no jail, no criminal record, but no stores either. It's a safer bet. The black market persists. <em>Less money, less controversy, less progress. A Canadian compromise.</em>",
+        desc: "No criminal penalties, but no legal commercial market either. Avoids the corporate cannabis lobby.",
+        effects: { rights: +6, social: +3, approval: +2, economy: 0, sovereign: +4, unity: +2 },
+        consequence: "You decriminalize — no jail, no criminal record, but no stores either. The black market persists, but you avoid creating a for-profit cannabis lobby that will resist regulation for decades. <em>Less revenue, less corporate capture. The public health framework is cleaner. Canada doesn't export a model of commercial cannabis — it exports a model of harm reduction.</em>",
       },
       {
         label: "Keep it criminal — not now",
-        desc: "The risks are too high. Maintain prohibition.",
-        effects: { rights: -5, social: -3, approval: -2, economy: -3, sovereign: -2, unity: -2 },
-        consequence: "You keep cannabis criminal. Arrests continue — disproportionately of Indigenous and Black Canadians. The world moves on without you. <em>By 2030, Canada is one of the last developed countries with criminal cannabis prohibition. A relic.</em>",
+        desc: "The criminalization is wrong, but legalization is premature. Focus on sentencing reform instead.",
+        effects: { rights: +2, social: -3, approval: +3, economy: -3, sovereign: +2, unity: +3 },
+        consequence: "You keep cannabis criminal but reform sentencing — no more jail time for possession, records expunged retroactively. It's half a step. Arrests decline but don't end. The black market stays. <em>But you avoid normalizing commercial drug use, and the international community doesn't flinch. By 2030, the gap between Canada and the rest of the world is smaller — for better and for worse.</em>",
       },
     ],
   },
@@ -1274,7 +1467,7 @@ const DECISIONS = [
     year: 2019,
     term: 13,
     title: "The Carbon Tax",
-    context: "You've implemented a national carbon price — $20 per tonne, rising to $50 by 2022, then $170 by 2030. It's the most controversial climate policy in Canadian history. Alberta calls it <em>'the second NEP.'</em> The Conservatives make it their central attack. But economists say it's the most efficient way to cut emissions. The revenue goes back to Canadians as a dividend check.",
+    context: "You've implemented a national carbon price — $20 per tonne in 2019, rising to $50 by 2022, and $170 by 2030. It's the most controversial climate policy in Canadian history. Alberta calls it <em>'the second NEP.'</em> The Conservatives make it their central attack. But economists say it's the most efficient way to cut emissions. The revenue goes back to Canadians as a dividend check. <em>Six years from now, a new government will scrap the consumer fuel charge entirely — but right now, in 2019, you're setting the course.</em>",
     choices: [
       {
         label: "Hold firm — the price rises as planned",
@@ -1351,320 +1544,559 @@ const DECISIONS = [
 ];
 
 // ═══════════════════════════════════════════════════════════════
-//  GAME STATE
+//  HISTORICAL BASELINE
+//  Index of the choice that matches what actually happened, for
+//  each decision in DECISIONS order. This is what makes the game's
+//  "you beat real history" claim falsifiable instead of decorative:
+//  we play the real timeline through the same rules and score it.
 // ═══════════════════════════════════════════════════════════════
 
-let state = {
-  metrics: { unity: 50, economy: 50, rights: 50, enviro: 50, sovereign: 50, social: 50, approval: 50 },
-  currentDecision: 0,
-  term: 1,
-  history: [],
-  electionsWon: 0,
-  electionsLost: 0,
+const HISTORICAL_PATH = [
+  0, // 1968 Official Languages Act (passed 1969)
+  0, // 1970 War Measures Act invoked, Oct 16
+  0, // 1971 Official multiculturalism adopted
+  0, // 1972 Minority government (109 seats)
+  1, // 1976 Ottawa did NOT bail out; Montreal carried the debt to 2006
+  0, // 1977 Berger Inquiry: moratorium accepted
+  0, // 1980 NEP implemented in full
+  0, // 1980 Trudeau campaigned hard; Non won 59.6%
+  0, // 1982 Patriated with the Charter, without Quebec
+  0, // 1984 Defeated — Mulroney's PCs won 211 seats
+  0, // 1988 Free trade proceeded
+  0, // 1991 GST implemented at 7%
+  1, // 1992 Meech died (Elijah Harper, June 1990)
+  0, // 1992 Cod moratorium imposed (July 2, 1992)
+  0, // 1995 Ottawa fought; Non won by 54,288 votes
+  0, // 1997 Transfers cut (CHST, 1995 budget)
+  0, // 2002 Kyoto ratified
+  0, // 2005 Civil Marriage Act passed
+  0, // 2008 Economic Action Plan
+  1, // 2012 Pipelines approved
+  0, // 2015 Liberal majority on "Real Change"
+  0, // 2018 Legalized, regulated and taxed
+  0, // 2019 Held firm (until the consumer price was removed in 2025)
+  0, // 2020 CERB and full-scale support
+  0, // 2025 Retaliated and diversified
+];
+
+// ═══════════════════════════════════════════════════════════════
+//  TUNING — every behavioural change is one flag. Flip to revert.
+// ═══════════════════════════════════════════════════════════════
+
+const TUNING = {
+  // Present choices in a per-run shuffled order. Without this, "always click
+  // the top button" is a dominant strategy that scores in the top band.
+  shuffleChoices: true,
+
+  // Losing an election puts you in opposition: for the next N decisions you
+  // influence rather than decide, so your choice's effects are scaled down.
+  oppositionYears: 2,
+  oppositionScale: 0.5,
+
+  // Compute the headline "X% of players" stat by simulation instead of
+  // asserting a number the game never measured.
+  honestEndStat: true,
+  endStatSamples: 20000,
+
+  // Resume an interrupted game (23 decisions is a long session on a phone).
+  autosave: true,
 };
 
-function resetState() {
-  state = {
-    metrics: { unity: 50, economy: 50, rights: 50, enviro: 50, sovereign: 50, social: 50, approval: 50 },
-    currentDecision: 0,
-    term: 1,
-    history: [],
-    electionsWon: 0,
-    electionsLost: 0,
+const SAVE_KEY = 'dominion.save.v1';
+const SCORE_METRICS = ['unity', 'economy', 'rights', 'enviro', 'sovereign', 'social'];
+const START_METRICS = () => ({ unity: 50, economy: 50, rights: 50, enviro: 50, sovereign: 50, social: 50, approval: 50 });
+
+// ═══════════════════════════════════════════════════════════════
+//  PURE CORE — no DOM. Everything below the fold is rendering.
+// ═══════════════════════════════════════════════════════════════
+
+const clamp = (v) => Math.max(0, Math.min(100, v));
+
+/** Deterministic PRNG so a seed reproduces an entire run (shareable, testable). */
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 }
 
-function clamp(v) { return Math.max(0, Math.min(100, v)); }
-
-function applyEffects(effects) {
-  for (const [key, val] of Object.entries(effects)) {
-    if (state.metrics[key] !== undefined) {
-      state.metrics[key] = clamp(state.metrics[key] + val);
-    }
+function shuffledOrder(n, rng) {
+  const a = Array.from({ length: n }, (_, i) => i);
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
+  return a;
+}
+
+/** Scale effects when governing from opposition. Never flips sign; never rounds to zero. */
+function scaleEffects(effects, scale) {
+  if (scale === 1) return { ...effects };
+  const out = {};
+  for (const [k, v] of Object.entries(effects)) {
+    if (v === 0) continue;
+    const s = v * scale;
+    out[k] = s > 0 ? Math.max(1, Math.round(s)) : Math.min(-1, Math.round(s));
+  }
+  return out;
+}
+
+function applyEffects(metrics, effects) {
+  for (const [k, v] of Object.entries(effects)) {
+    if (metrics[k] !== undefined) metrics[k] = clamp(metrics[k] + v);
+  }
+  return metrics;
+}
+
+function finalScore(metrics) {
+  return SCORE_METRICS.reduce((a, k) => a + metrics[k], 0) / SCORE_METRICS.length;
+}
+
+/** Play an arbitrary path through the real rules. Used for the baseline and the end-screen stat. */
+function playPath(pickFn) {
+  const metrics = START_METRICS();
+  let opposition = 0;
+  DECISIONS.forEach((d, i) => {
+    const c = d.choices[pickFn(d, i)];
+    const scale = opposition > 0 ? TUNING.oppositionScale : 1;
+    applyEffects(metrics, scaleEffects(c.effects || {}, scale));
+    if (opposition > 0) opposition--;
+    if (d.election && resolveElection(d, c, metrics.approval) === 'lose') opposition = TUNING.oppositionYears;
+  });
+  return metrics;
+}
+
+/**
+ * Single source of election truth — used by both the UI and the simulator,
+ * so what the player sees can never disagree with what the model computes.
+ * Approval is read BEFORE the choice's own effects land, matching the
+ * approval number shown on the ballot screen.
+ */
+function resolveElection(decision, choice, approvalAtBallot) {
+  const needed = decision.approvalNeeded ?? 30;
+  if (choice.result === 'lose') return 'lose';
+  if (approvalAtBallot < needed) return 'lose';
+  return choice.result === 'minority' ? 'minority' : 'win';
+}
+
+const HISTORICAL_METRICS = playPath((d, i) => HISTORICAL_PATH[i]);
+const HISTORICAL_BASELINE = finalScore(HISTORICAL_METRICS);
+
+// ═══════════════════════════════════════════════════════════════
+//  GAME STATE
+// ═══════════════════════════════════════════════════════════════
+
+let state;
+let rng;
+
+function resetState(seed) {
+  const s = seed ?? (Math.floor(Math.random() * 0xffffffff) >>> 0);
+  rng = mulberry32(s);
+  state = {
+    seed: s,
+    metrics: START_METRICS(),
+    currentDecision: 0,
+    history: [],
+    electionsWon: 0,
+    electionsLost: 0,
+    opposition: 0,
+    orders: DECISIONS.map((d) =>
+      TUNING.shuffleChoices ? shuffledOrder(d.choices.length, rng) : d.choices.map((_, i) => i)),
+  };
+}
+
+function saveGame() {
+  if (!TUNING.autosave) return;
+  try {
+    localStorage.setItem(SAVE_KEY, JSON.stringify({
+      seed: state.seed, metrics: state.metrics, currentDecision: state.currentDecision,
+      history: state.history, electionsWon: state.electionsWon,
+      electionsLost: state.electionsLost, opposition: state.opposition, orders: state.orders,
+    }));
+  } catch (e) { /* private mode, quota — never break the game over a save */ }
+}
+
+function loadSave() {
+  if (!TUNING.autosave) return null;
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (!raw) return null;
+    const s = JSON.parse(raw);
+    if (typeof s.currentDecision !== 'number' || s.currentDecision <= 0 || s.currentDecision >= DECISIONS.length) return null;
+    if (!Array.isArray(s.orders) || s.orders.length !== DECISIONS.length) return null;
+    return s;
+  } catch (e) { return null; }
+}
+
+function clearSave() {
+  try { localStorage.removeItem(SAVE_KEY); } catch (e) { /* ignore */ }
 }
 
 // ═══════════════════════════════════════════════════════════════
 //  RENDERING
 // ═══════════════════════════════════════════════════════════════
 
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
 function renderMetrics() {
-  const bar = document.getElementById('metrics-bar');
+  const bar = $('metrics-bar');
   bar.innerHTML = '';
   for (const m of METRICS) {
-    const val = state.metrics[m.id];
+    const val = Math.round(state.metrics[m.id]);
     const div = document.createElement('div');
     div.className = 'metric';
     div.innerHTML = `
-      <div class="metric-label">${m.label} <span class="val">${Math.round(val)}</span></div>
-      <div class="metric-bar-bg">
+      <div class="metric-label">${m.label} <span class="val">${val}</span></div>
+      <div class="metric-bar-bg" role="meter" aria-label="${m.label}" aria-valuenow="${val}" aria-valuemin="0" aria-valuemax="100">
         <div class="metric-bar-fill" style="width:${val}%; background:${m.color}"></div>
-      </div>
-    `;
+      </div>`;
     bar.appendChild(div);
   }
+}
+
+function renderProgress() {
+  const n = DECISIONS.length;
+  const i = Math.min(state.currentDecision, n);
+  $('progress-fill').style.width = `${(i / n) * 100}%`;
+  $('progress-label').textContent = `Decision ${Math.min(i + 1, n)} of ${n}`;
+  $('progress-track').setAttribute('aria-valuenow', String(i));
+  $('progress-track').setAttribute('aria-valuemax', String(n));
+}
+
+function choiceButtons(decision, handler) {
+  const order = state.orders[state.currentDecision];
+  return order.map((realIdx, slot) => {
+    const c = decision.choices[realIdx];
+    return `<button class="choice-button" data-action="${handler}" data-idx="${realIdx}">
+      <span class="choice-key" aria-hidden="true">${slot + 1}</span>
+      <span class="choice-label">${c.label}</span>
+      <span class="choice-desc">${c.desc}</span>
+    </button>`;
+  }).join('');
 }
 
 function renderDecision() {
   const d = DECISIONS[state.currentDecision];
   if (!d) { showEndScreen(); return; }
+  saveGame();
 
-  document.getElementById('current-year').textContent = d.year;
-  const termText = d.election ? 'Election Year' : `Term ${state.term}`;
-  document.getElementById('term-info').textContent = termText;
+  $('current-year').textContent = d.year;
+  $('term-info').innerHTML = d.election
+    ? 'Election Year'
+    : `Term ${d.term ?? '—'}${state.opposition > 0 ? ' · <span class="opposition-tag">In Opposition</span>' : ''}`;
 
-  const container = document.getElementById('decision-container');
+  const container = $('decision-container');
+  if (d.election) { renderElection(d, container); return; }
 
-  if (d.election) {
-    renderElection(d, container);
-    return;
-  }
-
-  let html = `<div class="decision-card">
+  container.innerHTML = `<div class="decision-card">
     <div class="decision-year">${d.year}</div>
-    <div class="decision-title">${d.title}</div>
-    <div class="decision-context">${d.context}</div>`;
+    <h2 class="decision-title">${d.title}</h2>
+    <div class="decision-context">${d.context}</div>
+    ${state.opposition > 0 ? `<div class="opposition-note">You are not in government. You can shape this — you cannot decide it. Your choice lands at ${Math.round(TUNING.oppositionScale * 100)}% strength.</div>` : ''}
+    ${choiceButtons(d, 'choose')}
+  </div>`;
 
-  d.choices.forEach((c, i) => {
-    html += `<button class="choice-button" onclick="chooseOption(${i})">
-      <span class="choice-label">${c.label}</span>
-      <span class="choice-desc">${c.desc}</span>
-    </button>`;
-  });
-
-  html += `</div>`;
-  container.innerHTML = html;
   renderMetrics();
+  renderProgress();
+  focusFirstChoice();
 }
 
 function renderElection(d, container) {
-  const approval = state.metrics.approval;
-  const needed = d.approvalNeeded || 30;
-  const canWin = approval >= needed;
-
-  let html = `<div class="election-card">
+  const approval = Math.round(state.metrics.approval);
+  const needed = d.approvalNeeded ?? 30;
+  container.innerHTML = `<div class="election-card">
     <div class="decision-year">${d.year} · Election</div>
     <h2>${d.title}</h2>
     <div class="election-year">${d.year}</div>
     <div class="election-stats">
-      <div class="election-stat">
-        <div class="stat-num">${Math.round(approval)}%</div>
-        <div class="stat-label">Approval</div>
-      </div>
-      <div class="election-stat">
-        <div class="stat-num">${needed}%</div>
-        <div class="stat-label">Needed to Win</div>
-      </div>
+      <div class="election-stat"><div class="stat-num">${approval}%</div><div class="stat-label">Approval</div></div>
+      <div class="election-stat"><div class="stat-num">${needed}%</div><div class="stat-label">Needed to Win</div></div>
     </div>
-    <div class="decision-context">${d.context}</div>`;
-
-  d.choices.forEach((c, i) => {
-    html += `<button class="choice-button" onclick="chooseElection(${i}, ${canWin})">
-      <span class="choice-label">${c.label}</span>
-      <span class="choice-desc">${c.desc}</span>
-    </button>`;
-  });
-
-  html += `</div>`;
-  container.innerHTML = html;
+    <div class="decision-context">${d.context}</div>
+    ${choiceButtons(d, 'elect')}
+  </div>`;
   renderMetrics();
+  renderProgress();
+  focusFirstChoice();
+}
+
+function showConsequence({ year, text, effects, banner, bannerClass, cta }) {
+  const changes = Object.entries(effects)
+    .filter(([, v]) => v !== 0)
+    .map(([k, v]) => {
+      const m = METRICS.find((x) => x.id === k);
+      if (!m) return '';
+      return `<span class="metric-change ${v > 0 ? 'positive' : 'negative'}">${m.label} ${v > 0 ? '+' : ''}${v}</span>`;
+    }).join('');
+
+  $('decision-container').innerHTML = `<div class="consequence-card">
+    <div class="decision-year">${year}</div>
+    ${banner ? `<div class="election-result ${bannerClass || ''}">${banner}</div>` : ''}
+    <div class="consequence-text">${text}</div>
+    <div class="metric-changes" aria-live="polite">${changes}</div>
+    <button class="continue-button" data-action="continue">${cta || 'Continue →'}</button>
+  </div>`;
+
+  renderMetrics();
+  renderProgress();
+  const b = document.querySelector('.continue-button');
+  if (b) b.focus();
 }
 
 function chooseOption(idx) {
   const d = DECISIONS[state.currentDecision];
   const c = d.choices[idx];
+  const scale = state.opposition > 0 ? TUNING.oppositionScale : 1;
+  const applied = scaleEffects(c.effects || {}, scale);
 
-  applyEffects(c.effects);
-  state.history.push({ year: d.year, title: d.title, action: c.label });
+  applyEffects(state.metrics, applied);
+  state.history.push({ year: d.year, title: d.title, action: c.label, kind: 'decision', opposition: state.opposition > 0 });
+  if (state.opposition > 0) state.opposition--;
   state.currentDecision++;
+  saveGame();
 
-  showConsequence(c, d.year);
+  showConsequence({ year: d.year, text: c.consequence, effects: applied });
 }
 
-function showConsequence(c, year) {
-  const container = document.getElementById('decision-container');
-  let changeHtml = '<div class="metric-changes">';
-
-  for (const [key, val] of Object.entries(c.effects)) {
-    if (val === 0) continue;
-    const m = METRICS.find(m => m.id === key);
-    if (!m) continue;
-    const sign = val > 0 ? '+' : '';
-    const cls = val > 0 ? 'positive' : 'negative';
-    changeHtml += `<span class="metric-change ${cls}">${m.label} ${sign}${val}</span>`;
-  }
-  changeHtml += '</div>';
-
-  container.innerHTML = `<div class="consequence-card">
-    <div class="decision-year">${year}</div>
-    <div class="consequence-text">${c.consequence}</div>
-    ${changeHtml}
-    <button class="continue-button" onclick="renderDecision()">Continue →</button>
-  </div>`;
-
-  renderMetrics();
-}
-
-function chooseElection(idx, canWin) {
+function chooseElection(idx) {
   const d = DECISIONS[state.currentDecision];
   const c = d.choices[idx];
+  const outcome = resolveElection(d, c, state.metrics.approval);
 
-  applyEffects(c.effects || {});
+  const scale = state.opposition > 0 ? TUNING.oppositionScale : 1;
+  const applied = scaleEffects(c.effects || {}, scale);
+  applyEffects(state.metrics, applied);
+  if (state.opposition > 0) state.opposition--;
+
+  const copy = {
+    lose: { banner: 'DEFEATED', bannerClass: 'lose', cta: 'The country moves on →' },
+    minority: { banner: 'MINORITY GOVERNMENT', bannerClass: 'minority', cta: 'Governing continues →' },
+    win: { banner: 'RE-ELECTED', bannerClass: 'win', cta: 'Your mandate continues →' },
+  }[outcome];
+
+  if (outcome === 'lose') { state.electionsLost++; state.opposition = TUNING.oppositionYears; }
+  else state.electionsWon++;
+
+  // Elections are decisions too — they belong in the log.
+  state.history.push({ year: d.year, title: d.title, action: c.label, kind: 'election', outcome });
   state.currentDecision++;
+  saveGame();
 
-  const container = document.getElementById('decision-container');
+  const tail = outcome === 'lose' && TUNING.oppositionYears > 0
+    ? `<p class="opposition-note">You sit in opposition for the next ${TUNING.oppositionYears} decisions. You will still be asked — but you will not be obeyed.</p>`
+    : '';
 
-  if (c.result === 'lose' || (!canWin && c.result !== 'win')) {
-    state.electionsLost++;
-    state.term++;
-    container.innerHTML = `<div class="consequence-card">
-      <div class="decision-year">${d.year} · Election Result</div>
-      <div class="election-result lose">DEFEATED</div>
-      <div class="consequence-text">${c.consequence}</div>
-      <button class="continue-button" onclick="renderDecision()">The country moves on →</button>
-    </div>`;
-  } else if (c.result === 'minority') {
-    state.electionsWon++;
-    state.term++;
-    container.innerHTML = `<div class="consequence-card">
-      <div class="decision-year">${d.year} · Election Result</div>
-      <div class="election-result" style="color:var(--gold)">MINORITY GOVERNMENT</div>
-      <div class="consequence-text">${c.consequence}</div>
-      <button class="continue-button" onclick="renderDecision()">Governing continues →</button>
-    </div>`;
-  } else {
-    state.electionsWon++;
-    state.term++;
-    container.innerHTML = `<div class="consequence-card">
-      <div class="decision-year">${d.year} · Election Result</div>
-      <div class="election-result win">RE-ELECTED</div>
-      <div class="consequence-text">${c.consequence}</div>
-      <button class="continue-button" onclick="renderDecision()">Your second term begins →</button>
-    </div>`;
-  }
-  renderMetrics();
+  showConsequence({ year: d.year, text: c.consequence + tail, effects: applied, ...copy });
 }
 
 // ═══════════════════════════════════════════════════════════════
 //  END SCREEN
 // ═══════════════════════════════════════════════════════════════
 
+/**
+ * The headline stat, measured rather than asserted. Samples random
+ * playthroughs of the actual live ruleset and reports where the player landed.
+ */
+function computePercentile(score) {
+  const N = TUNING.endStatSamples;
+  const r = mulberry32(0x2a9d8f);
+  let below = 0, beatHistory = 0;
+  for (let i = 0; i < N; i++) {
+    const s = finalScore(playPath((d) => Math.floor(r() * d.choices.length)));
+    if (s < score) below++;
+    if (s > HISTORICAL_BASELINE) beatHistory++;
+  }
+  return { percentile: (below / N) * 100, randomBeatHistoryPct: (beatHistory / N) * 100 };
+}
+
+function bandFor(score) {
+  const b = HISTORICAL_BASELINE;
+  if (score >= b + 12) return 'Your Canada is extraordinary.';
+  if (score >= b + 3) return 'Your Canada is stronger than the one we got.';
+  if (score >= b - 3) return 'Your Canada is… familiar.';
+  if (score >= b - 15) return 'Your Canada is struggling.';
+  return 'Your Canada is broken.';
+}
+
 function showEndScreen() {
-  document.getElementById('game-screen').style.display = 'none';
-  document.getElementById('end-screen').style.display = 'flex';
+  clearSave();
+  $('game-screen').style.display = 'none';
+  $('end-screen').style.display = 'flex';
 
-  // Calculate overall score
   const m = state.metrics;
-  const avgScore = (m.unity + m.economy + m.rights + m.enviro + m.sovereign + m.social) / 6;
-  const betterThanRealLife = avgScore > 50;
+  const score = finalScore(m);
+  const beatHistory = score > HISTORICAL_BASELINE;
 
-  // Generate narrative
-  let narrative = '';
+  let narrative = `<strong>${bandFor(score)}</strong> `;
+  const line = (v, hi, mid, lo) => (v >= 70 ? hi : v >= 40 ? mid : lo);
+  narrative += line(m.unity,
+    'Quebec and the West feel heard. The country hangs together not by default but by choice. ',
+    'The country holds — barely. Quebec and Alberta eye the door but don\'t walk through it. ',
+    'The federation is fraying. Separatism simmers. <em>Canada is thinner than it was.</em> ');
+  narrative += line(m.economy,
+    'The economy is booming — diversified, resilient, globally competitive. ',
+    'The economy is steady — not spectacular, not failing. ',
+    'The economy has stagnated. The boom never came, or it passed you by. ');
+  narrative += line(m.rights,
+    'The Charter is stronger than ever. Rights are not granted — they\'re guaranteed. ',
+    'Rights exist but are contested. The notwithstanding clause is used more than you\'d like. ',
+    'Rights are conditional. The Charter, if it exists, is a suggestion, not a shield. ');
+  narrative += line(m.enviro,
+    'Canada is a climate leader. Clean energy powers the future. The oil sands are transitioning. ',
+    'Climate policy is muddled — some progress, some regression. The transition hasn\'t arrived. ',
+    'The oil burns bright and the climate pays. Canada is a petro-state with polite manners. ');
+  narrative += line(m.sovereign,
+    'Canada is proudly independent — from Britain, from America, from anyone. <em>A true north, strong and free.</em> ',
+    'Canada is sovereign in name. In practice, it bends toward whoever is loudest. ',
+    '<em>Sovereignty has eroded. Canada is a province of someone else\'s empire — economically, culturally, or both.</em> ');
+  narrative += line(m.social,
+    'Health care, education, housing — the social state is robust. Canadians are cared for. ',
+    'The social state is functional but stretched. The cracks show in wait times and housing costs. ',
+    'The social state has eroded. <em>Health care is private now, or means-tested, or rationed.</em> The Canada you knew is gone. ');
 
-  if (avgScore >= 75) {
-    narrative += `<strong>Your Canada is extraordinary.</strong> `;
-  } else if (avgScore >= 60) {
-    narrative += `<strong>Your Canada is strong.</strong> `;
-  } else if (avgScore >= 45) {
-    narrative += `<strong>Your Canada is... familiar.</strong> `;
-  } else if (avgScore >= 30) {
-    narrative += `<strong>Your Canada is struggling.</strong> `;
-  } else {
-    narrative += `<strong>Your Canada is broken.</strong> `;
-  }
+  narrative += `<br><br>You won ${state.electionsWon} election${state.electionsWon === 1 ? '' : 's'} and lost ${state.electionsLost}. `;
+  narrative += `<br><br>You scored <strong>${score.toFixed(1)}</strong>. The real timeline — the actual laws, the actual choices, 1968 to 2025 — scores <strong>${HISTORICAL_BASELINE.toFixed(1)}</strong> under these same rules. `;
+  narrative += beatHistory
+    ? `<em>You left Canada in better shape than history did.</em>`
+    : `<em>History did it better. Governing is harder than it looks.</em>`;
 
-  // Unity narrative
-  if (m.unity >= 70) narrative += `Quebec and the West feel heard. The country hangs together not by default but by choice. `;
-  else if (m.unity >= 40) narrative += `The country holds — barely. Quebec and Alberta eye the door but don't walk through it. `;
-  else narrative += `The federation is fraying. Separatism simmers. <em>Canada is thinner than it was.</em> `;
+  $('end-narrative').innerHTML = narrative;
 
-  // Economy
-  if (m.economy >= 70) narrative += `The economy is booming — diversified, resilient, globally competitive. `;
-  else if (m.economy >= 40) narrative += `The economy is steady — not spectacular, not failing. `;
-  else narrative += `The economy has stagnated. The boom never came, or it passed you by. `;
-
-  // Rights
-  if (m.rights >= 70) narrative += `The Charter is stronger than ever. Rights are not granted — they're guaranteed. `;
-  else if (m.rights >= 40) narrative += `Rights exist but are contested. The notwithstanding clause is used more than you'd like. `;
-  else narrative += `Rights are conditional. The Charter, if it exists, is a suggestion, not a shield. `;
-
-  // Environment
-  if (m.enviro >= 70) narrative += `Canada is a climate leader. Clean energy powers the future. The oil sands are transitioning. `;
-  else if (m.enviro >= 40) narrative += `Climate policy is muddled — some progress, some regression. The transition hasn't arrived. `;
-  else narrative += `The oil burns bright and the climate pays. Canada is a petro-state with polite manners. `;
-
-  // Sovereignty
-  if (m.sovereign >= 70) narrative += `Canada is proudly independent — from Britain, from America, from anyone. <em>A true north, strong and free.</em> `;
-  else if (m.sovereign >= 40) narrative += `Canada is sovereign in name. In practice, it bends toward whoever is loudest. `;
-  else narrative += `<em>Sovereignty has eroded. Canada is a province of someone else's empire — economically, culturally, or both.</em> `;
-
-  // Social
-  if (m.social >= 70) narrative += `Health care, education, housing — the social state is robust. Canadians are cared for. `;
-  else if (m.social >= 40) narrative += `The social state is functional but stretched. The cracks show in wait times and housing costs. `;
-  else narrative += `The social state has eroded. <em>Health care is private now, or means-tested, or rationed.</em> The Canada you knew is gone. `;
-
-  // Elections
-  narrative += `<br><br>You won ${state.electionsWon} election(s) and lost ${state.electionsLost}. `;
-
-  if (betterThanRealLife) {
-    narrative += `<em>You left Canada in better shape than the real history did. You are in the 6%.</em>`;
-  } else {
-    narrative += `<em>Canada is not better than the real timeline. You are not alone — 94% of players do the same. Governing is harder than it looks.</em>`;
-  }
-
-  document.getElementById('end-narrative').innerHTML = narrative;
-
-  // Render metrics grid
-  const grid = document.getElementById('end-metrics-grid');
-  grid.innerHTML = '';
-  for (const metric of METRICS) {
+  // Metrics grid — real history shown alongside, so the score has a referent.
+  const grid = $('end-metrics-grid');
+  grid.innerHTML = METRICS.map((metric) => {
     const val = Math.round(state.metrics[metric.id]);
-    let status = '';
-    if (val >= 70) status = '#2a9d8f';
-    else if (val >= 40) status = '#e9c46a';
-    else status = '#d62828';
-
-    grid.innerHTML += `<div class="end-metric-box">
+    const colour = val >= 70 ? '#2a9d8f' : val >= 40 ? '#e9c46a' : '#d62828';
+    const hist = Math.round(HISTORICAL_METRICS[metric.id]);
+    const delta = val - hist;
+    return `<div class="end-metric-box">
       <div class="em-label">${metric.label}</div>
-      <div class="em-val" style="color:${status}">${val}</div>
-      <div class="em-bar"><div class="em-bar-fill" style="width:${val}%; background:${status}"></div></div>
+      <div class="em-val" style="color:${colour}">${val}</div>
+      <div class="em-bar"><div class="em-bar-fill" style="width:${val}%; background:${colour}"></div></div>
+      <div class="em-hist">history ${hist} <span class="${delta >= 0 ? 'positive' : 'negative'}">${delta >= 0 ? '+' : ''}${delta}</span></div>
     </div>`;
+  }).join('');
+
+  // Headline stat — measured, not asserted.
+  if (TUNING.honestEndStat) {
+    const { percentile } = computePercentile(score);
+    $('end-stat-pct').textContent = `${percentile.toFixed(0)}${percentile >= 10 ? 'th' : 'th'}`;
+    $('end-stat-desc').textContent =
+      `percentile. You outscored ${percentile.toFixed(0)}% of ${TUNING.endStatSamples.toLocaleString()} simulated runs — ` +
+      (beatHistory ? 'and you beat the real timeline.' : `the real timeline scored ${HISTORICAL_BASELINE.toFixed(1)}.`);
   }
 
-  // Stat
-  const pct = betterThanRealLife ? '6' : '94';
-  document.getElementById('end-stat-pct').textContent = pct + '%';
-  document.getElementById('end-stat-desc').textContent = betterThanRealLife
-    ? `of players left Canada in better shape than they found it. You're in rare company.`
-    : `of players leave Canada no better than the real timeline. Governing is harder than it looks.`;
+  // History log lives in its own container so replaying can't stack copies of it.
+  $('history-log').innerHTML = '<h3>Your Decisions</h3>' + state.history.map((h) => {
+    const tag = h.kind === 'election'
+      ? `<span class="he-outcome ${h.outcome}">${h.outcome}</span>`
+      : (h.opposition ? '<span class="he-outcome opp">opposition</span>' : '');
+    return `<div class="history-entry"><span class="he-year">${h.year}</span> · <span class="he-action">${esc(h.title)}: ${esc(h.action)}</span> ${tag}</div>`;
+  }).join('');
 
-  // History log
-  let logHtml = '<div class="history-log"><h3>Your Decisions</h3>';
-  for (const h of state.history) {
-    logHtml += `<div class="history-entry"><span class="he-year">${h.year}</span> · <span class="he-action">${h.title}: ${h.action}</span></div>`;
-  }
-  logHtml += '</div>';
-  document.getElementById('end-narrative').insertAdjacentHTML('afterend', logHtml);
+  $('seed-label').textContent = state.seed.toString(36);
+}
+
+async function shareResult() {
+  const score = finalScore(state.metrics);
+  const text = `Dominion — Replay Canada 1968–2030\n` +
+    `My Canada scored ${score.toFixed(1)}. The real timeline scored ${HISTORICAL_BASELINE.toFixed(1)}.\n` +
+    `${score > HISTORICAL_BASELINE ? 'I beat history.' : 'History beat me.'}\n` +
+    `${location.origin}${location.pathname}`;
+  try {
+    if (navigator.share) { await navigator.share({ text }); return; }
+    await navigator.clipboard.writeText(text);
+    const b = $('share-button');
+    const old = b.textContent;
+    b.textContent = 'Copied ✓';
+    setTimeout(() => { b.textContent = old; }, 1800);
+  } catch (e) { /* user dismissed */ }
 }
 
 // ═══════════════════════════════════════════════════════════════
 //  GAME FLOW
 // ═══════════════════════════════════════════════════════════════
 
-function startGame() {
-  resetState();
-  document.getElementById('start-screen').style.display = 'none';
-  document.getElementById('game-screen').style.display = 'block';
-  document.getElementById('end-screen').style.display = 'none';
+function focusFirstChoice() {
+  const b = document.querySelector('.choice-button');
+  if (b) b.focus({ preventScroll: true });
+}
+
+function showScreen(id) {
+  for (const s of ['start-screen', 'game-screen', 'end-screen']) {
+    $(s).style.display = s === id ? (s === 'game-screen' ? 'block' : 'flex') : 'none';
+  }
+}
+
+function startGame(seed) {
+  const urlSeed = new URLSearchParams(location.search).get('seed');
+  resetState(seed ?? (urlSeed ? parseInt(urlSeed, 36) >>> 0 : undefined));
+  showScreen('game-screen');
+  renderDecision();
+}
+
+function resumeGame() {
+  const s = loadSave();
+  if (!s) { startGame(); return; }
+  rng = mulberry32(s.seed);
+  state = { ...s, metrics: { ...START_METRICS(), ...s.metrics } };
+  showScreen('game-screen');
   renderDecision();
 }
 
 function restartGame() {
-  resetState();
-  document.getElementById('end-screen').style.display = 'none';
-  document.getElementById('start-screen').style.display = 'flex';
+  clearSave();
+  showScreen('start-screen');
+  const b = document.querySelector('.start-button');
+  if (b) b.focus();
 }
 
+// Event delegation: no inline handlers, no global-function coupling,
+// and the buttons keep working no matter how often we re-render.
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const a = el.dataset.action;
+  if (a === 'choose') chooseOption(Number(el.dataset.idx));
+  else if (a === 'elect') chooseElection(Number(el.dataset.idx));
+  else if (a === 'continue') renderDecision();
+  else if (a === 'start') startGame();
+  else if (a === 'resume') resumeGame();
+  else if (a === 'restart') restartGame();
+  else if (a === 'share') shareResult();
+});
+
+// Number keys pick a choice; that is a real accessibility and speed win
+// on a game that asks for 23 clicks in a row.
+document.addEventListener('keydown', (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if ($('game-screen').style.display === 'none') return;
+  const buttons = [...document.querySelectorAll('.choice-button')];
+  if (buttons.length && /^[1-9]$/.test(e.key)) {
+    const b = buttons[Number(e.key) - 1];
+    if (b) { e.preventDefault(); b.click(); }
+    return;
+  }
+  const cont = document.querySelector('.continue-button');
+  if (cont && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); cont.click(); }
+});
+
+// Offer to resume an interrupted run rather than silently discarding 20 decisions.
+(function init() {
+  resetState();
+  const s = loadSave();
+  if (s) {
+    const d = DECISIONS[s.currentDecision];
+    $('resume-banner').innerHTML =
+      `<span>You have a game in progress — ${d ? d.year : ''}, decision ${s.currentDecision + 1} of ${DECISIONS.length}.</span>
+       <button class="resume-button" data-action="resume">Resume</button>
+       <button class="resume-discard" data-action="start">Start over</button>`;
+    $('resume-banner').hidden = false;
+  }
+})();
 </script>
 </body>
 </html>
