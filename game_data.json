@@ -1,0 +1,1036 @@
+[
+  {
+    "year": 1968,
+    "title": "The Just Society",
+    "is_election": false,
+    "context": "You've just been elected Prime Minister. Quebec is restless \u2014 the Quiet Revolution has transformed the province, and the separatist movement is gaining steam. The Royal Commission on Bilingualism and Biculturalism has reported that Canada is in crisis. You promised a <em>'just society'</em> in your campaign. What do you do first?",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Pass the Official Languages Act",
+        "desc": "Make English and French equal in every federal institution. The civil service, the courts, Parliament \u2014 fully bilingual.",
+        "effects": {
+          "unity": 12,
+          "rights": 5,
+          "approval": 3,
+          "sovereign": 5,
+          "social": -2
+        },
+        "consequence": "The Official Languages Act passes with bipartisan support. For the first time, francophones see themselves reflected in the federal state. Quebec newspapers call it <em>'the end of colonization.'</em> But the West grumbles about cost and bureaucracy.",
+        "result": null
+      },
+      {
+        "label": "Delay \u2014 focus on the economy instead",
+        "desc": "Quebec can wait. Prioritize economic growth and national unity through prosperity, not language politics.",
+        "effects": {
+          "unity": -8,
+          "approval": 2,
+          "economy": 3,
+          "social": -3
+        },
+        "consequence": "You shelve the language file. In Quebec, this reads as indifference. <em>Le Devoir</em> runs a front-page editorial: 'Ottawa does not hear us.' The separatist movement grows.",
+        "result": null
+      },
+      {
+        "label": "Go further \u2014 dual federalism",
+        "desc": "Not just bilingualism, but structural decentralization. Give Quebec special status within confederation.",
+        "effects": {
+          "unity": 6,
+          "approval": -5,
+          "sovereign": -3,
+          "social": 2,
+          "rights": 2
+        },
+        "consequence": "You propose 'asymmetric federalism' \u2014 Quebec gets special powers. English Canada reacts with fury. The Globe and Mail calls it 'the beginning of the end of Canada.' Quebec intellectuals are cautiously optimistic.",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 1970,
+    "title": "The October Crisis",
+    "is_election": false,
+    "context": "October 1970. The FLQ has kidnapped British diplomat James Cross and Quebec Labour Minister Pierre Laporte. Bombs have been going off in Montreal for months. The Premier of Quebec, Robert Bourassa, asks you to invoke the <em>War Measures Act</em> \u2014 peacetime martial law, never used before. 500 people could be arrested overnight. A reporter asks how far you'll go. <em>'Just watch me,'</em> you say.",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Invoke the War Measures Act",
+        "desc": "Martial law. Mass arrests. Military in the streets of Montreal. The polls say 89% of Canadians support it.",
+        "effects": {
+          "approval": 10,
+          "unity": -3,
+          "rights": -10,
+          "social": -5
+        },
+        "consequence": "October 16, 4 AM. The tanks roll into Montreal. 497 people are arrested, most without charges. Laporte's body is found in the trunk of a car. The crisis ends \u2014 but the civil liberties debate has only begun. Trudeau's <em>'Just watch me'</em> becomes the most famous phrase in Canadian political history.",
+        "result": null
+      },
+      {
+        "label": "Use police and negotiation only",
+        "desc": "No martial law. Work with Quebec police, negotiate with the FLQ, uphold civil liberties even under pressure.",
+        "effects": {
+          "approval": -8,
+          "rights": 8,
+          "unity": -5,
+          "social": 3
+        },
+        "consequence": "You refuse martial law. The negotiation drags on for weeks. Laporte is still murdered. The public is split \u2014 some call you brave for defending liberty, others call you weak. The War Measures precedent is never set, but neither is the message of resolve.",
+        "result": null
+      },
+      {
+        "label": "Invoke the Act but with a sunset clause",
+        "desc": "Emergency powers for 30 days only, with judicial oversight. A middle path.",
+        "effects": {
+          "approval": 5,
+          "rights": -4,
+          "unity": -1,
+          "social": -2
+        },
+        "consequence": "A compromise: temporary emergency powers with parliamentary review. Some arrests, but fewer and more targeted. Both sides are dissatisfied, which may mean you got it right \u2014 or that you lacked the courage of either conviction.",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 1971,
+    "title": "A Multicultural Country",
+    "is_election": false,
+    "context": "The Royal Commission on Biculturalism revealed a third reality: Canada isn't just English and French. It's Ukrainian, Italian, Chinese, Indigenous, dozens of peoples. You're about to announce a new policy \u2014 the first official multiculturalism policy in the world. Some say it dilutes the French-English compact. Others say it's the only honest description of what Canada already is.",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Adopt official multiculturalism",
+        "desc": "The first country in the world to do so. Every culture is equal within the Canadian framework.",
+        "effects": {
+          "social": 8,
+          "unity": 4,
+          "approval": 5,
+          "rights": 5,
+          "economy": 2
+        },
+        "consequence": "October 1971. You announce multiculturalism as official federal policy. The world notices \u2014 Canada becomes the model for pluralism. Decades later, it will be the single most defining feature of Canadian identity around the world. <em>But it will also strain Quebec's vision of itself as a distinct nation within Canada.</em>",
+        "result": null
+      },
+      {
+        "label": "Bilingualism is enough \u2014 reject multiculturalism",
+        "desc": "Canada is two founding peoples. Adding more complicates the compact.",
+        "effects": {
+          "social": -5,
+          "unity": -3,
+          "approval": -3,
+          "rights": -3
+        },
+        "consequence": "You reject the multicultural framework. Canada stays officially bicultural. Immigrant communities feel unseen. Internationally, Canada is just another Western country. The word 'multicultural' never enters the Canadian vocabulary.",
+        "result": null
+      },
+      {
+        "label": "Adopt it but with integration requirements",
+        "desc": "Celebrate diversity, but require language proficiency and civic education.",
+        "effects": {
+          "social": 5,
+          "unity": 2,
+          "approval": 3,
+          "rights": 2,
+          "economy": 1
+        },
+        "consequence": "You adopt multiculturalism with conditions \u2014 language requirements, civic tests. Some call it pragmatic, others call it contradictory. Immigrants adapt faster but the cultural landscape is flatter, less vibrant.",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 1972,
+    "title": "Election of 1972",
+    "is_election": true,
+    "context": "Your first election as Prime Minister. The opposition says you're arrogant, too intellectual, out of touch. The economy is softening. But your language policy and the October Crisis response are still fresh. Do you campaign on your record, or pivot?",
+    "approval_needed": 30,
+    "choices": [
+      {
+        "label": "Campaign on the record \u2014 'A Just Society'",
+        "desc": "Own your decisions. Make the case that Canada is fairer and more unified than four years ago.",
+        "effects": {},
+        "consequence": "You campaign hard on the Just Society. The voters respond \u2014 but it's close. A minority government. You'll need support from the NDP to govern.",
+        "result": "minority"
+      },
+      {
+        "label": "Pivot to economic competence",
+        "desc": "Downplay the social reforms. Promise fiscal discipline and growth.",
+        "effects": {
+          "economy": 2,
+          "approval": -2
+        },
+        "consequence": "You pivot to the economy. It feels inauthentic \u2014 voters elected you for vision, not accounting. You squeak through with a reduced majority.",
+        "result": "minority"
+      }
+    ]
+  },
+  {
+    "year": 1976,
+    "title": "The Montreal Olympics",
+    "is_election": false,
+    "context": "Montreal is hosting the 1976 Olympics. The facilities are spectacular \u2014 but the costs are spiraling. Mayor Jean Drapeau promised the Games would pay for themselves. They won't. The final bill will be billions. Do you bail out the Games?",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Yes \u2014 Canada must not be embarrassed",
+        "desc": "Federal funding to complete the stadium. National prestige at stake.",
+        "effects": {
+          "approval": 5,
+          "unity": 5,
+          "economy": -8,
+          "social": 3,
+          "sovereign": 2
+        },
+        "consequence": "The Games are spectacular. Nadia Com\u0103neci scores her perfect 10. The world sees a modern, confident Canada. But the Big Owe \u2014 the Olympic Stadium debt \u2014 won't be paid off until <em>2006</em>. Thirty years.",
+        "result": null
+      },
+      {
+        "label": "No \u2014 let Montreal handle its own mess",
+        "desc": "Federalism means provincial responsibility. Quebec wanted the Games, Quebec can pay.",
+        "effects": {
+          "approval": -5,
+          "unity": -8,
+          "economy": 3,
+          "sovereign": -2
+        },
+        "consequence": "You refuse the bailout. Montreal scrambles. The Games happen but the optics are terrible \u2014 a half-finished tower, austerity across the city. Quebec remembers. <em>'Ottawa let us humiliate ourselves on the world stage.'</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 1980,
+    "title": "The National Energy Program",
+    "is_election": false,
+    "context": "Oil prices have quadrupled. Alberta is swimming in revenue while the rest of Canada pays through the nose. You propose the National Energy Program (NEP) \u2014 a made-in-Canada oil policy that would control prices, promote Canadian ownership, and keep energy affordable for Eastern Canada. Alberta's Premier Peter Lougheed calls it <em>'a declaration of economic war.'</em>",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Implement the NEP fully",
+        "desc": "Canadianize the oil industry. Price controls, foreign ownership limits, federal revenue share.",
+        "effects": {
+          "economy": -5,
+          "approval": -3,
+          "unity": -12,
+          "sovereign": 8,
+          "social": 5
+        },
+        "consequence": "The NEP passes. Eastern Canadians get relief at the pump. But Alberta erupts. Western alienation reaches its peak \u2014 bumper stickers appear: <em>'Let the Eastern Bastards Freeze in the Dark.'</em> Investment flees. Alberta's unemployment jumps from 4% to 12%. The wound will not heal for a generation.",
+        "result": null
+      },
+      {
+        "label": "Negotiate a revenue-sharing deal with provinces",
+        "desc": "Compromise. Federal-provincial agreement on sharing the boom without confiscating it.",
+        "effects": {
+          "economy": 3,
+          "unity": 2,
+          "approval": 3,
+          "sovereign": 3,
+          "social": 2
+        },
+        "consequence": "You negotiate rather than impose. Lougheed grumbles but agrees to a revenue-sharing formula. Alberta keeps its boom, the rest of Canada gets some benefit. It's unglamorous \u2014 but it works. <em>The NEP never happens. Western alienation stays at a simmer instead of a boil.</em>",
+        "result": null
+      },
+      {
+        "label": "Let the market sort it out",
+        "desc": "No federal intervention. Alberta keeps its money; Eastern Canada pays market prices.",
+        "effects": {
+          "economy": 5,
+          "unity": -5,
+          "approval": -5,
+          "sovereign": -8,
+          "social": -5
+        },
+        "consequence": "You do nothing. Alberta booms. But Eastern Canada and manufacturing provinces are crushed by energy costs. The regional wealth gap widens dramatically. <em>'Canada' becomes a thinner idea \u2014 a customs union, not a community.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 1980,
+    "title": "The Quebec Referendum",
+    "is_election": true,
+    "context": "May 1980. Quebec Premier Ren\u00e9 L\u00e9vesque has called a referendum on sovereignty-association. The question: should Quebec negotiate a new relationship with the rest of Canada? You're a federalist from Montreal. How hard do you campaign?",
+    "approval_needed": 25,
+    "choices": [
+      {
+        "label": "Campaign hard \u2014 'My country is my country'",
+        "desc": "Personal appeals, emotional speeches, promise constitutional renewal. Fight for Canada.",
+        "effects": {
+          "unity": 8,
+          "approval": 5,
+          "sovereign": 3
+        },
+        "consequence": "You throw yourself into the campaign. The <em>'Non'</em> side wins with 59.6%. In your victory speech, you promise to renew the constitution \u2014 to bring Quebec willingly into the Canadian fold. It's the high-water mark of your career.",
+        "result": "win"
+      },
+      {
+        "label": "Let Quebecers decide for themselves",
+        "desc": "This is Quebec's choice. Federal interference would only inflame things.",
+        "effects": {
+          "unity": -15,
+          "approval": -3,
+          "sovereign": -8
+        },
+        "consequence": "You stay out of it. Without a strong federal voice, the <em>'Oui'</em> side wins \u2014 barely, 51% to 49%. Quebec begins negotiations for sovereignty-association. Canada is in crisis. Your legacy is ashes.",
+        "result": "lose"
+      }
+    ]
+  },
+  {
+    "year": 1982,
+    "title": "Bringing the Constitution Home",
+    "is_election": false,
+    "context": "The British North America Act \u2014 Canada's constitution \u2014 is still a British law. You want to patriate it: bring it home, with a Canadian amending formula and a <em>Charter of Rights and Freedoms</em>. Eight premiers oppose you. Quebec has never signed the 1982 Constitution. This is the biggest constitutional moment since 1867.",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Patriate with the Charter \u2014 with or without Quebec",
+        "desc": "The Kitchen Accord: cut a deal with the other premiers, leave Quebec out. The Charter transforms Canada.",
+        "effects": {
+          "rights": 12,
+          "sovereign": 10,
+          "unity": -8,
+          "approval": 3,
+          "social": 3
+        },
+        "consequence": "April 17, 1982. Queen Elizabeth signs the Constitution Act on Parliament Hill. The Charter of Rights and Freedoms becomes the supreme law of the land. Canada is finally, fully sovereign. But Quebec never signs. <em>The wound from this night will never fully heal.</em> Still \u2014 the Charter becomes the most beloved document in Canadian life. Rights for all. Including the notwithstanding clause you had to accept to get it.",
+        "result": null
+      },
+      {
+        "label": "Negotiate until Quebec agrees",
+        "desc": "No constitution without Quebec's consent. Even if it takes years.",
+        "effects": {
+          "rights": 3,
+          "unity": 5,
+          "sovereign": 5,
+          "approval": -5
+        },
+        "consequence": "You refuse to proceed without Quebec. The patriation stalls. The British are annoyed \u2014 they don't want to be involved anymore. The constitutional question drags on for years, poisoning federal-provincial relations. But Quebec's consent, when it finally comes, is genuine. <em>Canada is whole \u2014 but the Charter is delayed, weakened, perhaps never born.</em>",
+        "result": null
+      },
+      {
+        "label": "Patriate without the Charter",
+        "desc": "Bring the constitution home, but leave rights out of it. Let legislatures decide.",
+        "effects": {
+          "sovereign": 10,
+          "rights": -8,
+          "unity": 2,
+          "approval": 2
+        },
+        "consequence": "You patriate the constitution \u2014 but without the Charter. The amending formula comes home, but the rights revolution doesn't happen. Canadian liberty stays at the mercy of legislatures. No notwithstanding clause drama \u2014 because there's no Charter to override. <em>Canada is sovereign but less free.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 1984,
+    "title": "Election of 1984",
+    "is_election": true,
+    "context": "You've been PM for 16 years. The economy has struggled. The NEP angered the West. Quebec is still out of the constitution. But you patriated the Constitution and gave Canadians the Charter. The voters are tired of you. <em>It's time.</em>",
+    "approval_needed": 35,
+    "choices": [
+      {
+        "label": "Campaign on the Charter and sovereignty",
+        "desc": "Remind voters what you've accomplished. The Constitution, the Charter, a just society.",
+        "effects": {},
+        "consequence": "You campaign on your legacy. The Charter is popular, but after 16 years, the country wants change. You lose \u2014 badly. Brian Mulroney's Progressive Conservatives win the largest majority in history. But the Charter endures.",
+        "result": "lose"
+      },
+      {
+        "label": "Campaign on experience and stability",
+        "desc": "In uncertain times, steady hands matter. Warn against the unknown.",
+        "effects": {
+          "approval": 3
+        },
+        "consequence": "You make the case for stability. It's not enough \u2014 16 years is a long time. You lose, but respectably. The PC majority is large but not historic.",
+        "result": "lose"
+      }
+    ]
+  },
+  {
+    "year": 1988,
+    "title": "Free Trade with America",
+    "is_election": false,
+    "context": "The new Progressive Conservative government has negotiated a Free Trade Agreement with the United States. It's the defining issue of the era. Free traders say it will transform the economy. Critics say it's the <em>beginning of the end of Canadian sovereignty</em> \u2014 a slow absorption into the American orbit. The election is a referendum on free trade.",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Support free trade \u2014 the deal is done",
+        "desc": "The FTA passes. Canada and the US eliminate tariffs. The economy integrates.",
+        "effects": {
+          "economy": 10,
+          "sovereign": -10,
+          "unity": -3,
+          "approval": 3,
+          "social": -2
+        },
+        "consequence": "Free trade passes. The Canadian economy booms \u2014 manufacturing, resources, services all grow. But the integration is deep and irreversible. Canadian culture becomes harder to distinguish from American. <em>The long argument about sovereignty shifts from 'independent from Britain' to 'independent from America.'</em>",
+        "result": null
+      },
+      {
+        "label": "Oppose \u2014 renegotiate for cultural exemptions",
+        "desc": "Trade yes, but protect Canadian culture, water, and social programs.",
+        "effects": {
+          "economy": 4,
+          "sovereign": 3,
+          "unity": 2,
+          "social": 3,
+          "approval": -2
+        },
+        "consequence": "You insist on cultural exemptions and protections for Canadian industries. The FTA passes \u2014 but weaker, with carve-outs for broadcasting, publishing, and water. Trade grows, but Canada maintains cultural space. <em>A less dramatic boom, but a more Canadian one.</em>",
+        "result": null
+      },
+      {
+        "label": "Kill the deal \u2014 build east-west trade instead",
+        "desc": "No free trade with the US. Strengthen internal Canadian trade and links.",
+        "effects": {
+          "economy": -10,
+          "sovereign": 8,
+          "unity": 5,
+          "approval": -5,
+          "social": 3
+        },
+        "consequence": "You kill free trade. The US is furious, and retaliates with softwood lumber tariffs. The Canadian economy suffers \u2014 but it stays independent. <em>The choice is stark: poorer but sovereign, or rich but assimilated. You chose the former.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 1991,
+    "title": "The GST",
+    "is_election": false,
+    "context": "The government needs revenue. The deficit is enormous. The proposal: a 7% Goods and Services Tax on almost everything. It's deeply unpopular \u2014 every Canadian will see it on every receipt. But it will fund the social state for a generation.",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Implement the GST",
+        "desc": "A visible 7% tax on most goods and services. Unpopular but necessary.",
+        "effects": {
+          "economy": 5,
+          "approval": -12,
+          "social": 3,
+          "unity": -3
+        },
+        "consequence": "The GST passes. Canadians are furious \u2014 the tax appears on every receipt, every day, a permanent reminder. But government revenues stabilize. The deficit begins its long decline. <em>It will be the most hated tax in Canadian history \u2014 and the most fiscally necessary.</em>",
+        "result": null
+      },
+      {
+        "label": "Replace with a hidden manufacturer's tax",
+        "desc": "Tax at the production stage. Less visible, but same revenue.",
+        "effects": {
+          "economy": 3,
+          "approval": 2,
+          "social": 1,
+          "unity": 1
+        },
+        "consequence": "You opt for a hidden tax instead. It raises less revenue but avoids the political fallout. The deficit continues to grow. <em>Out of sight, out of mind \u2014 but the bill comes due eventually.</em>",
+        "result": null
+      },
+      {
+        "label": "Cut spending instead \u2014 no new tax",
+        "desc": "Austerity. Shrink government to close the deficit.",
+        "effects": {
+          "economy": 2,
+          "approval": 3,
+          "social": -10,
+          "unity": -5,
+          "rights": -2
+        },
+        "consequence": "You cut spending instead. Programs shrink, transfers to provinces decline. The deficit narrows but social services erode. <em>The Canada Health Act starts to fray at the edges.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 1992,
+    "title": "The Meech Lake Accord",
+    "is_election": false,
+    "context": "Quebec still hasn't signed the Constitution. The Meech Lake Accord would bring them in \u2014 recognizing Quebec as a <em>'distinct society'</em>, giving it more powers. But it requires unanimous provincial consent. The clock is ticking. Indigenous leaders, women's groups, and English-Canadian nationalists all oppose it.",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Push it through \u2014 Quebec must be inside",
+        "desc": "Use every ounce of political capital to get all ten provinces to agree.",
+        "effects": {
+          "unity": 10,
+          "approval": -3,
+          "rights": -3,
+          "social": -2,
+          "sovereign": 2
+        },
+        "consequence": "You push hard. After furious negotiation, all ten provinces ratify. Quebec signs the Constitution \u2014 10 years late. The <em>'distinct society'</em> clause reshapes Canadian federalism. But critics warn it creates a tiered federation, and the backlash from Indigenous groups and equality advocates is fierce.",
+        "result": null
+      },
+      {
+        "label": "Let it die \u2014 the deal is flawed",
+        "desc": "The Accord collapses. Elijah Harper's filibuster kills it in Manitoba.",
+        "effects": {
+          "unity": -10,
+          "approval": 2,
+          "rights": 3,
+          "social": 2,
+          "sovereign": -2
+        },
+        "consequence": "Meech Lake dies. Quebec is wounded \u2014 again. <em>'Canada does not want us.'</em> The Parti Qu\u00e9b\u00e9cois surges. The 1995 referendum becomes inevitable. But the Charter stays intact, unweakened by the distinct society clause. Indigenous rights, not yet traded away, remain a lever for future progress.",
+        "result": null
+      },
+      {
+        "label": "Renegotiate \u2014 include Indigenous nations",
+        "desc": "A new accord that recognizes Quebec AND Indigenous nations as founding partners.",
+        "effects": {
+          "unity": 8,
+          "rights": 8,
+          "approval": -2,
+          "social": 5,
+          "sovereign": 3
+        },
+        "consequence": "You refuse the binary choice. A new round of negotiations begins \u2014 three-sided this time: federal, provincial, Indigenous. It takes years and nearly fails. But when the Charlottetown Accord finally passes, it's the most inclusive constitutional deal in Canadian history. <em>Canada is not two solitudes, or ten provinces \u2014 it is many nations, together.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 1995,
+    "title": "The Quebec Referendum, Round Two",
+    "is_election": false,
+    "context": "October 30, 1995. The Parti Qu\u00e9b\u00e9cois has called a second referendum. The question is vague \u2014 sovereignty with an offer of partnership. The polls are dead even. You're watching the results come in from Ottawa. <em>This is the night Canada almost breaks apart.</em>",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Fight with everything \u2014 a passionate Canada",
+        "desc": "Rally the country. Emotional appeal. Promise a renewed federalism. A last-minute federal love letter to Quebec.",
+        "effects": {
+          "unity": 10,
+          "approval": 5,
+          "sovereign": 5,
+          "social": 2
+        },
+        "consequence": "You go all in. The federal rally in Montreal draws 50,000 people. A last-minute <em>'love-in'</em> for Canadian unity. The results come in: 50.58% Non, 49.42% Oui. <em>Canada survives by 53,000 votes.</em> Parizeau blames 'money and the ethnic vote' and resigns. You've kept the country together \u2014 by a razor's margin.",
+        "result": null
+      },
+      {
+        "label": "Let Quebec decide \u2014 minimal federal involvement",
+        "desc": "This is Quebec's democratic right. Interference would be resented.",
+        "effects": {
+          "unity": -20,
+          "approval": -3,
+          "sovereign": -15,
+          "social": -5
+        },
+        "consequence": "You stay distant. Without a strong federal voice, the <em>'Oui'</em> creeps ahead. On October 30, 1995, Quebec votes 51% to 49% for sovereignty. <em>Canada breaks apart. The largest country in the world becomes two nations overnight.</em> You are the last Prime Minister of a united Canada. The History will not be kind.",
+        "result": null
+      },
+      {
+        "label": "Offer clear constitutional reform \u2014 the clarity path",
+        "desc": "Campaign for a clear question AND promise constitutional renewal if No wins.",
+        "effects": {
+          "unity": 5,
+          "approval": 3,
+          "sovereign": 3,
+          "rights": 3
+        },
+        "consequence": "You make the case for clarity and offer a concrete post-NO plan: constitutional renewal, provincial powers, Indigenous recognition. It's a tighter margin \u2014 51.5% Non \u2014 but the No side wins with a mandate. You've bought time. <em>Whether you use it is the question of your next term.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 1997,
+    "title": "The Deficit",
+    "is_election": false,
+    "context": "Canada's debt is approaching 70% of GDP. The bond rating agencies are making noise. Your Finance Minister proposes slashing the deficit \u2014 by cutting transfers to provinces for health and education. It will balance the budget. It will also gut the social contract that holds Canada together.",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Cut transfers \u2014 balance the budget",
+        "desc": "Slash the Canada Health and Social Transfer by $7 billion. Brutal but effective.",
+        "effects": {
+          "economy": 10,
+          "social": -12,
+          "unity": -5,
+          "approval": -3,
+          "rights": -5
+        },
+        "consequence": "You cut. The deficit disappears \u2014 Canada leads the G7 in deficit reduction. The bond rating agencies applaud. But health care wait times double. Provincial governments, starved of cash, privatize what they can. <em>The social state shrinks. The Canada Health Act, the pride of the nation, starts to look like a shell.</em>",
+        "result": null
+      },
+      {
+        "label": "Balanced approach \u2014 tax increases + moderate cuts",
+        "desc": "Some service cuts, some tax increases. Spread the pain.",
+        "effects": {
+          "economy": 5,
+          "social": -4,
+          "approval": -5,
+          "unity": 1,
+          "rights": -2
+        },
+        "consequence": "You split the difference. The deficit shrinks but doesn't vanish. Health care erodes more slowly. Tax increases are unpopular but manageable. <em>It's a grind \u2014 but Canada emerges with its social contract mostly intact, and its finances on the mend.</em>",
+        "result": null
+      },
+      {
+        "label": "Invest in growth \u2014 let the deficit ride",
+        "desc": "Cutting during a weak economy makes it weaker. Spend to grow, tax the rich.",
+        "effects": {
+          "economy": -5,
+          "social": 5,
+          "approval": 5,
+          "unity": 3,
+          "rights": 2
+        },
+        "consequence": "You invest instead of cutting. Infrastructure, education, innovation. The economy grows \u2014 slowly. The deficit lingers. The right calls you irresponsible. But the social state holds. <em>Canada comes out of the 90s poorer but kinder. The deficit will resolve itself in the 2000s boom \u2014 or it won't.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 2002,
+    "title": "Kyoto or Not",
+    "is_election": false,
+    "context": "Climate change is becoming a mainstream issue. The Kyoto Protocol asks developed countries to reduce greenhouse gas emissions to 6% below 1990 levels by 2012. Canada's economy is resource-heavy \u2014 Alberta's oil sands are just beginning their boom. Ratifying Kyoto means constraining that growth.",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Ratify Kyoto \u2014 lead on climate",
+        "desc": "Commit to emission targets. Make Canada a climate leader.",
+        "effects": {
+          "enviro": 12,
+          "economy": -5,
+          "approval": -2,
+          "sovereign": 3,
+          "social": 2
+        },
+        "consequence": "You ratify Kyoto. Canada is one of the first. The international community applauds. But Alberta's oil sands boom slows. <em>The targets prove impossible to meet \u2014 Canada will miss them badly. But the signal is sent: Canada takes climate seriously. The clean energy industry begins to grow.</em>",
+        "result": null
+      },
+      {
+        "label": "Ratify with concessions for the energy sector",
+        "desc": "Sign Kyoto but with loopholes for oil sands and heavy industry.",
+        "effects": {
+          "enviro": 4,
+          "economy": 2,
+          "approval": 2,
+          "sovereign": 1,
+          "social": 0
+        },
+        "consequence": "You sign with caveats. Canada is technically in Kyoto but effectively out. The oil sands continue to grow. <em>Canada has a climate policy on paper and an extraction economy in practice. The gap between the two becomes the defining contradiction of Canadian climate politics.</em>",
+        "result": null
+      },
+      {
+        "label": "Don't ratify \u2014 the economy needs oil",
+        "desc": "Kyoto is unrealistic for a resource economy. Prioritize growth.",
+        "effects": {
+          "enviro": -10,
+          "economy": 6,
+          "approval": 3,
+          "sovereign": -2,
+          "social": -2
+        },
+        "consequence": "You refuse Kyoto. The oil sands boom accelerates. Alberta's GDP explodes. But internationally, Canada becomes a climate laggard. <em>The world's polite polluter.</em> The environmental movement radicalizes. The cost of clean-up, deferred, grows every year.",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 2005,
+    "title": "Same-Sex Marriage",
+    "is_election": false,
+    "context": "Courts in Ontario, BC, and Quebec have already legalized same-sex marriage. The Supreme Court has said Parliament has the power to extend it nationwide. The Civil Marriage Act would make Canada the fourth country in the world to legalize same-sex marriage. It's a free vote in Parliament. Your minority government is fragile.",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Pass the Civil Marriage Act",
+        "desc": "Legalize same-sex marriage across Canada. A Charter issue.",
+        "effects": {
+          "rights": 10,
+          "social": 8,
+          "approval": -3,
+          "unity": -2,
+          "sovereign": 3
+        },
+        "consequence": "July 20, 2005. The Civil Marriage Act passes. Canada becomes the fourth country to legalize same-sex marriage nationwide. The world notices \u2014 again, Canada as human rights leader. But social conservatives are furious. <em>It costs you seats in rural Canada. It gains you the moral arc of history.</em>",
+        "result": null
+      },
+      {
+        "label": "Civil unions only \u2014 not marriage",
+        "desc": "Equal rights, different name. A compromise position.",
+        "effects": {
+          "rights": 4,
+          "social": 4,
+          "approval": 2,
+          "unity": 1,
+          "sovereign": 1
+        },
+        "consequence": "You propose civil unions \u2014 same rights, different word. The LGBTQ community feels betrayed by the compromise. Conservatives are still upset. <em>You've satisfied no one, which in Canadian politics means you've probably found the center.</em>",
+        "result": null
+      },
+      {
+        "label": "Defend traditional marriage",
+        "desc": "Marriage is between a man and a woman. Use the notwithstanding clause if needed.",
+        "effects": {
+          "rights": -10,
+          "social": -8,
+          "approval": 3,
+          "unity": 3,
+          "sovereign": -3
+        },
+        "consequence": "You block same-sex marriage. The courts are overruled. The LGBTQ community is devastated \u2014 this was their moment, and you took it away. Internationally, Canada goes backwards. <em>By 2020, the courts will force the issue again. But a generation of LGBTQ Canadians will remember who stood in the door.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 2008,
+    "title": "The Global Financial Crisis",
+    "is_election": false,
+    "context": "September 2008. Lehman Brothers has collapsed. The global financial system is in cardiac arrest. Canada's banks are relatively solid \u2014 stricter regulation kept them from the worst subprime excesses \u2014 but the real economy is tanking. Auto manufacturing in Ontario is hemorrhaging jobs. Do you stimulate or do you cut?",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Stimulate \u2014 the Economic Action Plan",
+        "desc": "Massive infrastructure spending, auto bailouts, tax cuts. Deficit spending to fight the recession.",
+        "effects": {
+          "economy": 5,
+          "social": 5,
+          "approval": 8,
+          "unity": 3,
+          "enviro": -2,
+          "sovereign": 2
+        },
+        "consequence": "You stimulate. The Economic Action Plan floods money into infrastructure, auto industry bailouts save GM and Chrysler plants in Ontario, and tax cuts put money in pockets. <em>Canada emerges from the recession faster than any other G7 country. The deficit balloons \u2014 but it's temporary, and the recovery is real.</em>",
+        "result": null
+      },
+      {
+        "label": "Steady as she goes \u2014 modest support",
+        "desc": "Limited intervention. Let the market correct with some help.",
+        "effects": {
+          "economy": 2,
+          "social": 0,
+          "approval": 0,
+          "unity": 0,
+          "sovereign": 0
+        },
+        "consequence": "You provide modest support \u2014 some auto industry assistance, some EI enhancements. The recession is longer and deeper than it needs to be. <em>Canada recovers, but slower, with more pain. The deficit stays smaller, though.</em>",
+        "result": null
+      },
+      {
+        "label": "Austerity \u2014 balance the budget through the recession",
+        "desc": "Cut spending to maintain fiscal discipline. Ride out the storm.",
+        "effects": {
+          "economy": -10,
+          "social": -10,
+          "approval": -10,
+          "unity": -5,
+          "sovereign": -2
+        },
+        "consequence": "You cut during the worst recession in 70 years. Auto plants close \u2014 50,000 manufacturing jobs vanish. The economy contracts harder and longer. <em>It's the 1930s all over again. Municipal services collapse. The recovery, when it comes, is joyless and slow.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 2012,
+    "title": "The Oil Sands",
+    "is_election": false,
+    "context": "The Alberta oil sands are the third-largest oil reserve in the world. They're also Canada's largest source of emissions. Northern Alberta is a boom economy \u2014 Fort McMurray is growing faster than any city in Canada. But the environmental cost is visible from space: tailings ponds, deforestation, carbon. The proposed pipelines to the coast would lock in decades of oil extraction. <em>What is Canada's future economy?</em>",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Regulate and cap \u2014 transition starts now",
+        "desc": "Emissions cap on oil sands. Invest in clean energy transition. Slower boom, cleaner future.",
+        "effects": {
+          "enviro": 10,
+          "economy": -5,
+          "approval": -5,
+          "unity": -5,
+          "social": 2,
+          "sovereign": 3
+        },
+        "consequence": "You impose an emissions cap and pivot federal investment toward clean energy. Alberta is furious \u2014 <em>'Ottawa is killing our economy again.'</em> The oil sands slow. But Canada's clean tech sector begins to flourish. By 2030, the bet looks smarter every year.",
+        "result": null
+      },
+      {
+        "label": "Approve pipelines \u2014 let the boom continue",
+        "desc": "Build pipelines to tidewater. Maximize oil exports. Deal with emissions later.",
+        "effects": {
+          "enviro": -12,
+          "economy": 10,
+          "approval": 3,
+          "unity": 3,
+          "social": -3,
+          "sovereign": -2
+        },
+        "consequence": "You approve the pipelines. The oil sands boom accelerates. Alberta's economy is on fire. Federal revenues pour in. But the emissions rise and rise. <em>By 2030, Canada has the highest per-capita emissions in the G7. The transition, when it finally comes, is brutal.</em>",
+        "result": null
+      },
+      {
+        "label": "Clean growth strategy \u2014 diversify while extracting",
+        "desc": "Pipelines yes, but with carbon pricing and green investment simultaneously.",
+        "effects": {
+          "enviro": 2,
+          "economy": 5,
+          "approval": 5,
+          "unity": 5,
+          "social": 3,
+          "sovereign": 2
+        },
+        "consequence": "You thread the needle \u2014 pipelines with carbon pricing, oil with green investment. Alberta gets its markets. Environmentalists get their transition. <em>It's expensive and complicated, but it's the Canadian way. Both sides are grumpy, which means it's probably right.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 2015,
+    "title": "Election of 2015",
+    "is_election": true,
+    "context": "It's been a decade of Conservative government. The country is divided \u2014 Alberta vs. the rest, resource economy vs. environment, the old Canada vs. the new. The opposition campaign is <em>'Real Change'</em> \u2014 a young, photogenic leader promising a new era. You need to decide what kind of Canada you're offering.",
+    "approval_needed": 30,
+    "choices": [
+      {
+        "label": "Promise a progressive era \u2014 climate, reconciliation, diversity",
+        "desc": "Carbon pricing, Indigenous reconciliation, gender parity, cannabis legalization, refugee welcome.",
+        "effects": {
+          "rights": 5,
+          "social": 5,
+          "enviro": 3,
+          "approval": 5,
+          "unity": 2,
+          "sovereign": 2
+        },
+        "consequence": "You campaign on hope. Canada welcomes 25,000 Syrian refugees. You promise a gender-balanced cabinet. <em>'Because it's 2015.'</em> The country responds \u2014 you win a majority. The progressive era begins.",
+        "result": "win"
+      },
+      {
+        "label": "Steady management \u2014 incremental change",
+        "desc": "Competence over charisma. Keep what works, fix what doesn't.",
+        "effects": {
+          "economy": 3,
+          "approval": 0,
+          "unity": 1,
+          "social": 0,
+          "rights": 0
+        },
+        "consequence": "You campaign on competence. It's respectable but uninspiring. You win \u2014 barely, a minority. The mandate for change is thin.",
+        "result": "minority"
+      },
+      {
+        "label": "Pivot right \u2014 resource economy and security",
+        "desc": "Doubles down on oil, security, traditional values. Compete with the right.",
+        "effects": {
+          "economy": 5,
+          "enviro": -5,
+          "social": -5,
+          "rights": -5,
+          "approval": -3,
+          "unity": -3
+        },
+        "consequence": "You campaign right. It splits the conservative vote and energizes the opposition. You lose \u2014 the progressive wave sweeps you out.",
+        "result": "lose"
+      }
+    ]
+  },
+  {
+    "year": 2018,
+    "title": "Cannabis Legalization",
+    "is_election": false,
+    "context": "You promised to legalize recreational cannabis. The first major country to do so. The arguments: end the black market, keep money away from organized crime, regulate quality, stop criminalizing young people. The opposition: it normalizes drug use, endangers youth, displeases the international community. <em>Canada would be the second country in the world, after Uruguay.</em>",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Legalize \u2014 regulate and tax",
+        "desc": "Legal recreational cannabis. Federal regulation, provincial retail. First major economy to do so.",
+        "effects": {
+          "rights": 5,
+          "social": 5,
+          "approval": -2,
+          "economy": 3,
+          "sovereign": 3,
+          "unity": 1
+        },
+        "consequence": "October 17, 2018. Cannabis is legal across Canada. The world watches \u2014 some appalled, some fascinated. Tax revenues begin flowing. Arrests plummet. <em>The black market shrinks but doesn't die. The youth usage rate is... mixed. But the criminalization of a generation ends.</em>",
+        "result": null
+      },
+      {
+        "label": "Decriminalize only \u2014 no retail market",
+        "desc": "No criminal penalties, but no legal commercial market either.",
+        "effects": {
+          "rights": 3,
+          "social": 3,
+          "approval": 2,
+          "economy": 0,
+          "sovereign": 1,
+          "unity": 0
+        },
+        "consequence": "You decriminalize \u2014 no jail, no criminal record, but no stores either. It's a safer bet. The black market persists. <em>Less money, less controversy, less progress. A Canadian compromise.</em>",
+        "result": null
+      },
+      {
+        "label": "Keep it criminal \u2014 not now",
+        "desc": "The risks are too high. Maintain prohibition.",
+        "effects": {
+          "rights": -5,
+          "social": -3,
+          "approval": -2,
+          "economy": -3,
+          "sovereign": -2,
+          "unity": -2
+        },
+        "consequence": "You keep cannabis criminal. Arrests continue \u2014 disproportionately of Indigenous and Black Canadians. The world moves on without you. <em>By 2030, Canada is one of the last developed countries with criminal cannabis prohibition. A relic.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 2019,
+    "title": "The Carbon Tax",
+    "is_election": false,
+    "context": "You've implemented a national carbon price \u2014 $20 per tonne, rising to $50 by 2022, then $170 by 2030. It's the most controversial climate policy in Canadian history. Alberta calls it <em>'the second NEP.'</em> The Conservatives make it their central attack. But economists say it's the most efficient way to cut emissions. The revenue goes back to Canadians as a dividend check.",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Hold firm \u2014 the price rises as planned",
+        "desc": "Stay the course. Carbon pricing is the most efficient climate tool.",
+        "effects": {
+          "enviro": 8,
+          "economy": -3,
+          "approval": -5,
+          "unity": -5,
+          "sovereign": 3,
+          "social": 2
+        },
+        "consequence": "You hold firm. The carbon price rises. Most Canadians get more back in dividends than they pay \u2014 but perception lags reality. Alberta seethes. <em>Emissions begin to plateau. But the political cost is enormous, and the regional divide deepens.</em>",
+        "result": null
+      },
+      {
+        "label": "Pause the increases \u2014 freeze at $50",
+        "desc": "Keep the price but stop the escalator. Compromise during affordability crisis.",
+        "effects": {
+          "enviro": 3,
+          "economy": 2,
+          "approval": 3,
+          "unity": 2,
+          "sovereign": 0,
+          "social": 0
+        },
+        "consequence": "You freeze the price at $50. Affordability concerns are acknowledged. Alberta is less angry. But the emissions target drifts further away. <em>The climate doesn't negotiate. But neither do voters.</em>",
+        "result": null
+      },
+      {
+        "label": "Scrap the carbon tax \u2014 use regulations instead",
+        "desc": "No carbon price. Use industry-specific regulations to cut emissions.",
+        "effects": {
+          "enviro": -5,
+          "economy": 5,
+          "approval": 5,
+          "unity": 5,
+          "sovereign": -2,
+          "social": -2
+        },
+        "consequence": "You scrap the tax. Alberta celebrates. But without a price signal, the clean transition stalls. <em>Regulations are slower, costlier, and less effective than a carbon price. The math is clear. The politics aren't.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 2020,
+    "title": "The Pandemic",
+    "is_election": false,
+    "context": "March 2020. COVID-19 arrives in Canada. Borders close, businesses shutter, the economy freezes. You're looking at potential unemployment not seen since the 1930s. The choice: how big is the response? How much debt? How much control?",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Go big \u2014 CERB and massive support",
+        "desc": "Direct payments to every affected worker. Business wage subsidies. Lockdowns enforced.",
+        "effects": {
+          "economy": -5,
+          "social": 10,
+          "approval": 10,
+          "unity": 5,
+          "rights": -3,
+          "sovereign": 3
+        },
+        "consequence": "You go big. CERB sends $2,000/month to 8 million Canadians. Wage subsidies keep businesses alive. Lockdowns save lives \u2014 Canada's death rate is a fraction of the US. <em>The deficit hits $380 billion. But the social fabric holds. People remember: the government was there.</em>",
+        "result": null
+      },
+      {
+        "label": "Moderate \u2014 targeted support only",
+        "desc": "Enhanced EI for the unemployed. Limited business aid. Softer restrictions.",
+        "effects": {
+          "economy": -2,
+          "social": 3,
+          "approval": 3,
+          "unity": 2,
+          "rights": 2,
+          "sovereign": 1
+        },
+        "consequence": "You provide targeted support \u2014 enhanced EI, some business help, but less than the moment demands. <em>The economic hit is smaller, but more people fall through the cracks. Recovery is slower. Some deaths that full lockdowns might have prevented.</em>",
+        "result": null
+      },
+      {
+        "label": "Minimal \u2014 let people make their own choices",
+        "desc": "No lockdowns. Voluntary guidance. Protect the economy above all.",
+        "effects": {
+          "economy": 3,
+          "social": -15,
+          "approval": -5,
+          "unity": -8,
+          "rights": 5,
+          "sovereign": -2
+        },
+        "consequence": "You refuse lockdowns. <em>The virus spreads faster. Canada's death rate mirrors the US. Hospitals overflow. The economy takes a smaller hit \u2014 but at what cost? Some provinces defy you and lock down anyway, fracturing national unity.</em>",
+        "result": null
+      }
+    ]
+  },
+  {
+    "year": 2025,
+    "title": "The Trump Tariffs",
+    "is_election": false,
+    "context": "January 2025. The new US president has imposed 25% tariffs on Canadian goods and is openly threatening annexation \u2014 calling Canada <em>the 51st state</em> and the Prime Minister <em>'Governor.'</em> The trade war is here. This is the most serious threat to Canadian sovereignty since 1812. How do you respond?",
+    "approval_needed": null,
+    "choices": [
+      {
+        "label": "Retaliate and diversify \u2014 'Canada Strong'",
+        "desc": "Counter-tariffs on $60B of US goods. Diversify trade to Europe and Asia. Stand firm on sovereignty.",
+        "effects": {
+          "sovereign": 12,
+          "economy": -5,
+          "approval": 10,
+          "unity": 10,
+          "social": -2,
+          "rights": 2
+        },
+        "consequence": "You retaliate. $60 billion in counter-tariffs. <em>'Elbow up, Canada.'</em> The country rallies \u2014 Canadian flags fly everywhere, US products are boycotted, 'Buy Canadian' becomes a movement. Trade diversification accelerates: new deals with the EU and Pacific nations. <em>The economy takes a hit \u2014 but Canada finds its spine. Sovereignty isn't free, but it's not for sale either.</em>",
+        "result": null
+      },
+      {
+        "label": "Negotiate \u2014 find a deal, avoid escalation",
+        "desc": "Seek a compromise. Offer concessions on border security and defence spending.",
+        "effects": {
+          "sovereign": -8,
+          "economy": 5,
+          "approval": -5,
+          "unity": -5,
+          "social": 0,
+          "rights": -2
+        },
+        "consequence": "You negotiate. Concessions on border security, defence spending commitments, a revised trade deal. <em>The tariffs ease. The economy recovers. But the word 'sovereignty' now has an asterisk. Canada is still independent \u2014 but it learned to flinch.</em>",
+        "result": null
+      },
+      {
+        "label": "Full economic integration \u2014 embrace the future",
+        "desc": "Open negotiations for a customs union or deeper integration. The future is continental.",
+        "effects": {
+          "sovereign": -20,
+          "economy": 15,
+          "approval": -8,
+          "unity": -15,
+          "social": 2,
+          "rights": -5
+        },
+        "consequence": "You open the door to continental integration. The economic gains are real \u2014 seamless trade, shared markets, booming investment. But <em>Canada as a distinct nation, a separate country, begins to dissolve. The Maple Leaf stays on the flag. The meaning drains out of it.</em>",
+        "result": null
+      }
+    ]
+  }
+]
