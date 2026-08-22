@@ -1,0 +1,1155 @@
+[
+  {
+    "id": "JUST_SOCIETY_1968",
+    "title": "The Just Society",
+    "yearWindow": [
+      1968,
+      1968
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 0,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Pass the Official Languages Act",
+        "metrics": {
+          "unity": 12,
+          "rights": 5,
+          "sovereign": 5,
+          "social": -2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Delay — focus on the economy instead",
+        "metrics": {
+          "unity": -8,
+          "economy": 3,
+          "social": -3
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Go further — dual federalism",
+        "metrics": {
+          "unity": 6,
+          "sovereign": -3,
+          "social": 2,
+          "rights": 2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "OCTOBER_CRISIS_1970",
+    "title": "The October Crisis",
+    "yearWindow": [
+      1970,
+      1970
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 1,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Invoke the War Measures Act",
+        "metrics": {
+          "unity": 2,
+          "rights": -10,
+          "social": -5,
+          "sovereign": 3
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Use police and negotiation only",
+        "metrics": {
+          "rights": 8,
+          "unity": -5,
+          "social": 3,
+          "sovereign": -3
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Invoke the Act but with a sunset clause",
+        "metrics": {
+          "rights": -4,
+          "unity": -1,
+          "social": -2,
+          "sovereign": 1
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "MULTICULTURALISM_1971",
+    "title": "A Multicultural Country",
+    "yearWindow": [
+      1971,
+      1971
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 2,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Adopt official multiculturalism",
+        "metrics": {
+          "social": 8,
+          "unity": 6,
+          "rights": 5,
+          "economy": 2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Bilingualism is enough — reject multiculturalism",
+        "metrics": {
+          "social": -5,
+          "unity": 5,
+          "rights": -3,
+          "economy": 5,
+          "sovereign": 2
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Adopt it but with integration requirements",
+        "metrics": {
+          "social": 5,
+          "unity": 6,
+          "rights": 2,
+          "economy": 3
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "ELECTION_1972",
+    "title": "Election of 1972",
+    "yearWindow": [
+      1972,
+      1972
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": true,
+    "approvalNeeded": 41,
+    "v1Index": 3,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Campaign on the record — 'A Just Society'",
+        "metrics": {
+          "unity": 3,
+          "social": 2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Pivot to economic competence",
+        "metrics": {
+          "economy": 5
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "MONTREAL_OLYMPICS_1976",
+    "title": "The Montreal Olympics",
+    "yearWindow": [
+      1976,
+      1976
+    ],
+    "type": "altered",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 4,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Yes — Canada must not be embarrassed",
+        "metrics": {
+          "unity": 5,
+          "economy": -8,
+          "social": 3,
+          "sovereign": 2
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c1",
+        "label": "No — let Montreal handle its own mess",
+        "metrics": {
+          "unity": -8,
+          "economy": 3,
+          "sovereign": -2
+        },
+        "isHistorical": true
+      }
+    ]
+  },
+  {
+    "id": "BERGER_INQUIRY_1977",
+    "title": "The Berger Inquiry",
+    "yearWindow": [
+      1977,
+      1977
+    ],
+    "type": "conditional",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 5,
+    "priority": 3,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Accept the moratorium — listen to the land",
+        "metrics": {
+          "enviro": 12,
+          "rights": 8,
+          "social": 5,
+          "economy": -5,
+          "unity": 3,
+          "sovereign": 3
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Build the pipeline — the North needs development",
+        "metrics": {
+          "enviro": -12,
+          "economy": 8,
+          "rights": -5,
+          "social": 2,
+          "unity": -3,
+          "sovereign": 5
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Build it with Indigenous co-ownership",
+        "metrics": {
+          "enviro": -4,
+          "economy": 5,
+          "rights": 5,
+          "social": 6,
+          "unity": 4,
+          "sovereign": 3
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "NEP_1980",
+    "title": "The National Energy Program",
+    "yearWindow": [
+      1980,
+      1980
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 6,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Implement the NEP fully",
+        "metrics": {
+          "economy": -5,
+          "unity": -12,
+          "sovereign": 8,
+          "social": 5
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Negotiate a revenue-sharing deal with provinces",
+        "metrics": {
+          "economy": 3,
+          "unity": 2,
+          "sovereign": 3,
+          "social": 2
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Let the market sort it out",
+        "metrics": {
+          "economy": 5,
+          "unity": -5,
+          "sovereign": -8,
+          "social": -5
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "QUEBEC_REFERENDUM_1980",
+    "title": "The Quebec Referendum",
+    "yearWindow": [
+      1980,
+      1980
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "approvalNeeded": 28,
+    "v1Index": 7,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Campaign hard — 'My country is my country'",
+        "metrics": {
+          "unity": 8,
+          "sovereign": 3
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Let Quebecers decide for themselves",
+        "metrics": {
+          "unity": -8,
+          "sovereign": 4,
+          "rights": 5,
+          "social": 2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "CONSTITUTION_1982",
+    "title": "Bringing the Constitution Home",
+    "yearWindow": [
+      1982,
+      1982
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 8,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Patriate with the Charter — with or without Quebec",
+        "metrics": {
+          "rights": 12,
+          "sovereign": 10,
+          "unity": -8,
+          "social": 3
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Negotiate until Quebec agrees",
+        "metrics": {
+          "rights": 3,
+          "unity": 5,
+          "sovereign": 5
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Patriate without the Charter",
+        "metrics": {
+          "sovereign": 10,
+          "rights": -8,
+          "unity": 2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "ELECTION_1984",
+    "title": "Election of 1984",
+    "yearWindow": [
+      1984,
+      1984
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": true,
+    "approvalNeeded": 49,
+    "v1Index": 9,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Campaign on the Charter and sovereignty",
+        "metrics": {
+          "rights": 2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Campaign on experience and stability",
+        "metrics": {
+          "economy": 2
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Step aside — let a new leader carry the banner",
+        "metrics": {
+          "unity": 2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "FREE_TRADE_1988",
+    "title": "Free Trade with America",
+    "yearWindow": [
+      1988,
+      1988
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 10,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Support free trade — the deal is done",
+        "metrics": {
+          "economy": 10,
+          "sovereign": -10,
+          "unity": -3,
+          "social": -2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Oppose — renegotiate for cultural exemptions",
+        "metrics": {
+          "economy": 4,
+          "sovereign": 3,
+          "unity": 2,
+          "social": 3
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Kill the deal — build east-west trade instead",
+        "metrics": {
+          "economy": -10,
+          "sovereign": 8,
+          "unity": 5,
+          "social": 3
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "GST_1991",
+    "title": "The GST",
+    "yearWindow": [
+      1991,
+      1991
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 11,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Implement the GST",
+        "metrics": {
+          "economy": 5,
+          "social": 3,
+          "unity": -3
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Replace with a hidden manufacturer's tax",
+        "metrics": {
+          "economy": 3,
+          "social": 1,
+          "unity": 1
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Cut spending instead — no new tax",
+        "metrics": {
+          "economy": 6,
+          "social": -10,
+          "unity": -5,
+          "rights": -2,
+          "sovereign": 2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "MEECH_LAKE_1992",
+    "title": "The Meech Lake Accord",
+    "yearWindow": [
+      1992,
+      1992
+    ],
+    "type": "altered",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 12,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Push it through — Quebec must be inside",
+        "metrics": {
+          "unity": 10,
+          "rights": -3,
+          "social": -2,
+          "sovereign": 2
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c1",
+        "label": "Let it die — the deal is flawed",
+        "metrics": {
+          "unity": -10,
+          "rights": 9,
+          "social": 6,
+          "sovereign": 4
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c2",
+        "label": "Renegotiate — include Indigenous nations",
+        "metrics": {
+          "unity": 8,
+          "rights": 8,
+          "social": 5,
+          "sovereign": 3
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "COD_MORATORIUM_1992",
+    "title": "The Cod Moratorium",
+    "yearWindow": [
+      1992,
+      1992
+    ],
+    "type": "reactive",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 13,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Close the fishery — the cod must recover",
+        "metrics": {
+          "enviro": 12,
+          "economy": -8,
+          "social": -8,
+          "unity": -3,
+          "sovereign": 2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Keep the fishery open — let the communities survive",
+        "metrics": {
+          "enviro": -10,
+          "economy": 3,
+          "social": 5,
+          "unity": 2,
+          "sovereign": -2
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Close it — but buy the licences and invest in transition",
+        "metrics": {
+          "enviro": 10,
+          "economy": -3,
+          "social": 3,
+          "unity": 4,
+          "sovereign": 3
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "QUEBEC_REFERENDUM_1995",
+    "title": "The Quebec Referendum, Round Two",
+    "yearWindow": [
+      1995,
+      1995
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 14,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Fight with everything — a passionate Canada",
+        "metrics": {
+          "unity": 10,
+          "sovereign": 5,
+          "social": 2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Let Quebec decide — minimal federal involvement",
+        "metrics": {
+          "unity": -20,
+          "sovereign": 6,
+          "social": -5,
+          "rights": 8
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Offer clear constitutional reform — the clarity path",
+        "metrics": {
+          "unity": 5,
+          "sovereign": 3,
+          "rights": 3
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "DEFICIT_1995",
+    "title": "The Deficit",
+    "yearWindow": [
+      1995,
+      1995
+    ],
+    "type": "altered",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 15,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Cut transfers — balance the budget",
+        "metrics": {
+          "economy": 10,
+          "social": -12,
+          "unity": -5,
+          "rights": -5
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Balanced approach — tax increases + moderate cuts",
+        "metrics": {
+          "economy": 5,
+          "social": -4,
+          "unity": 1,
+          "rights": -2
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Invest in growth — let the deficit ride",
+        "metrics": {
+          "economy": -5,
+          "social": 5,
+          "unity": 3,
+          "rights": 2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "KYOTO_2002",
+    "title": "Kyoto or Not",
+    "yearWindow": [
+      2002,
+      2002
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 16,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Ratify Kyoto — lead on climate",
+        "metrics": {
+          "enviro": 12,
+          "economy": -5,
+          "sovereign": 3,
+          "social": 2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Ratify with concessions for the energy sector",
+        "metrics": {
+          "enviro": 4,
+          "economy": 2,
+          "sovereign": 1,
+          "social": 0
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Don't ratify — the economy needs oil",
+        "metrics": {
+          "enviro": -10,
+          "economy": 6,
+          "sovereign": -2,
+          "social": -2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "SAME_SEX_MARRIAGE_2005",
+    "title": "Same-Sex Marriage",
+    "yearWindow": [
+      2005,
+      2005
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 17,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Pass the Civil Marriage Act",
+        "metrics": {
+          "rights": 10,
+          "social": 8,
+          "unity": -2,
+          "sovereign": 3
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Civil unions only — not marriage",
+        "metrics": {
+          "rights": 4,
+          "social": 4,
+          "unity": 1,
+          "sovereign": 1
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Defend traditional marriage",
+        "metrics": {
+          "rights": -10,
+          "social": -8,
+          "unity": 3,
+          "sovereign": -3
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "GFC_2008",
+    "title": "The Global Financial Crisis",
+    "yearWindow": [
+      2008,
+      2008
+    ],
+    "type": "reactive",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 18,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Stimulate — the Economic Action Plan",
+        "metrics": {
+          "economy": 5,
+          "social": 5,
+          "unity": 3,
+          "enviro": -2,
+          "sovereign": 2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Steady as she goes — modest support",
+        "metrics": {
+          "economy": 2,
+          "social": 0,
+          "unity": 0,
+          "sovereign": 0
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Austerity — balance the budget through the recession",
+        "metrics": {
+          "economy": 3,
+          "social": -10,
+          "unity": -5,
+          "sovereign": 3,
+          "rights": -2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "OIL_SANDS_2012",
+    "title": "The Oil Sands",
+    "yearWindow": [
+      2012,
+      2012
+    ],
+    "type": "altered",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 19,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Regulate and cap — transition starts now",
+        "metrics": {
+          "enviro": 10,
+          "economy": -5,
+          "unity": -5,
+          "social": 2,
+          "sovereign": 3
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c1",
+        "label": "Approve pipelines — let the boom continue",
+        "metrics": {
+          "enviro": -12,
+          "economy": 10,
+          "unity": 3,
+          "social": -3,
+          "sovereign": -2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c2",
+        "label": "Clean growth strategy — diversify while extracting",
+        "metrics": {
+          "enviro": 2,
+          "economy": 5,
+          "unity": 5,
+          "social": 3,
+          "sovereign": 2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "ELECTION_2015",
+    "title": "Election of 2015",
+    "yearWindow": [
+      2015,
+      2015
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": true,
+    "approvalNeeded": 30,
+    "v1Index": 20,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Promise a progressive era — climate, reconciliation, diversity",
+        "metrics": {
+          "rights": 5,
+          "social": 5,
+          "enviro": 3,
+          "unity": 2,
+          "sovereign": 2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Steady management — incremental change",
+        "metrics": {
+          "economy": 3,
+          "unity": 1,
+          "social": 0,
+          "rights": 0
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Pivot right — resource economy and security",
+        "metrics": {
+          "economy": 5,
+          "enviro": -5,
+          "social": -5,
+          "rights": -5,
+          "unity": -3
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "CANNABIS_2018",
+    "title": "Cannabis Legalization",
+    "yearWindow": [
+      2018,
+      2018
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 21,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Legalize — regulate and tax",
+        "metrics": {
+          "rights": 5,
+          "social": 5,
+          "economy": 3,
+          "sovereign": 3,
+          "unity": 1
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Decriminalize only — no retail market",
+        "metrics": {
+          "rights": 6,
+          "social": 3,
+          "economy": 0,
+          "sovereign": 4,
+          "unity": 2
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Keep it criminal — not now",
+        "metrics": {
+          "rights": 2,
+          "social": -3,
+          "economy": -3,
+          "sovereign": 2,
+          "unity": 3
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "CARBON_TAX_2019",
+    "title": "The Carbon Tax",
+    "yearWindow": [
+      2019,
+      2019
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 22,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Hold firm — the price rises as planned",
+        "metrics": {
+          "enviro": 8,
+          "economy": -3,
+          "unity": -5,
+          "sovereign": 3,
+          "social": 2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Pause the increases — freeze at $50",
+        "metrics": {
+          "enviro": 3,
+          "economy": 2,
+          "unity": 2,
+          "sovereign": 0,
+          "social": 0
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Scrap the carbon tax — use regulations instead",
+        "metrics": {
+          "enviro": -5,
+          "economy": 5,
+          "unity": 5,
+          "sovereign": -2,
+          "social": -2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "PANDEMIC_2020",
+    "title": "The Pandemic",
+    "yearWindow": [
+      2020,
+      2020
+    ],
+    "type": "universal",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 23,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Go big — CERB and massive support",
+        "metrics": {
+          "economy": -5,
+          "social": 10,
+          "unity": 5,
+          "rights": -3,
+          "sovereign": 3
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Moderate — targeted support only",
+        "metrics": {
+          "economy": -2,
+          "social": 3,
+          "unity": 2,
+          "rights": 2,
+          "sovereign": 1
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Minimal — let people make their own choices",
+        "metrics": {
+          "economy": 3,
+          "social": -15,
+          "unity": -8,
+          "rights": 5,
+          "sovereign": -2
+        },
+        "isHistorical": false
+      }
+    ]
+  },
+  {
+    "id": "TRUMP_TARIFFS_2025",
+    "title": "The Trump Tariffs",
+    "yearWindow": [
+      2025,
+      2025
+    ],
+    "type": "altered",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 24,
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Retaliate and diversify — 'Canada Strong'",
+        "metrics": {
+          "sovereign": 12,
+          "economy": -5,
+          "unity": 10,
+          "social": -2,
+          "rights": 2
+        },
+        "isHistorical": true
+      },
+      {
+        "id": "c1",
+        "label": "Negotiate — find a deal, avoid escalation",
+        "metrics": {
+          "sovereign": -8,
+          "economy": 5,
+          "unity": -5,
+          "social": 0,
+          "rights": -2
+        },
+        "isHistorical": false
+      },
+      {
+        "id": "c2",
+        "label": "Full economic integration — embrace the future",
+        "metrics": {
+          "sovereign": -20,
+          "economy": 15,
+          "unity": -15,
+          "social": 2,
+          "rights": -5
+        },
+        "isHistorical": false
+      }
+    ]
+  }
+]
