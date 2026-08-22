@@ -484,6 +484,217 @@ Add tests beyond V1's DOM checks:
 
 ---
 
+## V2-07 — Simulation engine: state machine first, Monte Carlo second
+
+**Status:** `proposed`  
+**Priority:** P0 foundation
+
+### Recommendation
+
+V2 needs a **small game simulation engine**, but not a full Paradox-style world simulator and not a Monte Carlo process running continuously in the browser.
+
+The right first architecture is:
+
+```text
+Authored event graph
++ deterministic state machine
++ durable world-state flags
++ transparent formulas
++ offline / on-demand scenario analysis
+```
+
+The engine should own the whole `GameState` and deterministically apply each choice, election, confidence vote, and branch transition. This is necessary once decisions unlock scenes, alter the country structure, change governing parties, or affect regional support.
+
+### What belongs in the live game
+
+- Apply a player choice to the state.
+- Select future eligible events from the authored graph.
+- Calculate a deterministic election outcome from the run seed.
+- Update dashboard metrics.
+- Show a brief **Cabinet Forecast** for the choice: likely direction, uncertainty, and main trade-off.
+
+Example player-facing forecast:
+
+```text
+Treasury forecast, 3–5 years
+Unemployment: likely down
+Debt-to-GDP: likely up
+Prairie support: likely down
+Confidence risk: NDP support strengthens
+```
+
+This is immediate, explainable, and cheap enough to run on every click.
+
+### What should not run continuously
+
+A browser should not run thousands of future branch simulations after every click. It adds latency, obscures the authored model, and can create misleading precision — e.g., “there is a 63.4% chance of Quebec separation” despite a simplified model.
+
+### Where Monte Carlo is valuable
+
+Use seeded Monte Carlo as an **analysis tool**, not as the game's hidden referee:
+
+1. **Content authoring / CI:** detect dead branches, impossible elections, dominant choices, and wild balance changes.
+2. **Optional player-facing forecast:** after a major decision, calculate a broad scenario band from a limited number of seeded simulations, clearly labelled as modelled uncertainty rather than fact.
+3. **Post-run replay:** show alternative plausible trajectories for the same branch.
+
+A player-facing output should be qualitative or banded:
+
+```text
+Modelled outlook: resilient / contested / fragile
+Chance of minority survival: low / medium / high
+```
+
+Not fake decimal precision.
+
+### Acceptance criteria
+
+- Same seed + same choices always produces the same state and election outcome.
+- Event eligibility can be explained from recorded state flags.
+- Monte Carlo is optional, bounded, and never required for basic gameplay.
+- Analysis code can run in Node/CI without the browser UI.
+
+---
+
+## V2-08 — Financial dashboard and economic indicators
+
+**Status:** `proposed`  
+**Priority:** P1
+
+### Why add it
+
+The current `economy` score is useful but too abstract for a political simulator. A dashboard with recognizably Canadian macro indicators makes trade-offs tangible: a stimulus can lower unemployment while raising debt; austerity can protect debt while weakening growth; an oil boom can improve GDP while worsening regional and environmental pressures.
+
+### Recommended initial dashboard
+
+Keep the main dashboard to **three legible indicators** plus an optional details drawer:
+
+| Indicator | Player-facing display | Why it matters |
+|---|---|---|
+| **Unemployment** | `%` | immediate household and election consequence |
+| **Debt-to-GDP** | `%` | fiscal capacity, crisis response, credibility |
+| **Real GDP / productivity strength** | index or `weak / steady / strong` | broad growth and capacity |
+
+Optional drawer / later V2:
+
+| Indicator | Use |
+|---|---|
+| Inflation / affordability | makes carbon, energy, and spending choices politically legible |
+| Housing pressure | essential for post-2015 Canada |
+| Federal balance / deficit | annual budget drama, distinct from total debt |
+| Regional prosperity | Alberta/Prairies vs Ontario/Quebec vs Atlantic divergence |
+| Emissions | complements Environment with a concrete number |
+
+### Data model
+
+Do not replace the six national metrics. Add a linked economic substate:
+
+```ts
+economy = {
+  unemployment: number,      // e.g. 5.8
+  debtToGdp: number,         // e.g. 61
+  growthIndex: number,       // 0–100 or annual growth band
+  inflation: number,         // optional in first release
+  fiscalBalance: number      // optional in first release
+}
+```
+
+Each decision can affect both high-level outcomes and indicators:
+
+```js
+effects: {
+  economy: +4,
+  social: +2,
+  fiscal: { debtToGdp: +3, unemployment: -1.1, growthIndex: +4 }
+}
+```
+
+The game should model **lags**: a policy does not necessarily change GDP, debt, and unemployment all on the next card. Add authored delayed effects where historically appropriate.
+
+### Guardrail
+
+Do not present invented annual rates as historical data. If the game displays precise years and percentages:
+- seed the historical baseline from cited historical series;
+- label alternate-path projections as modelled estimates;
+- show ranges where uncertainty is high.
+
+### Acceptance criteria
+
+- Dashboard always shows unemployment, debt-to-GDP, and growth strength.
+- Every financial metric has a plain-language tooltip and an associated policy trade-off.
+- Historical baseline values are sourced and distinguishable from counterfactual projections.
+- Economic indicators inform approval and regional support but do not secretly override visible choice effects.
+
+---
+
+## V2-09 — Conditional branch packs and visible consequence maps
+
+**Status:** `proposed`  
+**Priority:** P0
+
+### Goal
+
+Make selected choices feel like they genuinely reshape Canadian history without producing an unreadable, infinitely branching tree.
+
+### Branch-pack model
+
+A major divergence sets a durable flag and unlocks a finite branch pack:
+
+```text
+Choice outcome
+  → durable world flag
+  → 3–6 conditional follow-up scenes
+  → branch-specific election / ending implications
+```
+
+Candidate first packs:
+
+| Divergence | Flag | Follow-up themes |
+|---|---|---|
+| 1995 Quebec referendum: Yes | `quebecStatus = independent` | debt, borders, Indigenous consent, currency, federal redesign |
+| 1980 NEP fully implemented | `westernAlienation = high` | Alberta constitutional conflict, party realignment, energy investment |
+| 1982 Charter without Quebec | `constitutionalSettlement = contested` | Meech / Charlottetown alternatives, court legitimacy |
+| 2012 oil-sands cap | `energyTransition = early` | clean industry, Alberta backlash, export markets |
+| 2025 full continental integration | `sovereigntyModel = continental` | customs union, culture, defence, constitutional legitimacy |
+
+### Player-facing map
+
+Do not reveal every future card or their exact metric values before a player chooses. That turns the game into optimization.
+
+Instead, after a major choice, update a **Consequences Map** on the dashboard:
+
+```text
+ACTIVE TRAJECTORIES
+• Quebec constitutional settlement: unstable
+• Western alienation: rising
+• Fiscal capacity: constrained
+• Energy transition: early-stage
+
+Likely future dossiers
+• constitutional negotiations
+• provincial-federal resource dispute
+• clean-industry investment decision
+```
+
+This communicates that the choice changed the future while preserving discovery.
+
+### Authoring view
+
+The repository should contain a full machine-readable branch graph and generated reviewer document showing:
+- every flag a choice can set;
+- every scene it unlocks/blocks;
+- all reachable endings;
+- metric impacts, delayed impacts, party effects, and election consequences.
+
+This extends V1's generated `DECISION_TREE.md` into a branch-aware review artifact.
+
+### Acceptance criteria
+
+- At least one V2 branch contains conditional follow-up scenes unavailable in the historical route.
+- The game dashboard names active trajectories without exposing exact optimisation values.
+- CI verifies every branch has a valid continuation or a deliberate ending.
+
+---
+
 ## Explicitly not doing in early V2
 
 - Full map/riding-level simulation.
