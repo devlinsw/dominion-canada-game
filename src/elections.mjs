@@ -16,11 +16,18 @@ export const MANDATE_CLASSES = ['majority', 'minority', 'opposition'];
 export function resolveElection(state, { approvalNeeded = 40 }) {
   const r = rng(state);
   const m = state.metrics;
+  const f = state.financial;
+  // financial indicators feed the score with authored, visible weights:
+  // low unemployment helps; high debt hurts fiscal credibility; growth helps
+  const economicPain = (f.unemployment - 6) * 2.5          // ~0 at full employment
+                     + Math.max(0, f.debtToGdp - 70) * 0.3  // debt penalty above 70%
+                     + (50 - f.growthIndex) * 0.15;         // weak growth penalty
   const performance =
     (m.economy - 50) * 0.8 +
     (m.unity - 50) * 0.5 +
     (m.social - 50) * 0.4 +
-    (m.rights - 50) * 0.3;
+    (m.rights - 50) * 0.3 -
+    economicPain;
   const support = state.government.approval ?? 50;
   const score = support + performance * 0.3 + (state.government.credibility ?? 50) * 0.2
               + (r - 0.5) * 6;                       // seeded noise, ±3
@@ -38,9 +45,13 @@ export function resolveElection(state, { approvalNeeded = 40 }) {
     : { result: 'win', mandate: 'minority', score };
 }
 
-/** Apply an election result to state: transfer government, log history. */
+/** Apply an election result to state: transfer government, log history.
+ *  A government that lost confidence faces the voters with an approval penalty. */
 export function applyElectionResult(state, outcome, winnerParty = null) {
   const lost = outcome.result === 'lose';
+  if (state.government.confidenceFailed && !lost) {
+    state.government.approval = Math.max(0, (state.government.approval ?? 50) - 10);
+  }
   state.elections.push({
     year: state.year,
     result: outcome.result,
