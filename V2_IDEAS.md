@@ -695,6 +695,175 @@ This extends V1's generated `DECISION_TREE.md` into a branch-aware review artifa
 
 ---
 
+## V2-10 — Macro shocks, economic triggers, and crisis response
+
+**Status:** `proposed`  
+**Priority:** P1
+
+### Principle
+
+Economic crashes should not trigger from one simplistic number alone, such as “unemployment > 8%.” That makes downturns feel scripted and creates a player exploit: keep one indicator just below the line.
+
+Instead, use an authored **shock eligibility model**:
+
+```text
+shock eligibility = era + macro conditions + world flags + seeded uncertainty
+```
+
+Example:
+
+```text
+2007–2009 global-finance shock is eligible when:
+• year window is active;
+• externalExposure is medium/high OR export/commodity dependence is high;
+• growth strength is weak OR debt/fiscal vulnerability is elevated;
+• seeded event roll selects the shock.
+
+Severity then scales with:
+• unemployment;
+• debt-to-GDP / fiscal room;
+• banking / regulatory state;
+• trade exposure;
+• prior policy choices.
+```
+
+This means the historical 2008 event remains likely in the historical route, but a player with different banking, fiscal, energy, or trade policy can see a milder, delayed, or differently-shaped downturn.
+
+### Historical calibration
+
+Use historical episodes as **archetypes**, not as hard-coded repetitions:
+
+| Archetype | Era | Core signal | Canadian gameplay use |
+|---|---|---|---|
+| Technology / export slowdown | 2000–02 | growth slowdown, investment pullback | technology/telecom and export vulnerability dossier |
+| Global financial crisis | 2008–09 | GDP contraction, unemployment jump, commodity shock | banking, auto industry, stimulus, federal-provincial response |
+| Commodity collapse | 2014–16 | regional oil/commodity downturn | Prairie regional support, fiscal revenues, energy transition |
+| Pandemic stop | 2020 | external non-market shock | employment support, public health, debt shock |
+| Trade / tariff shock | 2025+ | external market access threat | sovereignty, diversification, manufacturing and consumer costs |
+
+For scale, Statistics Canada reports that during the 2008–09 recession Canada’s unemployment rate rose from 5.1% in August 2008 to 7.7% in July 2009 under its U.S.-concept-adjusted series; employment fell and real GDP declined over the downturn.[1][2]
+
+### Player-facing presentation
+
+Never present a crash as “the algorithm rolled badly.” Present it as a dossier with visible conditions:
+
+```text
+ECONOMIC ALERT — Export and credit conditions deteriorate
+
+Drivers:
+• Global credit freeze
+• Commodity price collapse
+• High auto-sector exposure
+
+Canada enters this shock with:
+• unemployment: 5.4%
+• debt-to-GDP: 46%
+• fiscal room: high
+
+Cabinet options: stimulus / targeted support / fiscal restraint
+```
+
+### Acceptance criteria
+
+- A shock has a named historical or plausible structural driver.
+- Severity can differ based on prior player choices.
+- Thresholds are visible enough to be intelligible but not reducible to a single exploit.
+- The historical route reproduces a historically plausible version of the event.
+
+---
+
+## V2-11 — Policy and scandal event packs
+
+**Status:** `proposed`  
+**Priority:** P1 content backlog
+
+### Candidate policy packs
+
+| Event family | Core dilemma | Likely state affected | Branch potential |
+|---|---|---|---|
+| **Canadian Wheat Board** | marketing board / farmer power / Prairie regional autonomy | Prairie support, trade, rural economy, sovereignty | high — changes later trade and Prairie party politics |
+| **Nationalization** | public control of strategic air, energy, rail, or communications assets | sovereignty, fiscal balance, regional legitimacy, business confidence | high — Crown corporation performance and provincial conflicts |
+| **Privatization** | sell Crown assets / deregulate public sectors / reduce public role | debt, fiscal capacity, service quality, labour support, sovereignty | high — irreversible asset ownership and later service crises |
+| **Trade diversification** | deepen US integration vs Europe/Asia/Commonwealth vs managed strategic trade | economy, sovereignty, sector / regional support | high — alters exposure to tariff and financial shocks |
+| **Scandal / ethics crisis** | protect minister, call inquiry, resign, or reform procurement | approval, party credibility, rights / institutional legitimacy | medium — election timing and opposition opportunities |
+
+### Canadian Wheat Board — recommended scene framing
+
+Avoid presenting it as simply “market good / board bad.” The authored trade-off is:
+
+```text
+Single-desk power and collective bargaining
+vs.
+individual farmer marketing freedom and trade flexibility
+```
+
+Possible options:
+- retain / modernize the single desk;
+- farmer-controlled hybrid model;
+- abolish the board and transition to open marketing.
+
+The important downstream state is not only `economy ±N`; it is:
+
+```js
+prairieAgriculture = 'collective-marketing' | 'hybrid' | 'open-market'
+```
+
+That state can affect future trade negotiation, drought / price-shock response, rural approval, and regional party strength.
+
+### Nationalization and privatization — recommended rule
+
+Model each asset as a long-term institution, not a one-time ideological score button:
+
+```js
+asset = {
+  ownership: 'public' | 'mixed' | 'private',
+  serviceCapacity: 0..100,
+  fiscalExposure: 0..100,
+  strategicControl: 0..100,
+  regionalLegitimacy: 0..100
+}
+```
+
+Nationalization can improve strategic control and service coordination while increasing fiscal exposure and provincial / business conflict. Privatization can reduce near-term debt and improve investment flexibility while weakening strategic control, labour trust, and future policy room. Those consequences should land over multiple later events.
+
+### Trade choices
+
+Trade should be a recurring strategic posture rather than one free-trade card:
+
+```js
+tradePosture = 'continental' | 'diversified' | 'managed-strategic' | 'protectionist'
+```
+
+It should influence later tariff shocks, manufacturing, commodities, culture, procurement rules, and foreign-policy room.
+
+### Scandals
+
+Scandals are good content if handled as **institutional stress tests**, not trivia quizzes or a claim that every player will repeat history.
+
+Use event categories with sourced historical inspirations:
+- procurement / sponsorship;
+- conflict of interest;
+- campaign finance;
+- ministerial ethics;
+- security / intelligence oversight.
+
+Choices should be framed as:
+
+```text
+independent inquiry / defend minister / resignation / reform rules / concealment
+```
+
+The real consequences are approval, party credibility, institutional trust, caucus unity, and election timing. Exact historical names can appear in archival mode or citations, but the player should be confronting the governing dilemma rather than guessing a scandal’s answer.
+
+### Acceptance criteria
+
+- Every pack has at least one durable flag or institutional state, not only immediate metric deltas.
+- Nationalization, privatization, and trade produce delayed consequences.
+- Scandal scenes are grounded in sourced institutional facts and do not trivialize real harm.
+- Prairie, provincial, labour, consumer, and Indigenous effects are considered where historically relevant.
+
+---
+
 ## Explicitly not doing in early V2
 
 - Full map/riding-level simulation.
@@ -715,3 +884,8 @@ Status: proposed → killed (with brief reason)
 ```
 
 For a new idea, add: problem, proposed mechanic, affected state, acceptance criteria, and kill criteria.
+
+## Sources
+
+[1] https://www150.statcan.gc.ca/n1/pub/11-626-x/11-626-x2014036-eng.htm — Statistics Canada: Labour Market Since the Last Recession
+[2] https://www150.statcan.gc.ca/n1/pub/11-010-x/2010004/part-partie3-eng.htm — Statistics Canada: Canadian Economic Observer, 2008-09 Recession
