@@ -70,6 +70,13 @@ export function regionalIndigenousLegitimacy(state) {
   if (state.world.westernAlienation === 'high') score -= 15;
   if (state.world.indigenousConsent === 'earned') score += 15;
   if (state.world.indigenousConsent === 'ignored') score -= 20;
+  // V2-13 Indigenous anchor spine flags
+  if (state.world.indigenousRelation === 'assimilation-pursued') score -= 15;
+  if (state.world.indigenousRelation === 'assimilation-rejected') score += 5;
+  if (state.world.s35Recognized === true) score += 10;
+  if (state.world.treatyPosture === 'modern-treaties') score += 10;
+  if (state.world.reconciliationPath === 'committed') score += 10;
+  if (state.world.reconciliationPath === 'rejected') score -= 15;
   return clamp(score);
 }
 

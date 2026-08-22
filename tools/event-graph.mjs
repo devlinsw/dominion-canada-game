@@ -13,6 +13,14 @@ try {
   const q = await import('../src/branch-quebec-1995.mjs');
   extra.push(q.QUEBEC_1995_REFERENDUM_V2, ...q.QUEBEC_1995_BRANCH);
 } catch {}
+try {
+  const s = await import('../src/pack-scandals.mjs');
+  extra.push(...s.SCANDAL_PACK);
+} catch {}
+try {
+  const sp = await import('../src/pack-indigenous-spine.mjs');
+  extra.push(...sp.INDIGENOUS_SPINE);
+} catch {}
 const all = [...events.filter(e => !extra.some(x => x.id === e.id)), ...extra];
 
 const errors = validateAll(all);

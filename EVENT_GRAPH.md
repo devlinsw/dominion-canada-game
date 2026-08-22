@@ -19,8 +19,74 @@ block, or alter referencing a missing event id fails validation. Flags named
 - choice **Hardline: insist on maximal federal terms**: sets `quebecStatus=independent`
 - choice **Negotiate a partnership / confederal arrangement**: sets `quebecStatus=renewed-federalism`
 
+## SCANDAL_PROCUREMENT_1976 — The Procurement Question
+*party, 1975–1978*
+
+- choice **Call a public inquiry**: sets `institutionalTrust=reformed`
+- choice **Close ranks — defend the minister**: sets `institutionalTrust=bruised`
+- choice **Accept the minister's resignation quietly**: sets `institutionalTrust=bruised`
+
+## SCANDAL_CROWN_BOARD_1985 — The Crown Corporation Board
+*party, 1984–1988*
+
+- choice **Reform the board — arm's-length governance rules**: sets `institutionalTrust=reformed`
+- choice **Quietly replace the chair, change nothing structural**: sets `institutionalTrust=bruised`
+- choice **Announce privatization review**: sets `institutionalTrust=bruised`, `crownSector=retrenchment`
+
+## SCANDAL_SPONSORSHIP_2002 — The Sponsorship Program
+*party, 2002–2004*
+
+- choice **Public inquiry with full disclosure**: sets `institutionalTrust=reformed`
+- choice **Contain it inside the party**: sets `institutionalTrust=bruised`
+- choice **Reframe as Quebec-bashing**: sets `institutionalTrust=bruised`
+
+## SCANDAL_SENATE_2013 — The Senate Expense Affair
+*party, 2012–2015*
+
+- choice **Use the moment: push Senate reform**: sets `institutionalTrust=reformed`, `senateModel=reform-track`
+- choice **Circle the wagons**: sets `institutionalTrust=bruised`
+
+## SCANDAL_LOBBYING_2019 — The Lobbying File
+*party, 2019–2021*
+
+- choice **Full cooperation with the ethics commissioner**: sets `institutionalTrust=reformed`
+- choice **Shut down the committees looking into it**: sets `institutionalTrust=bruised`
+
+## WHITE_PAPER_1969 — The White Paper on Indian Policy
+*universal, 1969–1971*
+
+- choice **Withdraw the White Paper**: sets `indigenousRelation=assimilation-rejected`
+- choice **Proceed with implementation**: sets `indigenousRelation=assimilation-pursued`
+
+## CONSTITUTION_S35_1982 — Aboriginal Rights in the Constitution
+*universal, 1980–1982*
+
+- choice **Entrench section 35 — recognize and affirm existing rights**: sets `s35Recognized=true`
+- choice **Leave it out — keep the package simple**: sets `s35Recognized=false`
+
+## RCAP_NISGAA_1998 — RCAP Response and Modern Treaties
+*universal, 1997–2000*
+
+- choice **Respond to RCAP; ratify Nisga'a**: sets `indigenousRelation=land-claims-era`, `treatyPosture=modern-treaties`
+- choice **Ratify Nisga'a, shelve RCAP**: sets `treatyPosture=modern-treaties`
+- choice **Delay both**: sets `treatyPosture=status-quo`
+
+## TRC_2015 — Truth and Reconciliation
+*universal, 2015–2017*
+
+- choice **Adopt the Calls to Action with funding and timelines**: sets `reconciliationPath=committed`
+- choice **Inquiry and apology — act on recommendations slowly**: sets `reconciliationPath=deferred`
+- choice **Reject the framework**: sets `reconciliationPath=rejected`
+
 ## Flag flow — writers → readers
 
 | Flag | Set by | Read/gated by |
 |---|---|---|
+| `crownSector` | SCANDAL_CROWN_BOARD_1985 | *(scorecard only)* |
+| `indigenousRelation` | WHITE_PAPER_1969, RCAP_NISGAA_1998 | *(scorecard only)* |
+| `institutionalTrust` | SCANDAL_PROCUREMENT_1976, SCANDAL_CROWN_BOARD_1985, SCANDAL_SPONSORSHIP_2002, SCANDAL_SENATE_2013, SCANDAL_LOBBYING_2019 | *(scorecard only)* |
 | `quebecStatus` | QUEBEC_REFERENDUM_1995, QUEBEC_NEGOTIATION_1996 | *(scorecard only)* |
+| `reconciliationPath` | TRC_2015 | *(scorecard only)* |
+| `s35Recognized` | CONSTITUTION_S35_1982 | *(scorecard only)* |
+| `senateModel` | SCANDAL_SENATE_2013 | *(scorecard only)* |
+| `treatyPosture` | RCAP_NISGAA_1998 | *(scorecard only)* |
