@@ -474,10 +474,10 @@ Add tests beyond V1's DOM checks:
 
 ## Open design decisions
 
-- [ ] **Scope of playable actor:** one chosen party, or choose any party at game start?
-- [ ] **Party set:** real historical parties by era, or stable archetypes to avoid party-label anachronisms?
-- [ ] **Historical control:** after a loss, should government decisions be fully authored, selected from a platform AI, or partially randomized within deterministic constraints?
-- [ ] **Quebec split:** does Quebec sovereignty always create a separate end-state, or can negotiations reconstitute a confederal arrangement?
+- [x] **Scope of playable actor:** start fixed as one party (Liberal), expand to any-party selection later.
+- [x] **Party set:** stable archetypes (Liberal / Tory / Social-democrat / Quebec nationalist / Regional-populist) to avoid era anachronisms. Archetypes have *ideals* — straying too far from them risks caucus non-confidence.
+- [x] **Historical control:** after a loss, government decisions are authored per event (not platform-AI-generated).
+- [x] **Quebec split:** independence is the default Yes-path, but one negotiation event can land at `renewed-federalism` — a repair path exists without doubling content.
 - [ ] **Election resolution:** mandate classes only for V2.0, or regional seat estimator immediately?
 - [ ] **Scoring:** equal commonwealth weights, declared weights, or dynamic weights by branch / affected nation?
 - [ ] **Editorial model:** how will sources, uncertainty, and legitimate scholarly disagreement be shown in-game?
