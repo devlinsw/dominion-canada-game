@@ -21,6 +21,14 @@ try {
   const sp = await import('../src/pack-indigenous-spine.mjs');
   extra.push(...sp.INDIGENOUS_SPINE);
 } catch {}
+try {
+  const wb = await import('../src/pack-wheat-board.mjs');
+  extra.push(...wb.WHEAT_BOARD_PACK);
+} catch {}
+try {
+  const tr = await import('../src/pack-trade.mjs');
+  extra.push(...tr.TRADE_PACK);
+} catch {}
 const all = [...events.filter(e => !extra.some(x => x.id === e.id)), ...extra];
 
 const errors = validateAll(all);

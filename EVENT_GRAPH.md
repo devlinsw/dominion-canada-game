@@ -78,15 +78,64 @@ block, or alter referencing a missing event id fails validation. Flags named
 - choice **Inquiry and apology — act on recommendations slowly**: sets `reconciliationPath=deferred`
 - choice **Reject the framework**: sets `reconciliationPath=rejected`
 
+## WHEAT_BOARD_ANCHOR_1970 — The Canadian Wheat Board
+*universal, 1970–1974*
+
+- choice **Strengthen the single desk**: sets `prairieAgriculture=collective-marketing`
+- choice **Allow dual marketing — voluntary Board participation**: sets `prairieAgriculture=hybrid`
+- choice **Open the market now**: sets `prairieAgriculture=open-market`
+
+## WHEAT_BOARD_PARTY_1993 — The Western Protest Vote
+*party, 1992–1996*
+
+- requires: `flag:prairieAgriculture=collective-marketing`
+- choice **Concede: promise a voluntary board**: sets `prairieAgriculture=hybrid`
+
+## WHEAT_BOARD_ENDGAME_2011 — Marketing Freedom for Grain Farmers
+*universal, 2011–2013*
+
+- choice **Retain the single desk**: sets `prairieAgriculture=collective-marketing`
+- choice **Negotiated transition to a hybrid model**: sets `prairieAgriculture=hybrid`
+- choice **Abolish the monopsony immediately**: sets `prairieAgriculture=open-market`
+
+## FREE_TRADE_ANCHOR_1988 — Free Trade with America
+*universal, 1987–1989*
+
+- choice **Sign broad agreement — culture included**: sets `tradePosture=continental`
+- choice **Sign with a cultural exemption**: sets `tradePosture=continental`, `culturalExemption=true`
+- choice **Walk away from the table**: sets `tradePosture=diversified`
+
+## NAFTA_EXTENSION_1993 — Extending the Pact to Mexico
+*altered, 1992–1994*
+
+- choice **Join the trilateral bloc**: sets `tradePosture=continental`
+- choice **Use the moment to diversify**: sets `tradePosture=diversified`
+
+## TRADE_CHINA_2014 — The China Question
+*altered, 2013–2016*
+
+- choice **Deepen the relationship**: sets `tradePosture=diversified`, `chinaExposure=deep`
+- choice **Trade yes — with human-rights conditions**: sets `chinaExposure=screened`
+- choice **Keep Beijing at arm's length**: sets `chinaExposure=low`
+
+## TARIFF_SHOCK_2025 — The Tariff Threat
+*reactive, 2024–2026*
+
+- choice **Pivot to allies and internal trade**: sets `tradePosture=diversified`
+
 ## Flag flow — writers → readers
 
 | Flag | Set by | Read/gated by |
 |---|---|---|
+| `chinaExposure` | TRADE_CHINA_2014 | *(scorecard only)* |
 | `crownSector` | SCANDAL_CROWN_BOARD_1985 | *(scorecard only)* |
+| `culturalExemption` | FREE_TRADE_ANCHOR_1988 | *(scorecard only)* |
 | `indigenousRelation` | WHITE_PAPER_1969, RCAP_NISGAA_1998 | *(scorecard only)* |
 | `institutionalTrust` | SCANDAL_PROCUREMENT_1976, SCANDAL_CROWN_BOARD_1985, SCANDAL_SPONSORSHIP_2002, SCANDAL_SENATE_2013, SCANDAL_LOBBYING_2019 | *(scorecard only)* |
+| `prairieAgriculture` | WHEAT_BOARD_ANCHOR_1970, WHEAT_BOARD_PARTY_1993, WHEAT_BOARD_ENDGAME_2011 | *(scorecard only)* |
 | `quebecStatus` | QUEBEC_REFERENDUM_1995, QUEBEC_NEGOTIATION_1996 | *(scorecard only)* |
 | `reconciliationPath` | TRC_2015 | *(scorecard only)* |
 | `s35Recognized` | CONSTITUTION_S35_1982 | *(scorecard only)* |
 | `senateModel` | SCANDAL_SENATE_2013 | *(scorecard only)* |
+| `tradePosture` | FREE_TRADE_ANCHOR_1988, NAFTA_EXTENSION_1993, TRADE_CHINA_2014, TARIFF_SHOCK_2025 | *(scorecard only)* |
 | `treatyPosture` | RCAP_NISGAA_1998 | *(scorecard only)* |
