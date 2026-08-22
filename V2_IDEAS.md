@@ -984,6 +984,40 @@ Not every historical event deserves a card. An event belongs when it produces a 
 - A reviewer can identify which events are independent, which are shared-but-altered, and which are branch-only without reading UI code.
 
 ---
+## V2-13 — Content expansion consensus (Socrates/Critic joint position)
+
+**Status:** `planned`
+**Priority:** P0 content round — step 8 of the V2-12 build sequence
+**Origin:** Three-round Socrates/Critic design discussion, 2026-08-22. Round docs absorbed into this section and removed.
+
+### Agreed package
+
+| # | Pack | Events | State added | Key constraints |
+|---|---|---|---|---|
+| 1 | Scandal pack | 5 | `institutionalTrust: 'bruised' \| 'reformed'` | Institutional stress tests; no real ministers named; reform-vs-conceal alters later event copy; one variant = ministerial ethics × Crown board |
+| 2 | Canadian Wheat Board | 5–6 | `prairieAgriculture: 'collective-marketing' \| 'hybrid' \| 'open-market'` | Alters later trade events; sequence before/with pack 3 |
+| 3 | Trade posture | 6–7 | `tradePosture: 'continental' \| 'diversified' \| 'managed-strategic' \| 'protectionist'` | Cultural exemption is a first-class sub-dilemma; shock-severity payoffs STUBBED until V2-10 exists |
+| 4 | NEP / western alienation | ≤8 hard cap | `westernAlienation`, energy-model flags | Biggest creep risk; built after pattern proven |
+| 5 | Indigenous anchor spine | 4 | `indigenousRelation`, `s35Recognized`, `treatyPosture`, `reconciliationPath` | Flags + metric deltas ONLY; no consent/regional mechanics in copy; feeds scorecard's Regional & Indigenous legitimacy row; precondition set for the future full arc |
+| 6 | Crown sector | ~5 | `crownSector: 'expansionist' \| 'mixed' \| 'retrenchment'` | Aggregate posture flag, not per-asset sub-state; delayed effects via existing `alters:` mechanism |
+
+**Totals:** ~33–35 events, 4–6 world flags, **zero new engine features**.
+**Slack priority:** Quebec merge-back alters (e.g., independent-Quebec trade anchor variants).
+
+### Binding authoring constraints
+
+1. No event copy may simulate deferred mechanics (consent negotiation, regional/nation electoral modeling) — the spine is federal decision points only.
+2. Scandal categories are era-anchored party events, never a random crisis pool; real names stay out of player-facing text.
+3. Trade cards authored now may SET `tradePosture` but must not author "milder 2008" payoff variants until the V2-10 eligibility model exists.
+4. Crown-sector consequences land as immediate deltas + `alters:` hooks on later trade/shock events; no delayed-effects queue.
+
+### Kill criteria
+
+- Any pack breaching its event count by >50% returns to review.
+- If the spine's flags end up unread by any later event or scorecard component, cut it.
+- NEP exceeding 8 scenes triggers automatic scope review.
+
+---
 
 ## Explicitly not doing in early V2
 
