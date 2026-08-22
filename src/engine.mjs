@@ -14,8 +14,12 @@ export function rng(state) {
 
 const cmp = { '>=': (a, b) => a >= b, '<=': (a, b) => a <= b, '>': (a, b) => a > b, '<': (a, b) => a < b, '==': (a, b) => a == b };
 
-/** Evaluate a predicate ref like "flag:quebecStatus=independent" or "metric:economy>=40". */
+/** Evaluate a predicate ref like "flag:quebecStatus=independent", "metric:economy>=40",
+ *  or "unlocked:<eventId>" (some prior choice must have unlocked it). */
 export function testPredicate(state, ref) {
+  if (ref.startsWith('unlocked:')) {
+    return state.unlocked.has(ref.slice('unlocked:'.length));
+  }
   const [kind, rest] = ref.split(':');
   if (kind === 'flag') {
     const m = rest.match(/^(\w+)(=|!=)(.+)$/);
@@ -33,31 +37,37 @@ export function testPredicate(state, ref) {
 
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
-/** Events whose year window is open, requirements met, not blocked/resolved. */
+/** Events whose year window is open, requirements met, not blocked/resolved.
+ *  An event with needsUnlock is eligible only once some choice has unlocked it. */
 export function eligibleEvents(state, events, year = state.year) {
   return events.filter(e =>
     !state.blocked.has(e.id) &&
     !state.resolved.has(e.id) &&
     year >= e.yearWindow[0] && year <= e.yearWindow[1] &&
+    (!e.needsUnlock || state.unlocked.has(e.id)) &&
     (e.requires || []).every(r => testPredicate(state, r)) &&
     (e.excludes || []).every(r => !testPredicate(state, r))
   );
 }
 
 /**
- * Pick the next event for this time step. Priority order:
- * constitutional/existential > election > scheduled anchor > party/conditional > reactive.
+ * Pick the next event for this time step. Priority order (highest rank wins):
+ * constitutional/existential conditional > election > scheduled anchor > party > reactive.
  */
+const TYPE_RANK = { conditional: 5, party: 2, reactive: 1 };
+
 export function selectNextEvent(state, events, year = state.year) {
   const pool = eligibleEvents(state, events, year);
   if (!pool.length) return null;
-  const rank = e =>
+  // Precompute scores ONCE — no rng() inside the comparator, so consumption
+  // order is independent of sort internals.
+  const noise = new Map(pool.map(e => [e, rng(state)]));
+  const score = e =>
     (e.type === 'conditional' ? 5 : 0) +
     (e.isElection ? 4 : 0) +
-    (e.priority ?? 2);
-  // deterministic seeded tie-break so shuffles are reproducible
-  const noise = e => rng(state) * 0.01 * ((e.id.charCodeAt(0) % 7) + 1);
-  return [...pool].sort((a, b) => (rank(b) + noise(b)) - (rank(a) + noise(a)))[0];
+    (TYPE_RANK[e.type] ?? 3) +          // universal/altered default to anchor tier
+    (e.priority ?? 0) * 10;             // explicit authorial override dominates
+  return [...pool].sort((a, b) => (score(b) + noise.get(b)) - (score(a) + noise.get(a)))[0];
 }
 
 /** Apply a chosen ChoiceSpec to state. Returns a transparent history record. */

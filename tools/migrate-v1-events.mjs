@@ -40,6 +40,11 @@ const CLASSIFY = {
 
 const events = v1.map(d => {
   const c = CLASSIFY[d.index];
+  // union of metric keys across all choices, in canonical order
+  const affected = new Set();
+  for (const ch of d.choices) for (const k of Object.keys(ch.effects || {})) {
+    if (!['approval'].includes(k)) affected.add(k);
+  }
   return {
     id: c.id,
     title: d.title,
@@ -50,6 +55,7 @@ const events = v1.map(d => {
     approvalNeeded: d.approval_needed ?? undefined,
     v1Index: d.index,
     priority: c.type === 'conditional' ? 3 : undefined,
+    metricsAffected: [...affected],
     choices: d.choices.map(ch => ({
       id: `c${ch.index}`,
       label: ch.label,
@@ -58,7 +64,10 @@ const events = v1.map(d => {
           .filter(([k]) => !['approval'].includes(k))
           .map(([k, v]) => [k, v])
       ),
+      approvalDelta: ch.effects.approval ?? 0,
+      outcome: ch.result ?? null,          // election result class ('minority'|'win'|'lose')
       isHistorical: !!ch.is_historical,
+      v1Text: { desc: ch.desc, consequence: ch.consequence }, // preserved verbatim
       // V2 additions authored later: financial, setsFlags, unlocks/blocks/alters
     })),
   };

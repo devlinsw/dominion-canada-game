@@ -39,7 +39,8 @@
  * @property {boolean} [isElection]
  * @property {number} [approvalNeeded] // elections only (V1 parity)
  * @property {number} [v1Index]        // index in V1 game_data.json, if migrated
- * @property {string[]} [requires]     // predicate refs: "flag:x=y" | "metric:unity>=40"
+ * @property {boolean} [needsUnlock]   // true = only eligible when some choice unlocked it
+ * @property {string[]} [requires]     // predicate refs: "flag:x=y" | "metric:unity>=40" | "unlocked:<id>"
  * @property {string[]} [excludes]
  * @property {number} [priority]       // selection order within an era (higher first)
  * @property {MetricId[]} metricsAffected
@@ -47,6 +48,11 @@
  * @property {RegionId[]} [regionalAffected]
  * @property {ChoiceSpec[]} choices
  */
+
+// KNOWN GAPS (accepted by schema but NOT yet implemented by engine.mjs):
+// - delayedYears: delayed financial/regional effects do not land automatically yet.
+// - confidence: confidence-partner deltas are recorded on choices but not applied to state.
+// - alters: alters[] is validated for referential integrity but has no runtime effect yet.
 
 export const METRIC_IDS = ['unity', 'economy', 'rights', 'enviro', 'sovereign', 'social'];
 export const FINANCIAL_IDS = ['unemployment', 'debtToGdp', 'growthIndex'];
@@ -77,7 +83,7 @@ function fail(spec, msg) { throw new Error(`[events] ${spec.id || '?'}: ${msg}`)
 
 /** Validate one EventSpec against the contract above. Throws on violation. */
 export function validateEvent(spec) {
-  for (const k of ['id', 'title', 'yearWindow', 'type', 'actor', 'choices']) {
+  for (const k of ['id', 'title', 'yearWindow', 'type', 'actor', 'choices', 'metricsAffected']) {
     if (spec[k] === undefined) fail(spec, `missing required field "${k}"`);
   }
   if (!Array.isArray(spec.yearWindow) || spec.yearWindow.length !== 2 ||
@@ -89,7 +95,16 @@ export function validateEvent(spec) {
   if (!Array.isArray(spec.choices) || spec.choices.length < 1) {
     fail(spec, 'needs at least one choice');
   }
-  spec.choices.forEach((c, i) => validateChoice(spec, c, i));
+  if (!Array.isArray(spec.metricsAffected)) fail(spec, 'metricsAffected must be an array');
+  for (const m of spec.metricsAffected) {
+    if (!METRIC_IDS.includes(m)) fail(spec, `metricsAffected: unknown metric "${m}"`);
+  }
+  const choiceIds = new Set();
+  spec.choices.forEach((c, i) => {
+    validateChoice(spec, c, i);
+    if (choiceIds.has(c.id)) fail(spec, `duplicate choice id "${c.id}"`);
+    choiceIds.add(c.id);
+  });
 }
 
 function validateChoice(spec, c, i) {
@@ -106,7 +121,10 @@ function validateChoice(spec, c, i) {
   }
 }
 
-/** Validate a whole event array; also checks id uniqueness. Returns error list. */
+/**
+ * Validate a whole event array; checks id uniqueness and cross-references.
+ * Returns error list (empty = valid).
+ */
 export function validateAll(events) {
   const errors = [];
   const seen = new Set();
@@ -116,6 +134,16 @@ export function validateAll(events) {
       if (seen.has(e.id)) errors.push(`duplicate id ${e.id}`);
       seen.add(e.id);
     } catch (err) { errors.push(err.message); }
+  }
+  // cross-reference integrity: unlocks/blocks/alters/requires-unlocked must point at real ids
+  for (const e of events) {
+    const refs = [
+      ...(e.unlocks || []), ...(e.blocks || []), ...(e.alters || []),
+      ...(e.requires || []).filter(r => r.startsWith('unlocked:')).map(r => r.slice('unlocked:'.length)),
+    ];
+    for (const ref of refs) {
+      if (!seen.has(ref)) errors.push(`${e.id}: references unknown event id "${ref}"`);
+    }
   }
   return errors;
 }
