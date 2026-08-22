@@ -864,6 +864,127 @@ The real consequences are approval, party credibility, institutional trust, cauc
 
 ---
 
+## V2-12 — Event taxonomy, eligibility rules, and vertical-slice plan
+
+**Status:** `proposed`  
+**Priority:** P0 — first V2 design deliverable
+
+### Purpose
+
+Before authoring all new scenarios or building the dashboard, create the **V2 event map**: a reviewable specification of what can happen, why it appears, who acts, what it changes, and what it unlocks.
+
+The first V2 output should be an event-graph / eligibility document, not a giant pile of card copy and not a polished UI.
+
+### Event buckets
+
+Every event must belong to one of these buckets:
+
+| Type | Appearance rule | Example |
+|---|---|---|
+| **Universal era anchor** | Appears in every run because the historical era creates an unavoidable pressure | October Crisis, pandemic, global downturn |
+| **Universal but altered** | Appears in every run, but its severity, copy, available choices, or actor changes with state | 2008 downturn with high versus low debt; tariff shock after continental versus diversified trade |
+| **Conditional consequence** | Appears only because a player-created world flag makes it relevant | Quebec separation negotiations after a Yes vote |
+| **Party / mandate event** | Appears because the governing party, opposition, or confidence partner makes a particular demand possible | NDP nationalization demand under Liberal-NDP confidence-and-supply |
+| **Reactive systemic shock** | Becomes eligible when era, macro conditions, exposure, and seeded uncertainty align | commodity crash, financial shock, trade disruption |
+
+### Authoring schema
+
+Each event needs a structured record before prose is finalized:
+
+```ts
+type EventSpec = {
+  id: string;
+  title: string;
+  yearWindow: [number, number];
+  type: 'universal' | 'altered' | 'conditional' | 'party' | 'reactive';
+  actor: 'government' | 'opposition' | 'confidence-partner' | 'all-parties';
+
+  requires?: Predicate[];
+  excludes?: Predicate[];
+  priority?: number;
+
+  metricsAffected: MetricId[];
+  financialIndicatorsAffected: FinancialIndicatorId[];
+  regionalEffects?: RegionId[];
+
+  choices: ChoiceSpec[];
+  setsFlags?: WorldFlagPatch;
+  unlocks?: EventId[];
+  blocks?: EventId[];
+  alters?: EventId[];
+};
+```
+
+For each `ChoiceSpec`, document:
+
+```text
+Immediate metric effects
+Financial effects
+Delayed effects
+Party / confidence effects
+World flags set
+Future events unlocked, blocked, or altered
+Historical reference path, if applicable
+```
+
+### Example: Quebec 1995 event
+
+```text
+Event: QUEBEC_1995_REFERENDUM
+Type: universal era anchor
+Year: 1995
+Actor: federal government
+
+Choice: Yes vote / separation negotiated
+Sets:
+  quebecStatus = independent
+Unlocks:
+  QUEBEC_DEBT_NEGOTIATION
+  INDIGENOUS_TERRITORIAL_CONSENT
+  POST_SEPARATION_FEDERAL_REDESIGN
+  POST_SEPARATION_ELECTION
+Alters:
+  later trade posture events
+  constitutional events
+  regional support model
+  end-state scorecard
+```
+
+### Event budget / pacing rule
+
+To prevent V2 from becoming a bloated sequence:
+
+```text
+Per era, normally show:
+• 1 shared pressure / anchor event
+• 0–1 conditional or altered consequence event
+• 0–1 party or regional event
+• elections / confidence events when due
+```
+
+Not every historical event deserves a card. An event belongs when it produces a meaningful decision, a durable state change, or an important political trade-off.
+
+### Build sequence
+
+1. Define `GameState` and the event schema.
+2. Classify existing V1 scenes as universal, altered, conditional, party, or reactive.
+3. Build a branch-aware event map with all flags, unlocks, blocks, and altered scenes.
+4. Define the financial state fields early (unemployment, debt-to-GDP, growth strength), but defer dashboard polish.
+5. Add minimal party/government/opposition state needed for the event actor to be meaningful.
+6. Build one complete vertical slice: **1995 Quebec referendum: Yes**.
+7. Test loss → opposition → re-election, altered events, and branch-specific ending within that slice.
+8. Only then add confidence-and-supply, Wheat Board, nationalization/privatization, trade, scandal, climate, and other branch packs.
+
+### Acceptance criteria
+
+- Every planned V2 event is classified in one event bucket.
+- Every conditional event has explicit requirements and at least one valid continuation.
+- Every major choice lists its future unlocks, blocks, and altered events.
+- Historical route remains a valid, deterministic route through the graph.
+- A reviewer can identify which events are independent, which are shared-but-altered, and which are branch-only without reading UI code.
+
+---
+
 ## Explicitly not doing in early V2
 
 - Full map/riding-level simulation.
