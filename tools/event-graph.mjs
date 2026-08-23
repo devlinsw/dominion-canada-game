@@ -29,6 +29,18 @@ try {
   const tr = await import('../src/pack-trade.mjs');
   extra.push(...tr.TRADE_PACK);
 } catch {}
+try {
+  const nep = await import('../src/pack-nep.mjs');
+  extra.push(...nep.NEP_PACK);
+} catch {}
+try {
+  const cr = await import('../src/pack-crown.mjs');
+  extra.push(...cr.CROWN_PACK);
+} catch {}
+try {
+  const qm = await import('../src/pack-quebec-mergeback.mjs');
+  extra.push(...qm.QUEBEC_MERGEBACK);
+} catch {}
 const all = [...events.filter(e => !extra.some(x => x.id === e.id)), ...extra];
 
 const errors = validateAll(all);

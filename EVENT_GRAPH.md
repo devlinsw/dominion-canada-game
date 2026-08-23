@@ -123,19 +123,81 @@ block, or alter referencing a missing event id fails validation. Flags named
 
 - choice **Pivot to allies and internal trade**: sets `tradePosture=diversified`
 
+## NEP_1980 — The National Energy Program
+*universal, 1980–1982*
+
+- choice **Implement the NEP fully**: sets `westernAlienation=high`, `energyModel=federal-nationalist`
+- choice **Negotiate a revenue-sharing compact**: sets `westernAlienation=moderate`, `energyModel=revenue-sharing`
+- choice **Let the market price it**: sets `westernAlienation=moderate`, `energyModel=market`
+
+## NEP_BACKLASH_1982 — The Western Backlash
+*conditional, 1981–1984*
+
+- requires: `flag:westernAlienation=high`
+- choice **Scrap the program outright**: sets `westernAlienation=moderate`, `energyModel=market`
+
+## WESTERN_SENATE_PRESSURE_1990 — Triple-E or Nothing
+*party, 1989–1992*
+
+- choice **Champion Triple-E Senate reform**: sets `senateModel=elected-triple-e`
+- choice **Defend the appointed Senate**: sets `senateModel=patronage`
+- choice **Propose abolition**: sets `senateModel=abolition-track`
+
+## ENERGY_TRANSITION_2015 — Energy in a Carbon-Constrained World
+*altered, 2015–2019*
+
+- choice **Force pipelines through**: sets `energyModel=market`
+- choice **Pair climate policy with transition support**: sets `energyModel=transition`, `westernAlienation=moderate`
+- choice **Cap emissions hard, fund clean industries**: sets `energyModel=transition`, `westernAlienation=high`
+
+## CROWN_EXPANSION_1976 — The Crown Corporation Buildup
+*party, 1974–1979*
+
+- choice **Expand the Crown sector aggressively**: sets `crownSector=expansionist`
+- choice **Approve selectively with arm's-length boards**: sets `crownSector=mixed`
+- choice **Keep the state out of business**: sets `crownSector=retrenchment`
+
+## VIA_RAIL_1978 — The Future of Passenger Rail
+*universal, 1977–1981*
+
+- choice **Create VIA Rail**: sets `crownSector=expansionist`
+- choice **Cut routes to the viable core**: sets `crownSector=retrenchment`
+
+## CROWN_PRIVATIZATION_1985 — Selling the Family Silver
+*altered, 1984–1990*
+
+- choice **Sell the major Crowns**: sets `crownSector=retrenchment`
+- choice **Sell the failing ones only**: sets `crownSector=mixed`
+- choice **Keep them all — fix governance instead**: sets `crownSector=expansionist`, `institutionalTrust=reformed`
+
+## PETRO_CAN_1991 — The Future of Petro-Canada
+*altered, 1990–1993*
+
+- choice **Privatize fully**: sets `crownSector=retrenchment`
+- choice **Partial float — keep the golden share**: sets `crownSector=mixed`
+- choice **Keep it fully public**: sets `crownSector=expansionist`
+
+## TRADE_WITHOUT_QUEBEC_1997 — Trade After Separation
+*conditional, 1996–2000*
+
+- requires: `flag:quebecStatus=independent`
+- choice **Use the rupture to diversify**: sets `tradePosture=diversified`
+
 ## Flag flow — writers → readers
 
 | Flag | Set by | Read/gated by |
 |---|---|---|
 | `chinaExposure` | TRADE_CHINA_2014 | *(scorecard only)* |
-| `crownSector` | SCANDAL_CROWN_BOARD_1985 | *(scorecard only)* |
+| `crownSector` | SCANDAL_CROWN_BOARD_1985, CROWN_EXPANSION_1976, VIA_RAIL_1978, CROWN_PRIVATIZATION_1985, PETRO_CAN_1991 | *(scorecard only)* |
 | `culturalExemption` | FREE_TRADE_ANCHOR_1988 | *(scorecard only)* |
+| `energyModel` | NEP_1980, NEP_BACKLASH_1982, ENERGY_TRANSITION_2015 | *(scorecard only)* |
 | `indigenousRelation` | WHITE_PAPER_1969, RCAP_NISGAA_1998 | *(scorecard only)* |
-| `institutionalTrust` | SCANDAL_PROCUREMENT_1976, SCANDAL_CROWN_BOARD_1985, SCANDAL_SPONSORSHIP_2002, SCANDAL_SENATE_2013, SCANDAL_LOBBYING_2019 | *(scorecard only)* |
+| `institutionalTrust` | SCANDAL_PROCUREMENT_1976, SCANDAL_CROWN_BOARD_1985, SCANDAL_SPONSORSHIP_2002, SCANDAL_SENATE_2013, SCANDAL_LOBBYING_2019, CROWN_PRIVATIZATION_1985 | *(scorecard only)* |
 | `prairieAgriculture` | WHEAT_BOARD_ANCHOR_1970, WHEAT_BOARD_PARTY_1993, WHEAT_BOARD_ENDGAME_2011 | *(scorecard only)* |
-| `quebecStatus` | QUEBEC_REFERENDUM_1995, QUEBEC_NEGOTIATION_1996 | *(scorecard only)* |
+| `quebecStatus` | QUEBEC_REFERENDUM_1995, QUEBEC_NEGOTIATION_1996 | TRADE_WITHOUT_QUEBEC_1997 |
 | `reconciliationPath` | TRC_2015 | *(scorecard only)* |
 | `s35Recognized` | CONSTITUTION_S35_1982 | *(scorecard only)* |
-| `senateModel` | SCANDAL_SENATE_2013 | *(scorecard only)* |
-| `tradePosture` | FREE_TRADE_ANCHOR_1988, NAFTA_EXTENSION_1993, TRADE_CHINA_2014, TARIFF_SHOCK_2025 | *(scorecard only)* |
+| `senateModel` | SCANDAL_SENATE_2013, WESTERN_SENATE_PRESSURE_1990 | *(scorecard only)* |
+| `tradePosture` | FREE_TRADE_ANCHOR_1988, NAFTA_EXTENSION_1993, TRADE_CHINA_2014, TARIFF_SHOCK_2025, TRADE_WITHOUT_QUEBEC_1997 | *(scorecard only)* |
 | `treatyPosture` | RCAP_NISGAA_1998 | *(scorecard only)* |
+| `westernAlienation` | NEP_1980, NEP_BACKLASH_1982, ENERGY_TRANSITION_2015 | *(scorecard only)* |
