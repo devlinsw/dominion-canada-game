@@ -1768,6 +1768,8 @@ const HISTORICAL_BASELINE = finalScore(HISTORICAL_METRICS);
 
 let v2World = {};            // durable world flags
 let v2Financial = null;      // V2-08 indicators (lazy-init on first game start)
+let v2Confidence = null;     // V2-04 confidence-and-supply partner (minorities)
+let v2PendingDemand = null;  // demand shown on the current card
 const V2_EVENTS = [];        // flattened pack events, sorted by year
 let v2Unlocked = new Set();
 let v2Blocked = new Set();
@@ -2121,6 +2123,7 @@ function saveGame() {
       v2World,
       v2Financial,
       v2ResolvedIds: [...v2Resolved],
+      v2Confidence,
     }));
   } catch (e) { /* private mode, quota — never break the game over a save */ }
 }
@@ -2193,18 +2196,39 @@ function renderDecision() {
   saveGame();
 
   $('current-year').textContent = d.year;
+  // Confidence-and-supply (V2-04): minority governments show their partner's
+  // support. The partner keeps you up if demands are met; refuse at your peril.
+  let confidenceTag = '';
+  if (!d.election && state.metrics.approval < 45 && !state.opposition) {
+    if (!v2Confidence) v2Confidence = { id: 'social democrat', support: 60, met: 0, refused: 0 };
+    confidenceTag = ` · <span class="opposition-tag" title="Confidence-and-supply: the ${v2Confidence.id} keeps this government alive. Meet its demands or risk the floor.">minority — ${v2Confidence.id} support ${Math.round(v2Confidence.support)}%</span>`;
+  }
   $('term-info').innerHTML = d.election
     ? 'Election Year'
-    : `Term ${d.term ?? '—'}${state.opposition > 0 ? ' · <span class="opposition-tag">In Opposition</span>' : ''}`;
+    : `Term ${d.term ?? '—'}${state.opposition > 0 ? ' · <span class="opposition-tag">In Opposition</span>' : ''}${confidenceTag}`;
 
   const container = $('decision-container');
   if (d.election) { renderElection(d, container); return; }
+
+  // On a minority, one choice per card is flagged as the partner's demand.
+  // Taking it builds support; refusing risks an early election.
+  let demandNote = '';
+  if (v2Confidence && !d.election && !state.opposition && d.v2DemandApplied !== true) {
+    d.v2DemandApplied = true;
+    const demandIdx = state.orders[state.currentDecision][0];
+    const demanded = d.choices[demandIdx];
+    if (demanded) {
+      v2PendingDemand = { idx: demandIdx, label: demanded.label };
+      demandNote = `<div class="opposition-note"><strong>${v2Confidence.id} confidence demand:</strong> "Pass <em>${demanded.label}</em> as written, or we withdraw support." Refusing risks an election.</div>`;
+    }
+  }
 
   container.innerHTML = `<div class="decision-card">
     <div class="decision-year">${d.year}</div>
     <h2 class="decision-title">${d.title}</h2>
     <div class="decision-context">${d.context}</div>
     ${state.opposition > 0 ? `<div class="opposition-note">You are not in government. You can shape this — you cannot decide it. Your choice lands at ${Math.round(TUNING.oppositionScale * 100)}% strength.</div>` : ''}
+    ${demandNote}
     ${choiceButtons(d, 'choose')}
   </div>`;
 
@@ -2305,6 +2329,28 @@ function chooseOption(idx) {
   let applied = scaleEffects(c.effects || {}, scale);
   applied = applyReformFatigue(state.metrics, applied);
 
+  // Confidence-and-supply: did the government meet the partner's demand?
+  let confidenceNote = '';
+  if (v2PendingDemand && !state.opposition) {
+    const met = idx === v2PendingDemand.idx;
+    if (met) {
+      v2Confidence.support = Math.min(100, v2Confidence.support + 12);
+      v2Confidence.met++;
+      confidenceNote = `<p class="opposition-note">The ${v2Confidence.id} is satisfied — support rises to ${Math.round(v2Confidence.support)}%.</p>`;
+    } else {
+      v2Confidence.support = Math.max(0, v2Confidence.support - 20);
+      v2Confidence.refused++;
+      if (v2Confidence.support < 30 && rng() < 0.5) {
+        state.confidenceFailed = true;
+        confidenceNote = `<p class="opposition-note"><strong>The ${v2Confidence.id} has withdrawn support.</strong> The government survives only until the next confidence vote — and the damage is done.</p>`;
+        applied.approval = (applied.approval ?? 0) - 10;
+      } else {
+        confidenceNote = `<p class="opposition-note">The ${v2Confidence.id} is unhappy — support falls to ${Math.round(v2Confidence.support)}%. Refuse again and the government may fall.</p>`;
+      }
+    }
+    v2PendingDemand = null;
+  }
+
   applyEffects(state.metrics, applied);
   state.history.push({ year: d.year, title: d.title, action: c.label, kind: 'decision', opposition: state.opposition > 0 });
   if (state.opposition > 0) state.opposition--;
@@ -2313,8 +2359,8 @@ function chooseOption(idx) {
 
   // Injected middle-path choices have no authored narrative — synthesize one
   // from the label rather than showing "undefined".
-  const text = c.consequence
-    || `<em>${c.label}.</em> The government proceeds — measured, unheroic, and defensible. History records the choice without drama.`;
+  const text = (c.consequence
+    || `<em>${c.label}.</em> The government proceeds — measured, unheroic, and defensible. History records the choice without drama.`) + confidenceNote;
   showConsequence({ year: d.year, text, effects: applied });
 }
 
@@ -2563,6 +2609,7 @@ function startGame(seed) {
   v2World = {}; v2Unlocked = new Set(); v2Blocked = new Set();
   v2Resolved = new Set(); v2Queue = []; v2Active = null;
   v2Financial = null; v2InitFinancial();
+  v2Confidence = null; v2PendingDemand = null;
   showScreen('game-screen');
   renderDecision();   // V1 spine renders immediately — no async gating
   loadV2Packs().then(() => {
@@ -2582,7 +2629,9 @@ function resumeGame() {
   v2Financial = s.v2Financial || null;
   if (!v2Financial) v2InitFinancial();
   v2Resolved = new Set(s.v2ResolvedIds || []);
-  v2Unlocked = new Set();   // re-derived: unlocked flags live in v2World history
+  v2Confidence = s.v2Confidence || null;
+  v2PendingDemand = null;
+  v2Unlocked = new Set();
   v2Blocked = new Set();
   v2Queue = []; v2Active = null;
   showScreen('game-screen');
