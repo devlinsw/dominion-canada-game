@@ -1090,6 +1090,13 @@ const DECISIONS = [
         consequence: "You refuse to campaign against Quebec's self-determination. The process is clean, the debate is genuine, and when the <em>'Non'</em> wins 60/40, the result has moral authority. Quebec stays — not because Ottawa pressured them, but because they chose to. The separatist movement is weakened by the legitimacy of the vote, not just by its outcome. <em>But you're blamed for not fighting hard enough, and a quarter of your caucus abstains.</em>",
         result: "lose",
       },
+      {
+        label: "YES — endorse sovereignty-association",
+        desc: "Break with your own party. Campaign openly for a Yes that leads to negotiation, not rupture.",
+        effects: { unity: -18, sovereign: +8, rights: +2, approval: -6 },
+        consequence: "You campaign for the <em>'Oui'</em>. Federalists are stunned; Quebec nationalists are suspicious of a Montreal federalist suddenly wearing their colours. The <em>'Non'</em> still wins — but far narrower than it should have been, and you are done as a national leader. <em>History will argue forever about what you were doing.</em>",
+        result: "lose",
+      },
     ],
   },
   {
@@ -1269,6 +1276,12 @@ const DECISIONS = [
         desc: "This is Quebec's democratic right. A clean process, win or lose, is more legitimate than a coerced one.",
         effects: { unity: -20, approval: -3, sovereign: +6, social: -5, rights: +8 },
         consequence: "You stay distant. Without a strong federal voice, the <em>'Oui'</em> creeps ahead. On October 30, 1995, Quebec votes 51% to 49% for sovereignty. <em>Canada breaks apart. The largest country in the world becomes two nations overnight.</em> You are the last Prime Minister of a united Canada. But the process was clean — the world recognizes the legitimacy of the vote, and Quebec's independence, however painful, is built on consent rather than coercion. The History will not be kind. But it will be honest.",
+      },
+      {
+        label: "YES — quietly hope for Oui",
+        desc: "Your heart is with sovereignty, but your office is not. Say nothing, do nothing, let it happen.",
+        effects: { unity: -22, approval: -8, sovereign: +7, rights: +6 },
+        consequence: "You neither campaign nor obstruct. Federal organizers wait for direction that never comes. The <em>'Oui'</em> carries — narrowly, chaotically, without a plan on either side. <em>You achieved what no Péquiste ever could: the end of Canada, by federal inattention.</em>",
       },
       {
         label: "Offer clear constitutional reform — the clarity path",
@@ -1662,8 +1675,16 @@ function applyEffects(metrics, effects) {
   return metrics;
 }
 
+// ── Score spread damping (playtest fix: hawk 29.3 too brutal) ───────────
+// The final score is a flat mean of six metrics. When one ideology drives two
+// metrics to the floor, the mean collapses below what the narrative describes
+// ("petro-state" ≠ failed state). Dampen the extremes in finalScore only:
+// metrics below 15 count as 15 for scoring — the country still functions.
+const SCORE_FLOOR = 15;
+
 function finalScore(metrics) {
-  return SCORE_METRICS.reduce((a, k) => a + metrics[k], 0) / SCORE_METRICS.length;
+  const vals = SCORE_METRICS.map(k => Math.max(SCORE_FLOOR, metrics[k]));
+  return vals.reduce((a, v) => a + v, 0) / SCORE_METRICS.length;
 }
 
 /** Play an arbitrary path through the real rules. Used for the baseline and the end-screen stat. */
@@ -2077,7 +2098,11 @@ function chooseOption(idx) {
   state.currentDecision++;
   saveGame();
 
-  showConsequence({ year: d.year, text: c.consequence, effects: applied });
+  // Injected middle-path choices have no authored narrative — synthesize one
+  // from the label rather than showing "undefined".
+  const text = c.consequence
+    || `<em>${c.label}.</em> The government proceeds — measured, unheroic, and defensible. History records the choice without drama.`;
+  showConsequence({ year: d.year, text, effects: applied });
 }
 
 function chooseElection(idx) {

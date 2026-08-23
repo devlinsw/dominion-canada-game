@@ -107,5 +107,5 @@ export function simulate(DECISIONS, chooser, TUNING = DEFAULT_TUNING) {
     if (opposition > 0) opposition--;
     if (d.election && resolveElection(d, c, m.approval) === 'lose') opposition = TUNING.oppositionYears;
   });
-  return { metrics: m, picks, score: SCORE_METRICS.reduce((a, k) => a + m[k], 0) / 6 };
+  return { metrics: m, picks, score: SCORE_METRICS.reduce((a, k) => a + Math.max(15, m[k]), 0) / 6 };
 }

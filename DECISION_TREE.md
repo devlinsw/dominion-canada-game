@@ -27,7 +27,7 @@ START
   │
   ├─ [1980] 📜 The National Energy Program             ► 3 choices
   │
-  ├─ [1980] 🗳️ The Quebec Referendum                   ► 2 choices
+  ├─ [1980] 🗳️ The Quebec Referendum                   ► 3 choices
   │
   ├─ [1982] 📜 Bringing the Constitution Home          ► 3 choices
   │
@@ -41,7 +41,7 @@ START
   │
   ├─ [1992] 📜 The Cod Moratorium                      ► 3 choices
   │
-  ├─ [1995] 📜 The Quebec Referendum, Round Two        ► 3 choices
+  ├─ [1995] 📜 The Quebec Referendum, Round Two        ► 4 choices
   │
   ├─ [1995] 📜 The Deficit                             ► 3 choices
   │
@@ -76,13 +76,13 @@ final score; **Approval** gates elections but is excluded from scoring.
 
 | Metric | Reachable range | Decisions that move it | Controllable swing |
 |---|---|---|---|
-| **National Unity** | 0–100 | 24/25 | 253 |
+| **National Unity** | 0–100 | 24/25 | 265 |
 | **Economy** | 0–100 | 19/25 | 172 |
 | **Rights & Liberties** | 0–100 | 17/25 | 151 |
 | **Environment** | 0–100 | 7/25 | 113 |
-| **Sovereignty** | 9–100 | 22/25 | 139 |
+| **Sovereignty** | 9–100 | 22/25 | 144 |
 | **Social Wellbeing** | 0–100 | 24/25 | 205 |
-| **Approval** | 0–100 | 24/25 | 228 |
+| **Approval** | 0–100 | 24/25 | 236 |
 
 ---
 
@@ -92,7 +92,7 @@ final score; **Approval** gates elections but is excluded from scoring.
 |---|---|---|---|---|
 | 1972 | Election of 1972 | 41% | 34–73 | yes |
 | 1980 | The Quebec Referendum | 28% | 26–84 | yes |
-| 1984 | Election of 1984 | 49% | 18–92 | yes |
+| 1984 | Election of 1984 | 49% | 15–92 | yes |
 | 2015 | Election of 2015 | 30% | 0–100 | yes |
 
 **Resolution** (single implementation, shared by the UI and the analyzer):
@@ -225,6 +225,7 @@ same rules. That, not 50, is the bar for "you beat history".
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Campaign hard — 'My country is my country' | +8 | — | — | — | +3 | — | +5 | +11 | win | **✓ actual** |
 | 2 | Let Quebecers decide for themselves | -8 | — | +5 | — | +4 | +2 | -3 | +3 | lose |  |
+| 3 | YES — endorse sovereignty-association | -18 | — | +2 | — | +8 | — | -6 | -8 | lose |  |
 
 ### 📜 1982 — Bringing the Constitution Home
 
@@ -308,7 +309,8 @@ same rules. That, not 50, is the bar for "you beat history".
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Fight with everything — a passionate Canada | +10 | — | — | — | +5 | +2 | +5 | +17 | **✓ actual** |
 | 2 | Let Quebec decide — minimal federal involvement | -20 | — | +8 | — | +6 | -5 | -3 | -11 |  |
-| 3 | Offer clear constitutional reform — the clarity path | +5 | — | +3 | — | +3 | — | +3 | +11 |  |
+| 3 | YES — quietly hope for Oui | -22 | — | +6 | — | +7 | — | -8 | -9 |  |
+| 4 | Offer clear constitutional reform — the clarity path | +5 | — | +3 | — | +3 | — | +3 | +11 |  |
 
 ### 📜 1995 — The Deficit
 
@@ -487,6 +489,8 @@ graph TD
     D7c0 --> D8
     D7 -->|"Let Quebecers decide for themselves"| D7c1["unity-8, rights+5, sovereign+4, social+2, approval-3"]
     D7c1 --> D8
+    D7 -->|"YES - endorse sovereignty-association"| D7c2["unity-18, rights+2, sovereign+8, approval-6"]
+    D7c2 --> D8
     D8["📜 1982: Bringing the Constitution Home"]
     D8 -->|"Patriate with the Charter - with or without Quebec"| D8c0["unity-8, rights+12, sovereign+10, social+3, approval+3"]
     D8c0 --> D9
@@ -534,8 +538,10 @@ graph TD
     D14c0 --> D15
     D14 -->|"Let Quebec decide - minimal federal involvement"| D14c1["unity-20, rights+8, sovereign+6, social-5, approval-3"]
     D14c1 --> D15
-    D14 -->|"Offer clear constitutional reform - the clarity path"| D14c2["unity+5, rights+3, sovereign+3, approval+3"]
+    D14 -->|"YES - quietly hope for Oui"| D14c2["unity-22, rights+6, sovereign+7, approval-8"]
     D14c2 --> D15
+    D14 -->|"Offer clear constitutional reform - the clarity path"| D14c3["unity+5, rights+3, sovereign+3, approval+3"]
+    D14c3 --> D15
     D15["📜 1995: The Deficit"]
     D15 -->|"Cut transfers - balance the budget"| D15c0["unity-5, economy+10, rights-5, social-12, approval-3"]
     D15c0 --> D16

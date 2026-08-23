@@ -423,6 +423,21 @@
         "consequence": "You refuse to campaign against Quebec's self-determination. The process is clean, the debate is genuine, and when the <em>'Non'</em> wins 60/40, the result has moral authority. Quebec stays — not because Ottawa pressured them, but because they chose to. The separatist movement is weakened by the legitimacy of the vote, not just by its outcome. <em>But you're blamed for not fighting hard enough, and a quarter of your caucus abstains.</em>",
         "result": "lose",
         "is_historical": false
+      },
+      {
+        "index": 2,
+        "label": "YES — endorse sovereignty-association",
+        "desc": "Break with your own party. Campaign openly for a Yes that leads to negotiation, not rupture.",
+        "effects": {
+          "unity": -18,
+          "sovereign": 8,
+          "rights": 2,
+          "approval": -6
+        },
+        "net_score_effect": -8,
+        "consequence": "You campaign for the <em>'Oui'</em>. Federalists are stunned; Quebec nationalists are suspicious of a Montreal federalist suddenly wearing their colours. The <em>'Non'</em> still wins — but far narrower than it should have been, and you are done as a national leader. <em>History will argue forever about what you were doing.</em>",
+        "result": "lose",
+        "is_historical": false
       }
     ]
   },
@@ -820,6 +835,21 @@
       },
       {
         "index": 2,
+        "label": "YES — quietly hope for Oui",
+        "desc": "Your heart is with sovereignty, but your office is not. Say nothing, do nothing, let it happen.",
+        "effects": {
+          "unity": -22,
+          "approval": -8,
+          "sovereign": 7,
+          "rights": 6
+        },
+        "net_score_effect": -9,
+        "consequence": "You neither campaign nor obstruct. Federal organizers wait for direction that never comes. The <em>'Oui'</em> carries — narrowly, chaotically, without a plan on either side. <em>You achieved what no Péquiste ever could: the end of Canada, by federal inattention.</em>",
+        "result": null,
+        "is_historical": false
+      },
+      {
+        "index": 3,
         "label": "Offer clear constitutional reform — the clarity path",
         "desc": "Campaign for a clear question AND promise constitutional renewal if No wins.",
         "effects": {

@@ -123,7 +123,7 @@ export const NEP_PACK = [
   {
     id: 'ENERGY_TRANSITION_2015',
     title: 'Energy in a Carbon-Constrained World',
-    yearWindow: [2015, 2019],
+    yearWindow: [2017, 2019],
     type: 'altered',
     actor: 'government',
     priority: 3,
