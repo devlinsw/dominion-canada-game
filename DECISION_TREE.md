@@ -617,4 +617,4 @@ graph TD
 
 ---
 
-*Generated 2026-08-21 from `index.html` by `tools/build-docs.mjs`.*
+*Generated 2026-08-23 from `index.html` by `tools/build-docs.mjs`.*

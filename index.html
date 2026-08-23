@@ -1685,8 +1685,142 @@ const HISTORICAL_METRICS = playPath((d, i) => HISTORICAL_PATH[i]);
 const HISTORICAL_BASELINE = finalScore(HISTORICAL_METRICS);
 
 // ═══════════════════════════════════════════════════════════════
-//  GAME STATE
+//  V2 EVENT LAYER — authored packs interleave into the V1 timeline.
+//  V1 (DECISIONS) remains the spine. Between V1 cards, eligible V2 events
+//  (whose year window has opened since the previous card) render in the same
+//  UI. V2 choices apply metric deltas + durable world flags. If pack modules
+//  fail to load, the game runs as pure V1 — graceful degradation.
 // ═══════════════════════════════════════════════════════════════
+
+let v2World = {};            // durable world flags
+const V2_EVENTS = [];        // flattened pack events, sorted by year
+let v2Unlocked = new Set();
+let v2Blocked = new Set();
+let v2Resolved = new Set();
+let v2Queue = [];            // eligible events pending, in selection order
+let v2Active = null;         // the V2 event currently on screen
+let v2Loaded = false;
+
+async function loadV2Packs() {
+  const modules = [
+    ['src/pack-scandals.mjs', 'SCANDAL_PACK'],
+    ['src/pack-indigenous-spine.mjs', 'INDIGENOUS_SPINE'],
+    ['src/pack-wheat-board.mjs', 'WHEAT_BOARD_PACK'],
+    ['src/pack-trade.mjs', 'TRADE_PACK'],
+    ['src/pack-nep.mjs', 'NEP_PACK'],
+    ['src/pack-crown.mjs', 'CROWN_PACK'],
+    ['src/pack-quebec-mergeback.mjs', 'QUEBEC_MERGEBACK'],
+    ['src/branch-quebec-1995.mjs', 'QUEBEC_MERGEBACK_FALLBACK'],
+  ];
+  const all = [];
+  for (const [src, key] of modules) {
+    try {
+      const m = await import(new URL(src, location.href).href);
+      if (m[key]) all.push(...m[key]);
+      else if (key === 'QUEBEC_MERGEBACK_FALLBACK' && m.QUEBEC_1995_BRANCH) all.push(...m.QUEBEC_1995_BRANCH);
+    } catch (err) { console.warn('[v2] pack unavailable:', src, err && err.message); }
+  }
+  all.sort((a, b) => a.yearWindow[0] - b.yearWindow[0]);
+  V2_EVENTS.length = 0;
+  const seen = new Set();
+  for (const e of all) if (!seen.has(e.id)) { seen.add(e.id); V2_EVENTS.push(e); }
+  v2Loaded = true;
+}
+
+function v2TestPredicate(ref) {
+  if (ref.startsWith('unlocked:')) return v2Unlocked.has(ref.slice('unlocked:'.length));
+  const [kind, rest] = ref.split(':');
+  if (kind === 'flag') {
+    const m = rest.match(/^(\w+)(=|!=)(.+)$/);
+    if (!m) return false;
+    return m[2] === '=' ? String(v2World[m[1]]) === m[3] : String(v2World[m[1]]) !== m[3];
+  }
+  return false;
+}
+
+function v2Eligible(year) {
+  return V2_EVENTS.filter(e =>
+    !v2Blocked.has(e.id) && !v2Resolved.has(e.id) &&
+    year >= e.yearWindow[0] && year <= e.yearWindow[1] &&
+    (!e.needsUnlock || v2Unlocked.has(e.id)) &&
+    (e.requires || []).every(r => v2TestPredicate(r)) &&
+    (e.excludes || []).every(r => !v2TestPredicate(r)));
+}
+
+// Called after a V1 card resolves: queue V2 events whose window has opened.
+function v2EnqueueUpTo(year) {
+  const cands = v2Eligible(year);
+  if (!cands.length) return;
+  const rank = e => (e.type === 'conditional' ? 5 : 0) + (e.isElection ? 4 : 0) +
+    ({ party: 2, reactive: 1 }[e.type] ?? 3) + (e.priority ?? 0) * 10;
+  cands.sort((a, b) => (rank(b) + rng() * 0.08) - (rank(a) + rng() * 0.08));
+  v2Queue.push(...cands);
+}
+
+function v2ApplyChoice(choice) {
+  Object.assign(v2World, choice.setsFlags || {});
+  for (const id of choice.unlocks || []) v2Unlocked.add(id);
+  for (const id of choice.blocks || []) v2Blocked.add(id);
+  v2Resolved.add(v2Active.id);
+}
+
+function v2Render() {
+  const e = v2Active;
+  const order = e.choices.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {   // seeded shuffle, same as V1
+    const j = Math.floor(rng() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  const buttons = order.map((realIdx, slot) => {
+    const c = e.choices[realIdx];
+    return `<button class="choice-button" data-action="choose-v2" data-idx="${realIdx}">
+      <span class="choice-key" aria-hidden="true">${slot + 1}</span>
+      <span class="choice-label">${c.label}</span>
+      <span class="choice-desc">${c.desc || ''}</span>
+    </button>`;
+  }).join('');
+  $('decision-container').innerHTML = `<div class="decision-card">
+    <div class="decision-year">${e.yearWindow[0]}</div>
+    <h2 class="decision-title">${e.title}</h2>
+    <div class="decision-context">${e.context || e.title}</div>
+    ${buttons}
+  </div>`;
+}
+
+function chooseV2Option(idx) {
+  const c = v2Active.choices[idx];
+  const scale = state.opposition > 0 ? TUNING.oppositionScale : 1;
+  const applied = {};
+  for (const [k, v] of Object.entries(c.metrics || {})) applied[k] = v * scale;
+  applyEffects(state.metrics, applied);
+  v2ApplyChoice(c);
+  state.history.push({ year: v2Active.yearWindow[0], title: v2Active.title, action: c.label, kind: 'v2-event', opposition: state.opposition > 0 });
+
+  const text = c.consequence
+    || `<em>${c.label}</em> — the government's decision is recorded. ${Object.keys(c.setsFlags || {}).length ? 'The country\u2019s path shifts.' : ''}`;
+  showConsequence({ year: v2Active.yearWindow[0], text, effects: applied });
+  v2Active = null;
+}
+
+// Patched renderDecision: drain the V2 queue before showing the next V1 card.
+const _renderDecision = renderDecision;
+renderDecision = function () {
+  if (v2Active) { v2Render(); return; }
+  if (v2Queue.length) {
+    v2Active = v2Queue.shift();
+    v2Render();
+    return;
+  }
+  const next = DECISIONS[state.currentDecision];
+  if (next) v2EnqueueUpTo(next.year);
+  if (v2Queue.length) {
+    v2Active = v2Queue.shift();
+    v2Render();
+    return;
+  }
+  _renderDecision();
+};
+
 
 let state;
 let rng;
@@ -2034,8 +2168,15 @@ function showScreen(id) {
 function startGame(seed) {
   const urlSeed = new URLSearchParams(location.search).get('seed');
   resetState(seed ?? (urlSeed ? parseInt(urlSeed, 36) >>> 0 : undefined));
+  v2World = {}; v2Unlocked = new Set(); v2Blocked = new Set();
+  v2Resolved = new Set(); v2Queue = []; v2Active = null;
   showScreen('game-screen');
-  renderDecision();
+  renderDecision();   // V1 spine renders immediately — no async gating
+  loadV2Packs().then(() => {
+    // packs arrive late: re-run eligibility for the current point in time
+    const next = DECISIONS[state.currentDecision];
+    if (next) v2EnqueueUpTo(next.year);
+  });
 }
 
 function resumeGame() {
@@ -2061,6 +2202,7 @@ document.addEventListener('click', (e) => {
   if (!el) return;
   const a = el.dataset.action;
   if (a === 'choose') chooseOption(Number(el.dataset.idx));
+  else if (a === 'choose-v2') chooseV2Option(Number(el.dataset.idx));
   else if (a === 'elect') chooseElection(Number(el.dataset.idx));
   else if (a === 'continue') renderDecision();
   else if (a === 'start') startGame();
