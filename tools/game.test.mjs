@@ -195,7 +195,8 @@ group('Accessibility & robustness');
   ctx.doc.dispatchEvent(new ctx.w.KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
   ok(ctx.doc.querySelector('.choice-button') !== null, 'Enter advances to the next decision');
   ok(ctx.doc.querySelector('[role="progressbar"]') !== null, 'progress is exposed to assistive tech');
-  ok(ctx.doc.querySelectorAll('[role="meter"]').length === ctx.w.eval('METRICS.length'), 'metrics are exposed as meters');
+  // Six national metrics + three financial indicators (V2-08), all role="meter".
+  ok(ctx.doc.querySelectorAll('[role="meter"]').length === ctx.w.eval('METRICS.length') + 3, 'metrics are exposed as meters');
   ok(ctx.doc.querySelector('.metric-changes[aria-live]') !== null || true, 'metric deltas announce politely');
   const src = fs.readFileSync(path.join(REPO, 'index.html'), 'utf8');
   ok(!/onclick=/.test(src), 'no inline onclick handlers remain');
