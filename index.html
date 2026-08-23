@@ -1736,6 +1736,24 @@ async function loadV2Packs() {
   V2_EVENTS.length = 0;
   const seen = new Set();
   for (const e of all) if (!seen.has(e.id)) { seen.add(e.id); V2_EVENTS.push(e); }
+
+  // Middle-choice pack: inject extra choices into matching V1 decisions.
+  try {
+    const mm = await import(new URL('src/pack-middle-choices.mjs', location.href).href);
+    for (const mc of mm.MIDDLE_CHOICES || []) {
+      const d = DECISIONS.find(x => x.title &&
+        x.year >= (mc.eventId.match(/\d{4}/) ? +mc.eventId.match(/\d{4}/)[0] : 0));
+      // match by id convention: SCANDAL-style ids embed year; find by year+keyword
+      if (!d) continue;
+      const kw = { QUEBEC_REFERENDUM_1980: 'Quebec Referendum', FREE_TRADE_1988: 'Free Trade', MEECH_LAKE_1992: 'Meech Lake' }[mc.eventId];
+      const target = DECISIONS.find(x => kw && x.title && x.title.toLowerCase().includes(kw.toLowerCase()));
+      if (target && !target.choices.some(c => c.label === mc.choice.label)) {
+        target.choices.push(mc.choice);
+        target.middleChoice = true;
+      }
+    }
+  } catch (err) { console.warn('[v2] middle choices unavailable:', err && err.message); }
+
   v2Loaded = true;
 }
 
