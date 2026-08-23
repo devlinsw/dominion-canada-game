@@ -1857,6 +1857,7 @@ function resetState(seed) {
     electionsWon: 0,
     electionsLost: 0,
     opposition: 0,
+    reformFatigue: 0,
     orders: DECISIONS.map((d) =>
       TUNING.shuffleChoices ? shuffledOrder(d.choices.length, rng) : d.choices.map((_, i) => i)),
   };
@@ -2001,11 +2002,55 @@ function showConsequence({ year, text, effects, banner, bannerClass, cta }) {
   if (b) b.focus();
 }
 
+// ── Reform fatigue (V2-13 playtest fix #5) ──────────────────────────────
+// Reform-forward choices (inquiries, commissions, rights expansions, climate
+// leadership) are detected by their effect signature. Early ones pay off fully;
+// as the counter climbs, positive gains shrink and a small fiscal/political
+// cost appears. Rationale: if reform is all a country does, it stops feeling
+// like reform and starts being just government — and government costs money.
+const REFORM_SIGNATURE = (effects) => {
+  const e = effects || {};
+  const reformy = ['rights', 'social', 'enviro'].filter(k => (e[k] || 0) > 0).length;
+  return reformy >= 2 && Object.keys(e).length >= 3;
+};
+
+function reformFatigueMultiplier(count) {
+  if (count < 3) return 1;        // first two: full effect
+  if (count < 6) return 0.75;     // next three: diminishing
+  if (count < 10) return 0.5;     // next four: half
+  return 0.35;                    // entrenched-reform state: minimal further gains
+}
+
+function applyReformFatigue(metrics, applied) {
+  const isReform = REFORM_SIGNATURE(applied);
+  if (!isReform) {
+    // Non-reform choices reset fatigue slowly — governing normally restores
+    // the country's appetite for self-examination.
+    state.reformFatigue = Math.max(0, (state.reformFatigue ?? 0) - 1);
+    return applied;
+  }
+  const n = state.reformFatigue ?? 0;
+  const mult = reformFatigueMultiplier(n);
+  state.reformFatigue = n + 1;
+  if (mult >= 1) return applied;
+
+  const scaled = {};
+  for (const [k, v] of Object.entries(applied)) {
+    scaled[k] = v > 0 ? Math.max(1, Math.round(v * mult)) : v;   // penalties unchanged
+  }
+  // The bill comes due: an entrenched reform agenda costs fiscal room.
+  if (n >= 6) scaled.economy = Math.min(scaled.economy ?? 0, -1) - (scaled.economy > 0 ? 0 : 0) - 1;
+  if (n >= 10) { scaled.approval = (scaled.approval ?? 0) - 2; }
+  return scaled;
+}
+// ─────────────────────────────────────────────────────────────────────────
+
 function chooseOption(idx) {
   const d = DECISIONS[state.currentDecision];
   const c = d.choices[idx];
   const scale = state.opposition > 0 ? TUNING.oppositionScale : 1;
-  const applied = scaleEffects(c.effects || {}, scale);
+  let applied = scaleEffects(c.effects || {}, scale);
+  applied = applyReformFatigue(state.metrics, applied);
 
   applyEffects(state.metrics, applied);
   state.history.push({ year: d.year, title: d.title, action: c.label, kind: 'decision', opposition: state.opposition > 0 });
