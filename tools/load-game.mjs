@@ -82,6 +82,18 @@ export function resolveElection(decision, choice, approvalAtBallot) {
 }
 
 /** Play a full game given a chooser(decision, index) -> choiceIndex. */
+// Soft floor: below 20, only half of further losses land; hard floor at 5.
+// Keeps "functioning country with economy 0" outcomes out of the space.
+export const applyDelta = (m, k, v) => {
+  let next = m[k] + v;
+  if (v < 0 && next < 20) {
+    const overshoot = 20 - Math.max(next, 5);
+    if (next < 5) next = 5;
+    else next = 20 - overshoot / 2;
+  }
+  m[k] = clamp(Math.round(next * 10) / 10);
+};
+
 export function simulate(DECISIONS, chooser, TUNING = DEFAULT_TUNING) {
   const m = Object.fromEntries(ALL_METRICS.map((k) => [k, 50]));
   const picks = [];
@@ -91,7 +103,7 @@ export function simulate(DECISIONS, chooser, TUNING = DEFAULT_TUNING) {
     picks.push(ci);
     const c = d.choices[ci];
     const eff = scaleEffects(c.effects || {}, opposition > 0 ? TUNING.oppositionScale : 1);
-    for (const [k, v] of Object.entries(eff)) if (k in m) m[k] = clamp(m[k] + v);
+    for (const [k, v] of Object.entries(eff)) if (k in m) applyDelta(m, k, v);
     if (opposition > 0) opposition--;
     if (d.election && resolveElection(d, c, m.approval) === 'lose') opposition = TUNING.oppositionYears;
   });

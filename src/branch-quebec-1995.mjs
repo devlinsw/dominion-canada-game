@@ -50,7 +50,8 @@ export const QUEBEC_1995_REFERENDUM_V2 = {
   choices: [
     {
       id: 'yes',
-      label: 'Yes side wins — begin separation negotiations',
+      label: 'YES — Quebec negotiates sovereignty',
+      desc: 'The Yes side wins. Begin separation negotiations.',
       metrics: { unity: -25, economy: -8, sovereign: 12 },
       financial: { debtToGdp: 6, growthIndex: -10 },
       setsFlags: { quebecStatus: 'independent-negotiating' },
@@ -60,7 +61,8 @@ export const QUEBEC_1995_REFERENDUM_V2 = {
     },
     {
       id: 'no',
-      label: 'No side holds — renew federalism from within',
+      label: 'NO — Quebec stays, federalism renewed from within',
+      desc: 'The No side holds. Renew federalism without a rupture.',
       metrics: { unity: 4, rights: 2 },
       isHistorical: true,
     },

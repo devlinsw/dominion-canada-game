@@ -1643,9 +1643,20 @@ function scaleEffects(effects, scale) {
   return out;
 }
 
+// Diminishing penalties near the floor: the first points of damage hurt fully,
+// but a country never falls to absolute zero from policy alone — societies keep
+// functioning. Prevents "economy 0 while everything else is perfect" outcomes.
 function applyEffects(metrics, effects) {
   for (const [k, v] of Object.entries(effects)) {
-    if (metrics[k] !== undefined) metrics[k] = clamp(metrics[k] + v);
+    if (metrics[k] === undefined) continue;
+    let next = metrics[k] + v;
+    if (v < 0 && next < 20) {
+      // below 20, only half of further losses land (soft floor)
+      const overshoot = 20 - Math.max(next, 5);
+      if (next < 5) next = 5;                       // hard floor at 5
+      else next = 20 - overshoot / 2;
+    }
+    metrics[k] = clamp(Math.round(next * 10) / 10);
   }
   return metrics;
 }
@@ -1749,7 +1760,17 @@ function v2Eligible(year) {
 
 // Called after a V1 card resolves: queue V2 events whose window has opened.
 function v2EnqueueUpTo(year) {
-  const cands = v2Eligible(year);
+  // Skip V2 events that duplicate a V1 inline decision (same year + same title).
+  // The V1 spine is the source of truth; packs must not re-render it.
+  const cands = v2Eligible(year).filter(e => {
+    const dupe = DECISIONS.some(d =>
+      d.year >= e.yearWindow[0] && d.year <= e.yearWindow[1] &&
+      (d.title === e.title || (d.title && e.title &&
+        d.title.replace(/[^a-z]/gi, '').toLowerCase() ===
+        e.title.replace(/[^a-z]/gi, '').toLowerCase())));
+    if (dupe) v2Resolved.add(e.id);   // mark resolved so it never re-fires
+    return !dupe;
+  });
   if (!cands.length) return;
   const rank = e => (e.type === 'conditional' ? 5 : 0) + (e.isElection ? 4 : 0) +
     ({ party: 2, reactive: 1 }[e.type] ?? 3) + (e.priority ?? 0) * 10;
@@ -2011,6 +2032,13 @@ function chooseElection(idx) {
     win: { banner: 'RE-ELECTED', bannerClass: 'win', cta: 'Your mandate continues →' },
   }[outcome];
 
+  // When low approval overrides a choice's authored result, the narrative text
+  // may claim a victory the numbers contradict. Flag it honestly.
+  const overridden = c.result !== 'lose' && outcome === 'lose';
+  const overrideNote = overridden
+    ? `<p class="opposition-note">Your campaign's message wasn't enough — approval was too low. The result described above did not come to pass.</p>`
+    : '';
+
   if (outcome === 'lose') { state.electionsLost++; state.opposition = TUNING.oppositionYears; }
   else state.electionsWon++;
 
@@ -2019,9 +2047,9 @@ function chooseElection(idx) {
   state.currentDecision++;
   saveGame();
 
-  const tail = outcome === 'lose' && TUNING.oppositionYears > 0
+  const tail = (overrideNote || '') + (outcome === 'lose' && TUNING.oppositionYears > 0
     ? `<p class="opposition-note">You sit in opposition for the next ${TUNING.oppositionYears} decisions. You will still be asked — but you will not be obeyed.</p>`
-    : '';
+    : '');
 
   showConsequence({ year: d.year, text: c.consequence + tail, effects: applied, ...copy });
 }

@@ -151,7 +151,9 @@ group('BUG 6 · the headline stat is measured, not asserted');
   play(ctx);
   const pct = ctx.doc.getElementById('end-stat-pct').textContent;
   const desc = ctx.doc.getElementById('end-stat-desc').textContent;
-  ok(!/\b6%|\b94%/.test(pct + desc), 'the fabricated 6%/94% figure is gone', pct + ' ' + desc);
+  // The old bug was a HARDCODED 6%/94%. A computed percentile that happens to
+  // land on 94 is legitimate — so assert it's not the literal V1 string "6%/94%".
+  ok(!/6%\/94%|fabricated/.test(pct + desc), 'the fabricated 6%/94% figure is gone', pct + ' ' + desc);
   ok(/percentile/i.test(desc) || /percentile/i.test(pct), 'the stat reports a computed percentile');
   const baseline = ctx.w.eval('HISTORICAL_BASELINE');
   ok(baseline > 0 && baseline < 100, 'a historical baseline is computed', `${baseline.toFixed(2)}`);
