@@ -1019,6 +1019,7 @@ const DECISIONS = [
     year: 1972,
     election: true,
     title: "Election of 1972",
+    historicalResult: "minority",
     context: "Your first election as Prime Minister. The opposition says you're arrogant, too intellectual, out of touch. The economy is softening. But your language policy and the October Crisis response are still fresh. Do you campaign on your record, or pivot?",
     approvalNeeded: 41,
     choices: [
@@ -1114,6 +1115,7 @@ const DECISIONS = [
     year: 1980,
     election: true,
     title: "The Quebec Referendum",
+    historicalResult: "win",
     context: "May 1980. Quebec Premier René Lévesque has called a referendum on sovereignty-association. The question: should Quebec negotiate a new relationship with the rest of Canada? You're a federalist from Montreal. How hard do you campaign?",
     approvalNeeded: 28,
     choices: [
@@ -1170,6 +1172,7 @@ const DECISIONS = [
     year: 1984,
     election: true,
     title: "Election of 1984",
+    historicalResult: "lose",
     context: "You've been PM for 16 years. The economy has struggled. The NEP angered the West. Quebec is still out of the constitution. But you patriated the Constitution and gave Canadians the Charter. The voters are tired of you. <em>It's time.</em>",
     approvalNeeded: 49,
     choices: [
@@ -1251,26 +1254,26 @@ const DECISIONS = [
   {
     year: 1992,
     term: 5,
-    title: "The Meech Lake Accord",
-    context: "June 1990. Quebec still hasn't signed the Constitution. The Meech Lake Accord — negotiated in 1987 — would bring them in, recognizing Quebec as a <em>'distinct society'</em> with new powers. But it required unanimous provincial consent by June 23, 1990, and it's dying. Elijah Harper, a Cree MLA in Manitoba, is blocking it. Indigenous leaders, women's groups, and English-Canadian nationalists all oppose it. <em>The clock runs out at midnight.</em>",
+    title: "The Charlottetown Accord",
+    context: "October 1992. Meech Lake died two years ago. A broader constitutional package is now before Canadians: Quebec as a distinct society, elected Senate reform, Indigenous self-government, and a social union — all in one referendum. It is the only time Canadians will vote directly on a constitutional settlement. The coalition behind it is broad; the coalition against it is broader.",
     choices: [
       {
-        label: "Push it through — Quebec must be inside",
-        desc: "Use every ounce of political capital to get all ten provinces to agree.",
+        label: "Campaign for a Yes — the deal is worth it",
+        desc: "Make the broad constitutional bargain: Quebec inside, Indigenous self-government, reformed institutions.",
         effects: { unity: +10, approval: -3, rights: -3, social: -2, sovereign: +2 },
         consequence: "You push hard. After furious negotiation, all ten provinces ratify. Quebec signs the Constitution — 10 years late. The <em>'distinct society'</em> clause reshapes Canadian federalism. But critics warn it creates a tiered federation, and the backlash from Indigenous groups and equality advocates is fierce.",
       },
       {
-        label: "Let it die — the deal is flawed",
-        desc: "The Accord collapses. Elijah Harper's filibuster kills it in Manitoba. The Charter stays unweakened.",
-        effects: { unity: -10, approval: +2, rights: +9, social: +6, sovereign: +4 },
-        consequence: "Meech Lake dies. Quebec is wounded — again. <em>'Canada does not want us.'</em> The Parti Québécois surges. The 1995 referendum becomes inevitable. But the Charter stays intact, unweakened by the 'distinct society' clause. Indigenous rights, not yet traded away, remain a lever for future progress. <em>You chose Charter integrity over constitutional peace. The bill for that peace comes due in 1995.</em>",
+        label: "Respect the No vote — return to ordinary politics",
+        desc: "Canadians reject the package. Accept the verdict rather than forcing another constitutional marathon.",
+        effects: { unity: -6, approval: +1, rights: +3, social: +1, sovereign: +3 },
+        consequence: "The accord loses in the referendum. Quebec is wounded again; western reformers feel ignored; Indigenous leaders lose a route that had briefly looked real. But a direct democratic verdict carries a legitimacy Meech never had. <em>Canada moves on without a grand settlement — unresolved, but not imposed.</em>",
       },
       {
-        label: "Renegotiate — include Indigenous nations",
-        desc: "A new accord that recognizes Quebec AND Indigenous nations as founding partners.",
-        effects: { unity: +8, rights: +8, approval: -2, social: +5, sovereign: +3 },
-        consequence: "You refuse the binary choice. A new round of negotiations begins — three-sided this time: federal, provincial, Indigenous. It takes years and nearly fails. But when the Charlottetown Accord finally passes, it's the most inclusive constitutional deal in Canadian history. <em>Canada is not two solitudes, or ten provinces — it is many nations, together.</em>",
+        label: "Return with a narrower settlement",
+        desc: "Drop the omnibus package; negotiate Quebec recognition and Indigenous self-government separately.",
+        effects: { unity: +5, rights: +4, approval: -3, social: +2, sovereign: +1 },
+        consequence: "You respect the referendum but refuse to treat it as the end of constitutional politics. A narrower, slower process begins: Quebec recognition, Indigenous self-government, and Senate reform no longer held hostage to one another. <em>Less grand, less elegant — perhaps more survivable.</em>",
       },
     ],
   },
@@ -1303,6 +1306,32 @@ const DECISIONS = [
   {
     year: 1995,
     term: 6,
+    title: "The Deficit",
+    context: "February 1995. Canada's debt is approaching 70% of GDP. The bond rating agencies are making noise. Your Finance Minister proposes slashing the deficit — by cutting the Canada Health and Social Transfer (CHST), $7 billion out of provincial transfers for health and education. It will balance the budget. It will also gut the social contract that holds Canada together. <em>The budget is in two weeks.</em>",
+    choices: [
+      {
+        label: "Cut transfers — balance the budget",
+        desc: "Slash the Canada Health and Social Transfer by $7 billion. Brutal but effective.",
+        effects: { economy: +10, social: -12, unity: -5, approval: -3, rights: -5 },
+        consequence: "You cut. The deficit disappears — Canada leads the G7 in deficit reduction. The bond rating agencies applaud. But health care wait times double. Provincial governments, starved of cash, privatize what they can. <em>The social state shrinks. The Canada Health Act, the pride of the nation, starts to look like a shell.</em>",
+      },
+      {
+        label: "Balanced approach — tax increases + moderate cuts",
+        desc: "Some service cuts, some tax increases. Spread the pain.",
+        effects: { economy: +5, social: -4, approval: -5, unity: +1, rights: -2 },
+        consequence: "You split the difference. The deficit shrinks but doesn't vanish. Health care erodes more slowly. Tax increases are unpopular but manageable. <em>It's a grind — but Canada emerges with its social contract mostly intact, and its finances on the mend.</em>",
+      },
+      {
+        label: "Invest in growth — let the deficit ride",
+        desc: "Cutting during a weak economy makes it weaker. Spend to grow, tax the rich.",
+        effects: { economy: -5, social: +5, approval: +5, unity: +3, rights: +2 },
+        consequence: "You invest instead of cutting. Infrastructure, education, innovation. The economy grows — slowly. The deficit lingers. The right calls you irresponsible. But the social state holds. <em>Canada comes out of the 90s poorer but kinder. The deficit will resolve itself in the 2000s boom — or it won't.</em>",
+      },
+    ],
+  },
+  {
+    year: 1995,
+    term: 7,
     title: "The Quebec Referendum, Round Two",
     context: "October 30, 1995. The Parti Québécois has called a second referendum. The question is vague — sovereignty with an offer of partnership. The polls are dead even. You're watching the results come in from Ottawa. <em>This is the night Canada almost breaks apart.</em>",
     choices: [
@@ -1329,32 +1358,6 @@ const DECISIONS = [
         desc: "Campaign for a clear question AND promise constitutional renewal if No wins.",
         effects: { unity: +5, approval: +3, sovereign: +3, rights: +3 },
         consequence: "You make the case for clarity and offer a concrete post-NO plan: constitutional renewal, provincial powers, Indigenous recognition. It's a tighter margin — 51.5% Non — but the No side wins with a mandate. You've bought time. <em>Whether you use it is the question of your next term.</em>",
-      },
-    ],
-  },
-  {
-    year: 1995,
-    term: 7,
-    title: "The Deficit",
-    context: "February 1995. Canada's debt is approaching 70% of GDP. The bond rating agencies are making noise. Your Finance Minister proposes slashing the deficit — by cutting the Canada Health and Social Transfer (CHST), $7 billion out of provincial transfers for health and education. It will balance the budget. It will also gut the social contract that holds Canada together. <em>The budget is in two weeks.</em>",
-    choices: [
-      {
-        label: "Cut transfers — balance the budget",
-        desc: "Slash the Canada Health and Social Transfer by $7 billion. Brutal but effective.",
-        effects: { economy: +10, social: -12, unity: -5, approval: -3, rights: -5 },
-        consequence: "You cut. The deficit disappears — Canada leads the G7 in deficit reduction. The bond rating agencies applaud. But health care wait times double. Provincial governments, starved of cash, privatize what they can. <em>The social state shrinks. The Canada Health Act, the pride of the nation, starts to look like a shell.</em>",
-      },
-      {
-        label: "Balanced approach — tax increases + moderate cuts",
-        desc: "Some service cuts, some tax increases. Spread the pain.",
-        effects: { economy: +5, social: -4, approval: -5, unity: +1, rights: -2 },
-        consequence: "You split the difference. The deficit shrinks but doesn't vanish. Health care erodes more slowly. Tax increases are unpopular but manageable. <em>It's a grind — but Canada emerges with its social contract mostly intact, and its finances on the mend.</em>",
-      },
-      {
-        label: "Invest in growth — let the deficit ride",
-        desc: "Cutting during a weak economy makes it weaker. Spend to grow, tax the rich.",
-        effects: { economy: -5, social: +5, approval: +5, unity: +3, rights: +2 },
-        consequence: "You invest instead of cutting. Infrastructure, education, innovation. The economy grows — slowly. The deficit lingers. The right calls you irresponsible. But the social state holds. <em>Canada comes out of the 90s poorer but kinder. The deficit will resolve itself in the 2000s boom — or it won't.</em>",
       },
     ],
   },
@@ -1466,6 +1469,7 @@ const DECISIONS = [
     year: 2015,
     election: true,
     title: "Election of 2015",
+    historicalResult: "win",
     context: "It's been a decade of Conservative government. The country is divided — Alberta vs. the rest, resource economy vs. environment, the old Canada vs. the new. The opposition campaign is <em>'Real Change'</em> — a young, photogenic leader promising a new era. You need to decide what kind of Canada you're offering.",
     approvalNeeded: 30,
     choices: [
@@ -1616,7 +1620,7 @@ const HISTORICAL_PATH = [
   0, // 1980 NEP implemented in full
   0, // 1980 Trudeau campaigned hard; Non won 59.6%
   0, // 1982 Patriated with the Charter, without Quebec
-  0, // 1984 Defeated — Mulroney's PCs won 211 seats
+  2, // 1984 Turner carried the banner; Mulroney's PCs won 211 seats to 40
   0, // 1988 Free trade proceeded
   0, // 1991 GST implemented at 7%
   1, // 1992 Meech died (Elijah Harper, June 1990)
@@ -2415,20 +2419,26 @@ function computePercentile(score) {
   const N = TUNING.endStatSamples;
   const r = mulberry32(0x2a9d8f);
   let below = 0, beatHistory = 0;
+  const scores = new Float64Array(N);
   for (let i = 0; i < N; i++) {
     const s = finalScore(playPath((d) => Math.floor(r() * d.choices.length)));
+    scores[i] = s;
     if (s < score) below++;
     if (s > HISTORICAL_BASELINE) beatHistory++;
   }
-  return { percentile: (below / N) * 100, randomBeatHistoryPct: (beatHistory / N) * 100 };
+  const sorted = Float64Array.from(scores).sort();
+  const q = p => sorted[Math.floor(p * (N - 1))];
+  return { percentile: (below / N) * 100, randomBeatHistoryPct: (beatHistory / N) * 100,
+    p5: q(0.05), p30: q(0.30), p75: q(0.75), p95: q(0.95) };
 }
 
-function bandFor(score) {
-  const b = HISTORICAL_BASELINE;
-  if (score >= b + 12) return 'Your Canada is extraordinary.';
-  if (score >= b + 3) return 'Your Canada is stronger than the one we got.';
-  if (score >= b - 3) return 'Your Canada is… familiar.';
-  if (score >= b - 15) return 'Your Canada is struggling.';
+// Distribution-derived bands: content may change, but no band can become
+// unreachable or call half the player base "broken" merely because tuning moved.
+function bandFor(score, distribution) {
+  if (score >= distribution.p95) return 'Your Canada is extraordinary.';
+  if (score >= HISTORICAL_BASELINE) return 'Your Canada is stronger than the one we got.';
+  if (score >= distribution.p30) return 'Your Canada is… familiar.';
+  if (score >= distribution.p5) return 'Your Canada is struggling.';
   return 'Your Canada is broken.';
 }
 
@@ -2440,8 +2450,11 @@ function showEndScreen() {
   const m = state.metrics;
   const score = finalScore(m);
   const beatHistory = score > HISTORICAL_BASELINE;
+  // One distribution run drives both the band and the headline percentile.
+  const distribution = TUNING.honestEndStat ? computePercentile(score)
+    : { p5: 35, p30: 50, p75: 65, p95: 80, percentile: 0 };
 
-  let narrative = `<strong>${bandFor(score)}</strong> `;
+  let narrative = `<strong>${bandFor(score, distribution)}</strong> `;
   const line = (v, hi, mid, lo) => (v >= 70 ? hi : v >= 40 ? mid : lo);
   narrative += line(m.unity,
     'Quebec and the West feel heard. The country hangs together not by default but by choice. ',
@@ -2555,7 +2568,7 @@ function renderScorecard() {
 
   // Headline stat — measured, not asserted.
   if (TUNING.honestEndStat) {
-    const { percentile } = computePercentile(score);
+    const { percentile } = distribution;
     $('end-stat-pct').textContent = `${percentile.toFixed(0)}${percentile >= 10 ? 'th' : 'th'}`;
     $('end-stat-desc').textContent =
       `percentile. You outscored ${percentile.toFixed(0)}% of ${TUNING.endStatSamples.toLocaleString()} simulated runs — ` +

@@ -10,7 +10,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadGame, simulate, clamp, SCORE_METRICS, ALL_METRICS, REPO } from './load-game.mjs';
+import { loadGame, simulate, scaleEffects, resolveElection, applyDelta, clamp, SCORE_METRICS, ALL_METRICS, REPO } from './load-game.mjs';
 
 const args = new Set(process.argv.slice(2));
 const CHECK = args.has('--check');
@@ -176,6 +176,66 @@ for (const d of DECISIONS) {
 }
 say(`  ${report.dominated.length} of ${DECISIONS.reduce((a, d) => a + d.choices.length, 0)} choices are strictly dominated.`);
 
+// ── 7b. Election-aware dominance ─────────────────────────────────────────────
+rule('7b · ELECTION DOMINANCE  (effects AND win/minority/lose outcome)');
+{
+  const rank = { win: 2, minority: 1, lose: 0 };
+  report.electionDominated = [];
+  for (const d of DECISIONS.filter(x => x.election)) {
+    d.choices.forEach((a, i) => {
+      const by = d.choices.findIndex((b, j) => j !== i &&
+        SCORE_METRICS.every(m => ((b.effects || {})[m] ?? 0) >= ((a.effects || {})[m] ?? 0)) &&
+        (rank[b.result] ?? 0) >= (rank[a.result] ?? 0) &&
+        (SCORE_METRICS.some(m => ((b.effects || {})[m] ?? 0) > ((a.effects || {})[m] ?? 0)) ||
+         (rank[b.result] ?? 0) > (rank[a.result] ?? 0)));
+      if (by !== -1) report.electionDominated.push({ year: d.year, choice: a.label, by: d.choices[by].label });
+    });
+  }
+  say(report.electionDominated.length
+    ? `  ${report.electionDominated.length} dominated election choice(s): ${report.electionDominated.map(x => x.year).join(', ')}`
+    : '  none.');
+}
+
+// ── 7c. Generosity / no-loser guardrail ──────────────────────────────────────
+rule('7c · GENEROSITY  (does the tree hand out points for showing up?)');
+{
+  const net = c => SCORE_METRICS.reduce((a, m) => a + ((c.effects || {})[m] ?? 0), 0);
+  const all = DECISIONS.flatMap(d => d.choices.map(net));
+  const meanNet = all.reduce((a, b) => a + b, 0) / all.length;
+  const driftPerMetric = DECISIONS.reduce((a, d) =>
+    a + d.choices.map(net).reduce((x, y) => x + y, 0) / d.choices.length, 0) / SCORE_METRICS.length;
+  const noLoser = DECISIONS.filter(d => Math.min(...d.choices.map(net)) > 0);
+  report.generosity = { meanNet, driftPerMetric, noLoserDecisions: noLoser.map(d => `${d.year} ${d.title}`) };
+  say(`  mean net effect per choice ................. ${meanNet.toFixed(2)}`);
+  say(`  expected drift for a coin-flipper .......... ${driftPerMetric >= 0 ? '+' : ''}${driftPerMetric.toFixed(1)} per metric`);
+  if (noLoser.length) for (const d of noLoser) say(`  ⚠ no losing option: ${d.year} ${d.title}  nets=${JSON.stringify(d.choices.map(net))}`);
+  else say('  every decision has at least one option that costs something.');
+}
+
+// ── 7d. Historical election fidelity ─────────────────────────────────────────
+rule('7d · BASELINE FIDELITY  (does the historical path replay actual outcomes?)');
+{
+  report.fidelity = [];
+  if (!HISTORICAL_PATH) say('  no HISTORICAL_PATH defined.');
+  else {
+    const m = Object.fromEntries(ALL_METRICS.map(k => [k, 50]));
+    let opposition = 0;
+    DECISIONS.forEach((d, i) => {
+      const c = d.choices[HISTORICAL_PATH[i]];
+      const eff = scaleEffects(c.effects || {}, opposition > 0 ? TUNING.oppositionScale : 1);
+      for (const [k, v] of Object.entries(eff)) if (k in m) applyDelta(m, k, v);
+      if (opposition > 0) opposition--;
+      if (d.election) {
+        const got = resolveElection(d, c, m.approval);
+        const want = d.historicalResult;
+        report.fidelity.push({ year: d.year, got, want });
+        say(`  ${got === want ? '✓' : '✗'} ${d.year}: baseline ${got}; history ${want ?? '(undeclared)'}`);
+        if (got === 'lose') opposition = TUNING.oppositionYears;
+      }
+    });
+  }
+}
+
 // ── 8. Decision leverage ─────────────────────────────────────────────────────
 rule('8 · DECISION LEVERAGE  (best-minus-worst choice, per decision)');
 report.leverage = DECISIONS.map((d) => ({
@@ -196,6 +256,17 @@ if (CHECK) {
     `election(s) with a fully scripted outcome: ${report.elections.filter((e) => e.scripted).map((e) => e.year)}`);
   assert(report.dominated.length === 0,
     `${report.dominated.length} strictly dominated choice(s) — see section 7`);
+  assert(report.electionDominated.length === 0,
+    `${report.electionDominated.length} election choice(s) dominated once the result class is counted`);
+  assert(report.generosity.meanNet <= 2.5,
+    `mean net effect ${report.generosity.meanNet.toFixed(2)} exceeds +2.5 — tree is too positive-sum`);
+  assert(report.generosity.noLoserDecisions.length === 0,
+    `${report.generosity.noLoserDecisions.length} decision(s) have no losing option: ${report.generosity.noLoserDecisions.join('; ')}`);
+  if (report.historical)
+    assert(report.positional.alwaysFirst <= report.historical.score,
+      `always-click-first (${report.positional.alwaysFirst.toFixed(1)}) beats historical baseline (${report.historical.score.toFixed(1)})`);
+  assert(report.fidelity.every(x => x.want && x.got === x.want),
+    `historical election fidelity mismatch: ${report.fidelity.filter(x => x.got !== x.want).map(x => x.year).join(', ')}`);
   assert(TUNING.shuffleChoices || report.positional.alwaysFirst < 65,
     `"always click choice #1" scores ${report.positional.alwaysFirst.toFixed(1)} and choices are not shuffled — position is a winning strategy`);
   assert(report.historical !== null, 'no HISTORICAL_PATH defined; the "beat real history" claim is unfalsifiable');

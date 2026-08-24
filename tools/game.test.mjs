@@ -73,8 +73,10 @@ group('BUG 1 · header term counter tracks the authored timeline');
     .filter(({ d, i }) => !seen[i].header.includes(`Term ${d.term}`));
   ok(mismatches.length === 0, 'every non-election screen shows its authored term',
     mismatches.map(({ d, i }) => `${d.year} wanted Term ${d.term}, saw "${seen[i].header}"`).join('; '));
-  const i1997 = D.findIndex((d) => d.title === 'The Deficit');
-  ok(seen[i1997].header.includes('Term 7'), '1995 shows Term 7 (was Term 4)', seen[i1997].header);
+  const iDeficit = D.findIndex((d) => d.title === 'The Deficit');
+  const iRef1995 = D.findIndex((d) => d.title === 'The Quebec Referendum, Round Two');
+  ok(iDeficit < iRef1995 && seen[iDeficit].header.includes('Term 6') && seen[iRef1995].header.includes('Term 7'),
+    'February deficit (Term 6) precedes October referendum (Term 7)', `${seen[iDeficit].header} → ${seen[iRef1995].header}`);
   ok(seen[0].progress === `Decision 1 of ${D.length}` && seen[D.length - 1].progress === `Decision ${D.length} of ${D.length}`,
     'progress counts correctly from first to last decision');
 }

@@ -37,13 +37,13 @@ START
   │
   ├─ [1991] 📜 The GST                                 ► 3 choices
   │
-  ├─ [1992] 📜 The Meech Lake Accord                   ► 3 choices
+  ├─ [1992] 📜 The Charlottetown Accord                ► 3 choices
   │
   ├─ [1992] 📜 The Cod Moratorium                      ► 3 choices
   │
-  ├─ [1995] 📜 The Quebec Referendum, Round Two        ► 4 choices
-  │
   ├─ [1995] 📜 The Deficit                             ► 3 choices
+  │
+  ├─ [1995] 📜 The Quebec Referendum, Round Two        ► 4 choices
   │
   ├─ [2002] 📜 Kyoto or Not                            ► 3 choices
   │
@@ -76,13 +76,13 @@ final score; **Approval** gates elections but is excluded from scoring.
 
 | Metric | Reachable range | Decisions that move it | Controllable swing |
 |---|---|---|---|
-| **National Unity** | 0–100 | 24/25 | 265 |
+| **National Unity** | 0–100 | 24/25 | 261 |
 | **Economy** | 0–100 | 19/25 | 172 |
-| **Rights & Liberties** | 0–100 | 17/25 | 151 |
+| **Rights & Liberties** | 0–100 | 17/25 | 146 |
 | **Environment** | 0–100 | 7/25 | 113 |
-| **Sovereignty** | 9–100 | 22/25 | 144 |
-| **Social Wellbeing** | 0–100 | 24/25 | 205 |
-| **Approval** | 0–100 | 24/25 | 236 |
+| **Sovereignty** | 8–100 | 22/25 | 144 |
+| **Social Wellbeing** | 0–100 | 24/25 | 201 |
+| **Approval** | 0–100 | 24/25 | 235 |
 
 ---
 
@@ -106,7 +106,7 @@ function resolveElection(decision, choice, approvalAtBallot) {
 }
 ```
 
-**Defeat has teeth.** Losing puts you in opposition for the next 2 decisions: you are still asked, but your choice lands at 50% strength.
+**Defeat has teeth.** Losing puts you in opposition for the next 2 decisions: you are still asked, but your choice lands at 0% strength.
 
 ---
 
@@ -116,18 +116,18 @@ function resolveElection(decision, choice, approvalAtBallot) {
 finalScore = mean(unity, economy, rights, enviro, sovereign, social)
 ```
 
-The real timeline — the choices Canada actually made — scores **81.0** under these
+The real timeline — the choices Canada actually made — scores **77.2** under these
 same rules. That, not 50, is the bar for "you beat history".
 
 | Metric | Real history, 2030 |
 |---|---|
-| National Unity | 59 |
-| Economy | 62 |
-| Rights & Liberties | 95 |
+| National Unity | 69 |
+| Economy | 45 |
+| Rights & Liberties | 87 |
 | Environment | 83 |
 | Sovereignty | 100 |
-| Social Wellbeing | 87 |
-| Approval | 97 |
+| Social Wellbeing | 79 |
+| Approval | 100 |
 
 ---
 
@@ -247,9 +247,9 @@ same rules. That, not 50, is the bar for "you beat history".
 
 | # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Result | Historical |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Campaign on the Charter and sovereignty | — | — | +2 | — | — | — | +5 | +2 | win | **✓ actual** |
+| 1 | Campaign on the Charter and sovereignty | — | — | +2 | — | — | — | +5 | +2 | win |  |
 | 2 | Campaign on experience and stability | — | +2 | — | — | — | — | +8 | +2 | minority |  |
-| 3 | Step aside — let a new leader carry the banner | +2 | — | — | — | — | — | +3 | +2 | lose |  |
+| 3 | Step aside — let a new leader carry the banner | +2 | — | — | — | — | — | +3 | +2 | lose | **✓ actual** |
 
 ### 📜 1988 — Free Trade with America
 
@@ -275,17 +275,17 @@ same rules. That, not 50, is the bar for "you beat history".
 | 2 | Replace with a hidden manufacturer's tax | +1 | +3 | — | — | — | +1 | +2 | +5 |  |
 | 3 | Cut spending instead — no new tax | -5 | +6 | -2 | — | +2 | -10 | +3 | -9 |  |
 
-### 📜 1992 — The Meech Lake Accord
+### 📜 1992 — The Charlottetown Accord
 
-> June 1990. Quebec still hasn't signed the Constitution. The Meech Lake Accord — negotiated in 1987 — would bring them in, recognizing Quebec as a *'distinct society'* with new powers. But it required unanimous provincial consent by June 23, 1990, and it's dying. Elijah Harper, a Cree MLA in Manitoba, is blocking it. Indigenous leaders, women's groups, and English-Canadian nationalists all oppose it. *The clock runs out at midnight.*
+> October 1992. Meech Lake died two years ago. A broader constitutional package is now before Canadians: Quebec as a distinct society, elected Senate reform, Indigenous self-government, and a social union — all in one referendum. It is the only time Canadians will vote directly on a constitutional settlement. The coalition behind it is broad; the coalition against it is broader.
 
 **Term 5**
 
 | # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Push it through — Quebec must be inside | +10 | — | -3 | — | +2 | -2 | -3 | +7 |  |
-| 2 | Let it die — the deal is flawed | -10 | — | +9 | — | +4 | +6 | +2 | +9 | **✓ actual** |
-| 3 | Renegotiate — include Indigenous nations | +8 | — | +8 | — | +3 | +5 | -2 | +24 |  |
+| 1 | Campaign for a Yes — the deal is worth it | +10 | — | -3 | — | +2 | -2 | -3 | +7 |  |
+| 2 | Respect the No vote — return to ordinary politics | -6 | — | +3 | — | +3 | +1 | +1 | +1 | **✓ actual** |
+| 3 | Return with a narrower settlement | +5 | — | +4 | — | +1 | +2 | -3 | +12 |  |
 
 ### 📜 1992 — The Cod Moratorium
 
@@ -299,11 +299,23 @@ same rules. That, not 50, is the bar for "you beat history".
 | 2 | Keep the fishery open — let the communities survive | +2 | +3 | — | -10 | -2 | +5 | +5 | -2 |  |
 | 3 | Close it — but buy the licences and invest in transition | +4 | -3 | — | +10 | +3 | +3 | +2 | +17 |  |
 
+### 📜 1995 — The Deficit
+
+> February 1995. Canada's debt is approaching 70% of GDP. The bond rating agencies are making noise. Your Finance Minister proposes slashing the deficit — by cutting the Canada Health and Social Transfer (CHST), $7 billion out of provincial transfers for health and education. It will balance the budget. It will also gut the social contract that holds Canada together. *The budget is in two weeks.*
+
+**Term 6**
+
+| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Cut transfers — balance the budget | -5 | +10 | -5 | — | — | -12 | -3 | -12 | **✓ actual** |
+| 2 | Balanced approach — tax increases + moderate cuts | +1 | +5 | -2 | — | — | -4 | -5 | — |  |
+| 3 | Invest in growth — let the deficit ride | +3 | -5 | +2 | — | — | +5 | +5 | +5 |  |
+
 ### 📜 1995 — The Quebec Referendum, Round Two
 
 > October 30, 1995. The Parti Québécois has called a second referendum. The question is vague — sovereignty with an offer of partnership. The polls are dead even. You're watching the results come in from Ottawa. *This is the night Canada almost breaks apart.*
 
-**Term 6**
+**Term 7**
 
 | # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -311,18 +323,6 @@ same rules. That, not 50, is the bar for "you beat history".
 | 2 | Let Quebec decide — minimal federal involvement | -20 | — | +8 | — | +6 | -5 | -3 | -11 |  |
 | 3 | YES — quietly hope for Oui | -22 | — | +6 | — | +7 | — | -8 | -9 |  |
 | 4 | Offer clear constitutional reform — the clarity path | +5 | — | +3 | — | +3 | — | +3 | +11 |  |
-
-### 📜 1995 — The Deficit
-
-> February 1995. Canada's debt is approaching 70% of GDP. The bond rating agencies are making noise. Your Finance Minister proposes slashing the deficit — by cutting the Canada Health and Social Transfer (CHST), $7 billion out of provincial transfers for health and education. It will balance the budget. It will also gut the social contract that holds Canada together. *The budget is in two weeks.*
-
-**Term 7**
-
-| # | Choice | National Unity | Economy | Rights & Liberties | Environment | Sovereignty | Social Wellbeing | Approval | Net | Historical |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Cut transfers — balance the budget | -5 | +10 | -5 | — | — | -12 | -3 | -12 | **✓ actual** |
-| 2 | Balanced approach — tax increases + moderate cuts | +1 | +5 | -2 | — | — | -4 | -5 | — |  |
-| 3 | Invest in growth — let the deficit ride | +3 | -5 | +2 | — | — | +5 | +5 | +5 |  |
 
 ### 📜 2002 — Kyoto or Not
 
@@ -519,12 +519,12 @@ graph TD
     D11c1 --> D12
     D11 -->|"Cut spending instead - no new tax"| D11c2["unity-5, economy+6, rights-2, sovereign+2, social-10, approval+3"]
     D11c2 --> D12
-    D12["📜 1992: The Meech Lake Accord"]
-    D12 -->|"Push it through - Quebec must be inside"| D12c0["unity+10, rights-3, sovereign+2, social-2, approval-3"]
+    D12["📜 1992: The Charlottetown Accord"]
+    D12 -->|"Campaign for a Yes - the deal is worth it"| D12c0["unity+10, rights-3, sovereign+2, social-2, approval-3"]
     D12c0 --> D13
-    D12 -->|"Let it die - the deal is flawed"| D12c1["unity-10, rights+9, sovereign+4, social+6, approval+2"]
+    D12 -->|"Respect the No vote - return to ordinary politics"| D12c1["unity-6, rights+3, sovereign+3, social+1, approval+1"]
     D12c1 --> D13
-    D12 -->|"Renegotiate - include Indigenous nations"| D12c2["unity+8, rights+8, sovereign+3, social+5, approval-2"]
+    D12 -->|"Return with a narrower settlement"| D12c2["unity+5, rights+4, sovereign+1, social+2, approval-3"]
     D12c2 --> D13
     D13["📜 1992: The Cod Moratorium"]
     D13 -->|"Close the fishery - the cod must recover"| D13c0["unity-3, economy-8, enviro+12, sovereign+2, social-8, approval-3"]
@@ -533,22 +533,22 @@ graph TD
     D13c1 --> D14
     D13 -->|"Close it - but buy the licences and invest in transition"| D13c2["unity+4, economy-3, enviro+10, sovereign+3, social+3, approval+2"]
     D13c2 --> D14
-    D14["📜 1995: The Quebec Referendum, Round Two"]
-    D14 -->|"Fight with everything - a passionate Canada"| D14c0["unity+10, sovereign+5, social+2, approval+5"]
+    D14["📜 1995: The Deficit"]
+    D14 -->|"Cut transfers - balance the budget"| D14c0["unity-5, economy+10, rights-5, social-12, approval-3"]
     D14c0 --> D15
-    D14 -->|"Let Quebec decide - minimal federal involvement"| D14c1["unity-20, rights+8, sovereign+6, social-5, approval-3"]
+    D14 -->|"Balanced approach - tax increases + moderate cuts"| D14c1["unity+1, economy+5, rights-2, social-4, approval-5"]
     D14c1 --> D15
-    D14 -->|"YES - quietly hope for Oui"| D14c2["unity-22, rights+6, sovereign+7, approval-8"]
+    D14 -->|"Invest in growth - let the deficit ride"| D14c2["unity+3, economy-5, rights+2, social+5, approval+5"]
     D14c2 --> D15
-    D14 -->|"Offer clear constitutional reform - the clarity path"| D14c3["unity+5, rights+3, sovereign+3, approval+3"]
-    D14c3 --> D15
-    D15["📜 1995: The Deficit"]
-    D15 -->|"Cut transfers - balance the budget"| D15c0["unity-5, economy+10, rights-5, social-12, approval-3"]
+    D15["📜 1995: The Quebec Referendum, Round Two"]
+    D15 -->|"Fight with everything - a passionate Canada"| D15c0["unity+10, sovereign+5, social+2, approval+5"]
     D15c0 --> D16
-    D15 -->|"Balanced approach - tax increases + moderate cuts"| D15c1["unity+1, economy+5, rights-2, social-4, approval-5"]
+    D15 -->|"Let Quebec decide - minimal federal involvement"| D15c1["unity-20, rights+8, sovereign+6, social-5, approval-3"]
     D15c1 --> D16
-    D15 -->|"Invest in growth - let the deficit ride"| D15c2["unity+3, economy-5, rights+2, social+5, approval+5"]
+    D15 -->|"YES - quietly hope for Oui"| D15c2["unity-22, rights+6, sovereign+7, approval-8"]
     D15c2 --> D16
+    D15 -->|"Offer clear constitutional reform - the clarity path"| D15c3["unity+5, rights+3, sovereign+3, approval+3"]
+    D15c3 --> D16
     D16["📜 2002: Kyoto or Not"]
     D16 -->|"Ratify Kyoto - lead on climate"| D16c0["economy-5, enviro+12, sovereign+3, social+2, approval-2"]
     D16c0 --> D17
@@ -623,4 +623,4 @@ graph TD
 
 ---
 
-*Generated 2026-08-23 from `index.html` by `tools/build-docs.mjs`.*
+*Generated 2026-08-24 from `index.html` by `tools/build-docs.mjs`.*
