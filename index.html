@@ -1644,9 +1644,10 @@ const TUNING = {
   shuffleChoices: true,
 
   // Losing an election puts you in opposition: for the next N decisions you
-  // influence rather than decide, so your choice's effects are scaled down.
+  // state what you would do, but do not enact policy. The record affects later
+  // political content; national metrics do not move until you win office again.
   oppositionYears: 2,
-  oppositionScale: 0.5,
+  oppositionScale: 0,
 
   // Compute the headline "X% of players" stat by simulation instead of
   // asserting a number the game never measured.
@@ -2227,7 +2228,7 @@ function renderDecision() {
     <div class="decision-year">${d.year}</div>
     <h2 class="decision-title">${d.title}</h2>
     <div class="decision-context">${d.context}</div>
-    ${state.opposition > 0 ? `<div class="opposition-note">You are not in government. You can shape this — you cannot decide it. Your choice lands at ${Math.round(TUNING.oppositionScale * 100)}% strength.</div>` : ''}
+    ${state.opposition > 0 ? `<div class="opposition-note">You are not in government. You can state what you would do — but it is recorded, not enacted. National metrics do not move until you return to office.</div>` : ''}
     ${demandNote}
     ${choiceButtons(d, 'choose')}
   </div>`;
