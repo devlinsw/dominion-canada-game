@@ -148,7 +148,7 @@ w('');
 w('## Scoring');
 w('');
 w('```');
-w('finalScore = mean(unity, economy, rights, enviro, sovereign, social)');
+w('finalScore = weighted mean of unity, economy, rights, enviro, externalIndependence (0.5), selfDetermination (0.5), social');
 w('```');
 w('');
 if (hist) {

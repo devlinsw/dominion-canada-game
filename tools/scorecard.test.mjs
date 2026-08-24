@@ -8,10 +8,11 @@ import {
   COMMONWEALTH_WEIGHTS,
 } from '../src/scorecard.mjs';
 
-const HISTORICAL = { unity: 55, economy: 60, rights: 70, enviro: 45, sovereign: 50, social: 58 };
+const HISTORICAL = { unity: 55, economy: 60, rights: 70, enviro: 45, externalIndependence: 50, selfDetermination: 50, social: 58 };
 
 test('weights are public, not hidden', () => {
-  assert.ok(COMMONWEALTH_WEIGHTS && Object.keys(COMMONWEALTH_WEIGHTS).length === 6);
+  assert.ok(COMMONWEALTH_WEIGHTS && Object.keys(COMMONWEALTH_WEIGHTS).length === 7,
+    'seven scored dimensions (E/S split at 0.5 weight each)');
 });
 
 test('matching the historical path scores exactly 50 on national outcome', () => {

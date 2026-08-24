@@ -54,7 +54,8 @@ export function loadGame(htmlPath = path.join(REPO, 'index.html')) {
   return { src, DECISIONS, METRICS, HISTORICAL_PATH, TUNING };
 }
 
-export const SCORE_METRICS = ['unity', 'economy', 'rights', 'enviro', 'sovereign', 'social'];
+export const SCORE_METRICS = ['unity', 'economy', 'rights', 'enviro', 'externalIndependence', 'selfDetermination', 'social'];
+export const SCORE_WEIGHTS = { externalIndependence: 0.5, selfDetermination: 0.5 };
 export const ALL_METRICS = [...SCORE_METRICS, 'approval'];
 export const clamp = (v) => Math.max(0, Math.min(100, v));
 
@@ -107,5 +108,6 @@ export function simulate(DECISIONS, chooser, TUNING = DEFAULT_TUNING) {
     if (opposition > 0) opposition--;
     if (d.election && resolveElection(d, c, m.approval) === 'lose') opposition = TUNING.oppositionYears;
   });
-  return { metrics: m, picks, score: SCORE_METRICS.reduce((a, k) => a + Math.max(15, m[k]), 0) / 6 };
+  const wsum = SCORE_METRICS.reduce((a, k) => a + (SCORE_WEIGHTS[k] ?? 1), 0);
+    return { metrics: m, picks, score: SCORE_METRICS.reduce((a, k) => a + Math.max(15, m[k]) * (SCORE_WEIGHTS[k] ?? 1), 0) / wsum };
 }

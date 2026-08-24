@@ -11,9 +11,9 @@
     "isElection": false,
     "v1Index": 0,
     "metricsAffected": [
+      "selfDetermination",
       "unity",
       "rights",
-      "sovereign",
       "social",
       "economy"
     ],
@@ -22,9 +22,9 @@
         "id": "c0",
         "label": "Pass the Official Languages Act",
         "metrics": {
+          "selfDetermination": 5,
           "unity": 12,
           "rights": 5,
-          "sovereign": 5,
           "social": -2
         },
         "approvalDelta": 3,
@@ -56,7 +56,7 @@
         "label": "Go further — dual federalism",
         "metrics": {
           "unity": 6,
-          "sovereign": -3,
+          "selfDetermination": 3,
           "social": 2,
           "rights": 2
         },
@@ -82,20 +82,20 @@
     "isElection": false,
     "v1Index": 1,
     "metricsAffected": [
+      "selfDetermination",
       "unity",
       "rights",
-      "social",
-      "sovereign"
+      "social"
     ],
     "choices": [
       {
         "id": "c0",
         "label": "Invoke the War Measures Act",
         "metrics": {
+          "selfDetermination": -3,
           "unity": 2,
           "rights": -10,
-          "social": -5,
-          "sovereign": 3
+          "social": -5
         },
         "approvalDelta": 15,
         "outcome": null,
@@ -109,10 +109,10 @@
         "id": "c1",
         "label": "Use police and negotiation only",
         "metrics": {
+          "selfDetermination": 3,
           "rights": 8,
           "unity": -5,
-          "social": 3,
-          "sovereign": -3
+          "social": 3
         },
         "approvalDelta": -8,
         "outcome": null,
@@ -126,10 +126,10 @@
         "id": "c2",
         "label": "Invoke the Act but with a sunset clause",
         "metrics": {
+          "selfDetermination": -1,
           "rights": -4,
           "unity": -1,
-          "social": -2,
-          "sovereign": 1
+          "social": -2
         },
         "approvalDelta": 5,
         "outcome": null,
@@ -157,7 +157,7 @@
       "unity",
       "rights",
       "economy",
-      "sovereign"
+      "selfDetermination"
     ],
     "choices": [
       {
@@ -181,11 +181,11 @@
         "id": "c1",
         "label": "Bilingualism is enough — reject multiculturalism",
         "metrics": {
+          "selfDetermination": -2,
           "social": -5,
           "unity": 5,
           "rights": -3,
-          "economy": 5,
-          "sovereign": 2
+          "economy": 5
         },
         "approvalDelta": -3,
         "outcome": null,
@@ -278,7 +278,7 @@
       "unity",
       "economy",
       "social",
-      "sovereign"
+      "selfDetermination"
     ],
     "choices": [
       {
@@ -288,7 +288,7 @@
           "unity": 5,
           "economy": -8,
           "social": 3,
-          "sovereign": 2
+          "selfDetermination": -2
         },
         "approvalDelta": 5,
         "outcome": null,
@@ -304,7 +304,7 @@
         "metrics": {
           "unity": -8,
           "economy": 3,
-          "sovereign": -2
+          "selfDetermination": 2
         },
         "approvalDelta": -5,
         "outcome": null,
@@ -329,24 +329,25 @@
     "v1Index": 5,
     "priority": 3,
     "metricsAffected": [
+      "selfDetermination",
       "enviro",
       "rights",
       "social",
       "economy",
       "unity",
-      "sovereign"
+      "externalIndependence"
     ],
     "choices": [
       {
         "id": "c0",
         "label": "Accept the moratorium — listen to the land",
         "metrics": {
+          "selfDetermination": 3,
           "enviro": 12,
           "rights": 8,
           "social": 5,
           "economy": -5,
-          "unity": 3,
-          "sovereign": 3
+          "unity": 3
         },
         "approvalDelta": 0,
         "outcome": null,
@@ -360,12 +361,13 @@
         "id": "c1",
         "label": "Build the pipeline — the North needs development",
         "metrics": {
+          "externalIndependence": 5,
+          "selfDetermination": -3,
           "enviro": -12,
           "economy": 8,
           "rights": -5,
           "social": 2,
-          "unity": -3,
-          "sovereign": 5
+          "unity": -3
         },
         "approvalDelta": 0,
         "outcome": null,
@@ -379,12 +381,13 @@
         "id": "c2",
         "label": "Build it with Indigenous co-ownership",
         "metrics": {
+          "externalIndependence": 2,
+          "selfDetermination": 3,
           "enviro": -4,
           "economy": 5,
           "rights": 5,
           "social": 6,
-          "unity": 4,
-          "sovereign": 3
+          "unity": 4
         },
         "approvalDelta": 0,
         "outcome": null,
@@ -408,9 +411,10 @@
     "isElection": false,
     "v1Index": 6,
     "metricsAffected": [
+      "externalIndependence",
+      "selfDetermination",
       "economy",
       "unity",
-      "sovereign",
       "social"
     ],
     "choices": [
@@ -418,9 +422,10 @@
         "id": "c0",
         "label": "Implement the NEP fully",
         "metrics": {
+          "externalIndependence": 8,
+          "selfDetermination": -3,
           "economy": -5,
           "unity": -12,
-          "sovereign": 8,
           "social": 5
         },
         "approvalDelta": -3,
@@ -435,9 +440,10 @@
         "id": "c1",
         "label": "Negotiate a revenue-sharing deal with provinces",
         "metrics": {
+          "externalIndependence": 2,
+          "selfDetermination": 3,
           "economy": 3,
           "unity": 2,
-          "sovereign": 3,
           "social": 2
         },
         "approvalDelta": 3,
@@ -452,9 +458,9 @@
         "id": "c2",
         "label": "Let the market sort it out",
         "metrics": {
+          "externalIndependence": -8,
           "economy": 5,
           "unity": -5,
-          "sovereign": -8,
           "social": -5
         },
         "approvalDelta": -5,
@@ -480,8 +486,8 @@
     "approvalNeeded": 28,
     "v1Index": 7,
     "metricsAffected": [
+      "selfDetermination",
       "unity",
-      "sovereign",
       "rights",
       "social"
     ],
@@ -490,8 +496,8 @@
         "id": "c0",
         "label": "Campaign hard — 'My country is my country'",
         "metrics": {
-          "unity": 8,
-          "sovereign": 3
+          "selfDetermination": 3,
+          "unity": 8
         },
         "approvalDelta": 5,
         "outcome": "win",
@@ -505,8 +511,8 @@
         "id": "c1",
         "label": "Let Quebecers decide for themselves",
         "metrics": {
+          "selfDetermination": 4,
           "unity": -8,
-          "sovereign": 4,
           "rights": 5,
           "social": 2
         },
@@ -516,6 +522,22 @@
         "v1Text": {
           "desc": "This is Quebec's democratic right. A freer process means a more legitimate result, whichever way it goes.",
           "consequence": "You refuse to campaign against Quebec's self-determination. The process is clean, the debate is genuine, and when the <em>'Non'</em> wins 60/40, the result has moral authority. Quebec stays — not because Ottawa pressured them, but because they chose to. The separatist movement is weakened by the legitimacy of the vote, not just by its outcome. <em>But you're blamed for not fighting hard enough, and a quarter of your caucus abstains.</em>"
+        }
+      },
+      {
+        "id": "c2",
+        "label": "YES — endorse sovereignty-association",
+        "metrics": {
+          "selfDetermination": 8,
+          "unity": -18,
+          "rights": 2
+        },
+        "approvalDelta": -6,
+        "outcome": "lose",
+        "isHistorical": false,
+        "v1Text": {
+          "desc": "Break with your own party. Campaign openly for a Yes that leads to negotiation, not rupture.",
+          "consequence": "You campaign for the <em>'Oui'</em>. Federalists are stunned; Quebec nationalists are suspicious of a Montreal federalist suddenly wearing their colours. The <em>'Non'</em> still wins — but far narrower than it should have been, and you are done as a national leader. <em>History will argue forever about what you were doing.</em>"
         }
       }
     ]
@@ -532,8 +554,9 @@
     "isElection": false,
     "v1Index": 8,
     "metricsAffected": [
+      "externalIndependence",
+      "selfDetermination",
       "rights",
-      "sovereign",
       "unity",
       "social"
     ],
@@ -542,8 +565,9 @@
         "id": "c0",
         "label": "Patriate with the Charter — with or without Quebec",
         "metrics": {
+          "externalIndependence": 10,
+          "selfDetermination": -3,
           "rights": 12,
-          "sovereign": 10,
           "unity": -8,
           "social": 3
         },
@@ -559,9 +583,10 @@
         "id": "c1",
         "label": "Negotiate until Quebec agrees",
         "metrics": {
+          "externalIndependence": 2,
+          "selfDetermination": 5,
           "rights": 3,
-          "unity": 5,
-          "sovereign": 5
+          "unity": 5
         },
         "approvalDelta": -5,
         "outcome": null,
@@ -575,7 +600,8 @@
         "id": "c2",
         "label": "Patriate without the Charter",
         "metrics": {
-          "sovereign": 10,
+          "externalIndependence": 10,
+          "selfDetermination": -2,
           "rights": -8,
           "unity": 2
         },
@@ -615,7 +641,7 @@
         },
         "approvalDelta": 5,
         "outcome": "win",
-        "isHistorical": true,
+        "isHistorical": false,
         "v1Text": {
           "desc": "Remind voters what you've accomplished. The Constitution, the Charter, a just society.",
           "consequence": "You campaign on your legacy. The Charter is popular, but after 16 years, the country wants change. If your approval holds, you may squeak through. If not — Brian Mulroney's Progressive Conservatives win the largest majority in history."
@@ -643,7 +669,7 @@
         },
         "approvalDelta": 3,
         "outcome": "lose",
-        "isHistorical": false,
+        "isHistorical": true,
         "v1Text": {
           "desc": "Sixteen years is enough. Endorse a successor and campaign from the background.",
           "consequence": "You step aside. The party rallies around your chosen successor. The transition is dignified — but the new leader is untested, and the voters may prefer the real Mulroney to your proxy. The party's fate is now out of your hands."
@@ -663,8 +689,8 @@
     "isElection": false,
     "v1Index": 10,
     "metricsAffected": [
+      "externalIndependence",
       "economy",
-      "sovereign",
       "unity",
       "social"
     ],
@@ -673,8 +699,8 @@
         "id": "c0",
         "label": "Support free trade — the deal is done",
         "metrics": {
+          "externalIndependence": -10,
           "economy": 10,
-          "sovereign": -10,
           "unity": -3,
           "social": -2
         },
@@ -690,8 +716,8 @@
         "id": "c1",
         "label": "Oppose — renegotiate for cultural exemptions",
         "metrics": {
+          "externalIndependence": 3,
           "economy": 4,
-          "sovereign": 3,
           "unity": 2,
           "social": 3
         },
@@ -707,8 +733,8 @@
         "id": "c2",
         "label": "Kill the deal — build east-west trade instead",
         "metrics": {
+          "externalIndependence": 8,
           "economy": -10,
-          "sovereign": 8,
           "unity": 5,
           "social": 3
         },
@@ -737,8 +763,7 @@
       "economy",
       "social",
       "unity",
-      "rights",
-      "sovereign"
+      "rights"
     ],
     "choices": [
       {
@@ -780,8 +805,7 @@
           "economy": 6,
           "social": -10,
           "unity": -5,
-          "rights": -2,
-          "sovereign": 2
+          "rights": -2
         },
         "approvalDelta": 3,
         "outcome": null,
@@ -795,7 +819,7 @@
   },
   {
     "id": "MEECH_LAKE_1992",
-    "title": "The Meech Lake Accord",
+    "title": "The Charlottetown Accord",
     "yearWindow": [
       1992,
       1992
@@ -805,61 +829,61 @@
     "isElection": false,
     "v1Index": 12,
     "metricsAffected": [
+      "selfDetermination",
       "unity",
       "rights",
-      "social",
-      "sovereign"
+      "social"
     ],
     "choices": [
       {
         "id": "c0",
-        "label": "Push it through — Quebec must be inside",
+        "label": "Campaign for a Yes — the deal is worth it",
         "metrics": {
+          "selfDetermination": 2,
           "unity": 10,
           "rights": -3,
-          "social": -2,
-          "sovereign": 2
+          "social": -2
         },
         "approvalDelta": -3,
         "outcome": null,
         "isHistorical": false,
         "v1Text": {
-          "desc": "Use every ounce of political capital to get all ten provinces to agree.",
+          "desc": "Make the broad constitutional bargain: Quebec inside, Indigenous self-government, reformed institutions.",
           "consequence": "You push hard. After furious negotiation, all ten provinces ratify. Quebec signs the Constitution — 10 years late. The <em>'distinct society'</em> clause reshapes Canadian federalism. But critics warn it creates a tiered federation, and the backlash from Indigenous groups and equality advocates is fierce."
         }
       },
       {
         "id": "c1",
-        "label": "Let it die — the deal is flawed",
+        "label": "Respect the No vote — return to ordinary politics",
         "metrics": {
-          "unity": -10,
-          "rights": 9,
-          "social": 6,
-          "sovereign": 4
+          "selfDetermination": 3,
+          "unity": -6,
+          "rights": 3,
+          "social": 1
         },
-        "approvalDelta": 2,
+        "approvalDelta": 1,
         "outcome": null,
         "isHistorical": true,
         "v1Text": {
-          "desc": "The Accord collapses. Elijah Harper's filibuster kills it in Manitoba. The Charter stays unweakened.",
-          "consequence": "Meech Lake dies. Quebec is wounded — again. <em>'Canada does not want us.'</em> The Parti Québécois surges. The 1995 referendum becomes inevitable. But the Charter stays intact, unweakened by the 'distinct society' clause. Indigenous rights, not yet traded away, remain a lever for future progress. <em>You chose Charter integrity over constitutional peace. The bill for that peace comes due in 1995.</em>"
+          "desc": "Canadians reject the package. Accept the verdict rather than forcing another constitutional marathon.",
+          "consequence": "The accord loses in the referendum. Quebec is wounded again; western reformers feel ignored; Indigenous leaders lose a route that had briefly looked real. But a direct democratic verdict carries a legitimacy Meech never had. <em>Canada moves on without a grand settlement — unresolved, but not imposed.</em>"
         }
       },
       {
         "id": "c2",
-        "label": "Renegotiate — include Indigenous nations",
+        "label": "Return with a narrower settlement",
         "metrics": {
-          "unity": 8,
-          "rights": 8,
-          "social": 5,
-          "sovereign": 3
+          "selfDetermination": 1,
+          "unity": 5,
+          "rights": 4,
+          "social": 2
         },
-        "approvalDelta": -2,
+        "approvalDelta": -3,
         "outcome": null,
         "isHistorical": false,
         "v1Text": {
-          "desc": "A new accord that recognizes Quebec AND Indigenous nations as founding partners.",
-          "consequence": "You refuse the binary choice. A new round of negotiations begins — three-sided this time: federal, provincial, Indigenous. It takes years and nearly fails. But when the Charlottetown Accord finally passes, it's the most inclusive constitutional deal in Canadian history. <em>Canada is not two solitudes, or ten provinces — it is many nations, together.</em>"
+          "desc": "Drop the omnibus package; negotiate Quebec recognition and Indigenous self-government separately.",
+          "consequence": "You respect the referendum but refuse to treat it as the end of constitutional politics. A narrower, slower process begins: Quebec recognition, Indigenous self-government, and Senate reform no longer held hostage to one another. <em>Less grand, less elegant — perhaps more survivable.</em>"
         }
       }
     ]
@@ -876,22 +900,22 @@
     "isElection": false,
     "v1Index": 13,
     "metricsAffected": [
+      "externalIndependence",
       "enviro",
       "economy",
       "social",
-      "unity",
-      "sovereign"
+      "unity"
     ],
     "choices": [
       {
         "id": "c0",
         "label": "Close the fishery — the cod must recover",
         "metrics": {
+          "externalIndependence": 2,
           "enviro": 12,
           "economy": -8,
           "social": -8,
-          "unity": -3,
-          "sovereign": 2
+          "unity": -3
         },
         "approvalDelta": -3,
         "outcome": null,
@@ -905,11 +929,11 @@
         "id": "c1",
         "label": "Keep the fishery open — let the communities survive",
         "metrics": {
+          "externalIndependence": -2,
           "enviro": -10,
           "economy": 3,
           "social": 5,
-          "unity": 2,
-          "sovereign": -2
+          "unity": 2
         },
         "approvalDelta": 5,
         "outcome": null,
@@ -923,11 +947,11 @@
         "id": "c2",
         "label": "Close it — but buy the licences and invest in transition",
         "metrics": {
+          "externalIndependence": 3,
           "enviro": 10,
           "economy": -3,
           "social": 3,
-          "unity": 4,
-          "sovereign": 3
+          "unity": 4
         },
         "approvalDelta": 2,
         "outcome": null,
@@ -941,7 +965,7 @@
   },
   {
     "id": "QUEBEC_REFERENDUM_1995",
-    "title": "The Quebec Referendum, Round Two",
+    "title": "The Deficit",
     "yearWindow": [
       1995,
       1995
@@ -950,75 +974,6 @@
     "actor": "government",
     "isElection": false,
     "v1Index": 14,
-    "metricsAffected": [
-      "unity",
-      "sovereign",
-      "social",
-      "rights"
-    ],
-    "choices": [
-      {
-        "id": "c0",
-        "label": "Fight with everything — a passionate Canada",
-        "metrics": {
-          "unity": 10,
-          "sovereign": 5,
-          "social": 2
-        },
-        "approvalDelta": 5,
-        "outcome": null,
-        "isHistorical": true,
-        "v1Text": {
-          "desc": "Rally the country. Emotional appeal. Promise a renewed federalism. A last-minute federal love letter to Quebec.",
-          "consequence": "You go all in. The federal rally in Montreal draws 50,000 people. A last-minute <em>'love-in'</em> for Canadian unity. The results come in: 50.58% Non, 49.42% Oui. <em>Canada survives by 53,000 votes.</em> Parizeau blames 'money and the ethnic vote' and resigns. You've kept the country together — by a razor's margin."
-        }
-      },
-      {
-        "id": "c1",
-        "label": "Let Quebec decide — minimal federal involvement",
-        "metrics": {
-          "unity": -20,
-          "sovereign": 6,
-          "social": -5,
-          "rights": 8
-        },
-        "approvalDelta": -3,
-        "outcome": null,
-        "isHistorical": false,
-        "v1Text": {
-          "desc": "This is Quebec's democratic right. A clean process, win or lose, is more legitimate than a coerced one.",
-          "consequence": "You stay distant. Without a strong federal voice, the <em>'Oui'</em> creeps ahead. On October 30, 1995, Quebec votes 51% to 49% for sovereignty. <em>Canada breaks apart. The largest country in the world becomes two nations overnight.</em> You are the last Prime Minister of a united Canada. But the process was clean — the world recognizes the legitimacy of the vote, and Quebec's independence, however painful, is built on consent rather than coercion. The History will not be kind. But it will be honest."
-        }
-      },
-      {
-        "id": "c2",
-        "label": "Offer clear constitutional reform — the clarity path",
-        "metrics": {
-          "unity": 5,
-          "sovereign": 3,
-          "rights": 3
-        },
-        "approvalDelta": 3,
-        "outcome": null,
-        "isHistorical": false,
-        "v1Text": {
-          "desc": "Campaign for a clear question AND promise constitutional renewal if No wins.",
-          "consequence": "You make the case for clarity and offer a concrete post-NO plan: constitutional renewal, provincial powers, Indigenous recognition. It's a tighter margin — 51.5% Non — but the No side wins with a mandate. You've bought time. <em>Whether you use it is the question of your next term.</em>"
-        }
-      }
-    ]
-  },
-  {
-    "id": "DEFICIT_1995",
-    "title": "The Deficit",
-    "yearWindow": [
-      1995,
-      1995
-    ],
-    "type": "altered",
-    "actor": "government",
-    "isElection": false,
-    "v1Index": 15,
     "metricsAffected": [
       "economy",
       "social",
@@ -1080,6 +1035,91 @@
     ]
   },
   {
+    "id": "DEFICIT_1995",
+    "title": "The Quebec Referendum, Round Two",
+    "yearWindow": [
+      1995,
+      1995
+    ],
+    "type": "altered",
+    "actor": "government",
+    "isElection": false,
+    "v1Index": 15,
+    "metricsAffected": [
+      "selfDetermination",
+      "unity",
+      "social",
+      "rights"
+    ],
+    "choices": [
+      {
+        "id": "c0",
+        "label": "Fight with everything — a passionate Canada",
+        "metrics": {
+          "selfDetermination": 5,
+          "unity": 10,
+          "social": 2
+        },
+        "approvalDelta": 5,
+        "outcome": null,
+        "isHistorical": true,
+        "v1Text": {
+          "desc": "Rally the country. Emotional appeal. Promise a renewed federalism. A last-minute federal love letter to Quebec.",
+          "consequence": "You go all in. The federal rally in Montreal draws 50,000 people. A last-minute <em>'love-in'</em> for Canadian unity. The results come in: 50.58% Non, 49.42% Oui. <em>Canada survives by 53,000 votes.</em> Parizeau blames 'money and the ethnic vote' and resigns. You've kept the country together — by a razor's margin."
+        }
+      },
+      {
+        "id": "c1",
+        "label": "Let Quebec decide — minimal federal involvement",
+        "metrics": {
+          "selfDetermination": 6,
+          "unity": -20,
+          "social": -5,
+          "rights": 8
+        },
+        "approvalDelta": -3,
+        "outcome": null,
+        "isHistorical": false,
+        "v1Text": {
+          "desc": "This is Quebec's democratic right. A clean process, win or lose, is more legitimate than a coerced one.",
+          "consequence": "You stay distant. Without a strong federal voice, the <em>'Oui'</em> creeps ahead. On October 30, 1995, Quebec votes 51% to 49% for sovereignty. <em>Canada breaks apart. The largest country in the world becomes two nations overnight.</em> You are the last Prime Minister of a united Canada. But the process was clean — the world recognizes the legitimacy of the vote, and Quebec's independence, however painful, is built on consent rather than coercion. The History will not be kind. But it will be honest."
+        }
+      },
+      {
+        "id": "c2",
+        "label": "YES — quietly hope for Oui",
+        "metrics": {
+          "selfDetermination": 7,
+          "unity": -22,
+          "rights": 6
+        },
+        "approvalDelta": -8,
+        "outcome": null,
+        "isHistorical": false,
+        "v1Text": {
+          "desc": "Your heart is with sovereignty, but your office is not. Say nothing, do nothing, let it happen.",
+          "consequence": "You neither campaign nor obstruct. Federal organizers wait for direction that never comes. The <em>'Oui'</em> carries — narrowly, chaotically, without a plan on either side. <em>You achieved what no Péquiste ever could: the end of Canada, by federal inattention.</em>"
+        }
+      },
+      {
+        "id": "c3",
+        "label": "Offer clear constitutional reform — the clarity path",
+        "metrics": {
+          "selfDetermination": 3,
+          "unity": 5,
+          "rights": 3
+        },
+        "approvalDelta": 3,
+        "outcome": null,
+        "isHistorical": false,
+        "v1Text": {
+          "desc": "Campaign for a clear question AND promise constitutional renewal if No wins.",
+          "consequence": "You make the case for clarity and offer a concrete post-NO plan: constitutional renewal, provincial powers, Indigenous recognition. It's a tighter margin — 51.5% Non — but the No side wins with a mandate. You've bought time. <em>Whether you use it is the question of your next term.</em>"
+        }
+      }
+    ]
+  },
+  {
     "id": "KYOTO_2002",
     "title": "Kyoto or Not",
     "yearWindow": [
@@ -1091,9 +1131,9 @@
     "isElection": false,
     "v1Index": 16,
     "metricsAffected": [
+      "externalIndependence",
       "enviro",
       "economy",
-      "sovereign",
       "social"
     ],
     "choices": [
@@ -1101,9 +1141,9 @@
         "id": "c0",
         "label": "Ratify Kyoto — lead on climate",
         "metrics": {
+          "externalIndependence": 3,
           "enviro": 12,
           "economy": -5,
-          "sovereign": 3,
           "social": 2
         },
         "approvalDelta": -2,
@@ -1118,9 +1158,9 @@
         "id": "c1",
         "label": "Ratify with concessions for the energy sector",
         "metrics": {
+          "externalIndependence": 1,
           "enviro": 4,
           "economy": 2,
-          "sovereign": 1,
           "social": 0
         },
         "approvalDelta": 2,
@@ -1135,9 +1175,9 @@
         "id": "c2",
         "label": "Don't ratify — the economy needs oil",
         "metrics": {
+          "externalIndependence": -2,
           "enviro": -10,
           "economy": 6,
-          "sovereign": -2,
           "social": -2
         },
         "approvalDelta": 3,
@@ -1162,20 +1202,20 @@
     "isElection": false,
     "v1Index": 17,
     "metricsAffected": [
+      "selfDetermination",
       "rights",
       "social",
-      "unity",
-      "sovereign"
+      "unity"
     ],
     "choices": [
       {
         "id": "c0",
         "label": "Pass the Civil Marriage Act",
         "metrics": {
+          "selfDetermination": 3,
           "rights": 10,
           "social": 8,
-          "unity": -2,
-          "sovereign": 3
+          "unity": -2
         },
         "approvalDelta": -3,
         "outcome": null,
@@ -1189,10 +1229,10 @@
         "id": "c1",
         "label": "Civil unions only — not marriage",
         "metrics": {
+          "selfDetermination": 1,
           "rights": 4,
           "social": 4,
-          "unity": 1,
-          "sovereign": 1
+          "unity": 1
         },
         "approvalDelta": 2,
         "outcome": null,
@@ -1206,10 +1246,10 @@
         "id": "c2",
         "label": "Defend traditional marriage",
         "metrics": {
+          "selfDetermination": -3,
           "rights": -10,
           "social": -8,
-          "unity": 3,
-          "sovereign": -3
+          "unity": 3
         },
         "approvalDelta": 3,
         "outcome": null,
@@ -1233,11 +1273,11 @@
     "isElection": false,
     "v1Index": 18,
     "metricsAffected": [
+      "externalIndependence",
       "economy",
       "social",
       "unity",
       "enviro",
-      "sovereign",
       "rights"
     ],
     "choices": [
@@ -1245,11 +1285,11 @@
         "id": "c0",
         "label": "Stimulate — the Economic Action Plan",
         "metrics": {
+          "externalIndependence": 2,
           "economy": 5,
           "social": 5,
           "unity": 3,
-          "enviro": -2,
-          "sovereign": 2
+          "enviro": -2
         },
         "approvalDelta": 8,
         "outcome": null,
@@ -1263,10 +1303,7 @@
         "id": "c1",
         "label": "Steady as she goes — modest support",
         "metrics": {
-          "economy": 2,
-          "social": 0,
-          "unity": 0,
-          "sovereign": 0
+          "economy": 2
         },
         "approvalDelta": 0,
         "outcome": null,
@@ -1280,10 +1317,10 @@
         "id": "c2",
         "label": "Austerity — balance the budget through the recession",
         "metrics": {
+          "externalIndependence": 3,
           "economy": 3,
           "social": -10,
           "unity": -5,
-          "sovereign": 3,
           "rights": -2
         },
         "approvalDelta": -10,
@@ -1308,22 +1345,22 @@
     "isElection": false,
     "v1Index": 19,
     "metricsAffected": [
+      "externalIndependence",
       "enviro",
       "economy",
       "unity",
-      "social",
-      "sovereign"
+      "social"
     ],
     "choices": [
       {
         "id": "c0",
         "label": "Regulate and cap — transition starts now",
         "metrics": {
+          "externalIndependence": 3,
           "enviro": 10,
           "economy": -5,
           "unity": -5,
-          "social": 2,
-          "sovereign": 3
+          "social": 2
         },
         "approvalDelta": -5,
         "outcome": null,
@@ -1337,11 +1374,11 @@
         "id": "c1",
         "label": "Approve pipelines — let the boom continue",
         "metrics": {
+          "externalIndependence": -2,
           "enviro": -12,
           "economy": 10,
           "unity": 3,
-          "social": -3,
-          "sovereign": -2
+          "social": -3
         },
         "approvalDelta": 3,
         "outcome": null,
@@ -1359,7 +1396,7 @@
           "economy": 5,
           "unity": 5,
           "social": 3,
-          "sovereign": 2
+          "externalIndependence": 2
         },
         "approvalDelta": 5,
         "outcome": null,
@@ -1388,7 +1425,6 @@
       "social",
       "enviro",
       "unity",
-      "sovereign",
       "economy"
     ],
     "choices": [
@@ -1399,8 +1435,7 @@
           "rights": 5,
           "social": 5,
           "enviro": 3,
-          "unity": 2,
-          "sovereign": 2
+          "unity": 2
         },
         "approvalDelta": 5,
         "outcome": "win",
@@ -1459,10 +1494,10 @@
     "isElection": false,
     "v1Index": 21,
     "metricsAffected": [
+      "selfDetermination",
       "rights",
       "social",
       "economy",
-      "sovereign",
       "unity"
     ],
     "choices": [
@@ -1470,10 +1505,10 @@
         "id": "c0",
         "label": "Legalize — regulate and tax",
         "metrics": {
+          "selfDetermination": 3,
           "rights": 5,
           "social": 5,
           "economy": 3,
-          "sovereign": 3,
           "unity": 1
         },
         "approvalDelta": -2,
@@ -1488,10 +1523,10 @@
         "id": "c1",
         "label": "Decriminalize only — no retail market",
         "metrics": {
+          "selfDetermination": 4,
           "rights": 6,
           "social": 3,
           "economy": 0,
-          "sovereign": 4,
           "unity": 2
         },
         "approvalDelta": 2,
@@ -1506,10 +1541,10 @@
         "id": "c2",
         "label": "Keep it criminal — not now",
         "metrics": {
+          "selfDetermination": -2,
           "rights": 2,
           "social": -3,
           "economy": -3,
-          "sovereign": 2,
           "unity": 3
         },
         "approvalDelta": 3,
@@ -1534,10 +1569,10 @@
     "isElection": false,
     "v1Index": 22,
     "metricsAffected": [
+      "selfDetermination",
       "enviro",
       "economy",
       "unity",
-      "sovereign",
       "social"
     ],
     "choices": [
@@ -1545,10 +1580,10 @@
         "id": "c0",
         "label": "Hold firm — the price rises as planned",
         "metrics": {
+          "selfDetermination": 3,
           "enviro": 8,
           "economy": -3,
           "unity": -5,
-          "sovereign": 3,
           "social": 2
         },
         "approvalDelta": -5,
@@ -1565,9 +1600,7 @@
         "metrics": {
           "enviro": 3,
           "economy": 2,
-          "unity": 2,
-          "sovereign": 0,
-          "social": 0
+          "unity": 2
         },
         "approvalDelta": 3,
         "outcome": null,
@@ -1581,10 +1614,10 @@
         "id": "c2",
         "label": "Scrap the carbon tax — use regulations instead",
         "metrics": {
+          "selfDetermination": -2,
           "enviro": -5,
           "economy": 5,
           "unity": 5,
-          "sovereign": -2,
           "social": -2
         },
         "approvalDelta": 5,
@@ -1609,22 +1642,22 @@
     "isElection": false,
     "v1Index": 23,
     "metricsAffected": [
+      "selfDetermination",
       "economy",
       "social",
       "unity",
-      "rights",
-      "sovereign"
+      "rights"
     ],
     "choices": [
       {
         "id": "c0",
         "label": "Go big — CERB and massive support",
         "metrics": {
+          "selfDetermination": 3,
           "economy": -5,
           "social": 10,
           "unity": 5,
-          "rights": -3,
-          "sovereign": 3
+          "rights": -3
         },
         "approvalDelta": 10,
         "outcome": null,
@@ -1638,11 +1671,11 @@
         "id": "c1",
         "label": "Moderate — targeted support only",
         "metrics": {
+          "selfDetermination": 1,
           "economy": -2,
           "social": 3,
           "unity": 2,
-          "rights": 2,
-          "sovereign": 1
+          "rights": 2
         },
         "approvalDelta": 3,
         "outcome": null,
@@ -1656,11 +1689,11 @@
         "id": "c2",
         "label": "Minimal — let people make their own choices",
         "metrics": {
+          "selfDetermination": -2,
           "economy": 3,
           "social": -15,
           "unity": -8,
-          "rights": 5,
-          "sovereign": -2
+          "rights": 5
         },
         "approvalDelta": -5,
         "outcome": null,
@@ -1684,7 +1717,7 @@
     "isElection": false,
     "v1Index": 24,
     "metricsAffected": [
-      "sovereign",
+      "externalIndependence",
       "economy",
       "unity",
       "social",
@@ -1695,7 +1728,7 @@
         "id": "c0",
         "label": "Retaliate and diversify — 'Canada Strong'",
         "metrics": {
-          "sovereign": 12,
+          "externalIndependence": 12,
           "economy": -5,
           "unity": 10,
           "social": -2,
@@ -1713,7 +1746,7 @@
         "id": "c1",
         "label": "Negotiate — find a deal, avoid escalation",
         "metrics": {
-          "sovereign": -8,
+          "externalIndependence": -8,
           "economy": 5,
           "unity": -5,
           "social": 0,
@@ -1731,7 +1764,7 @@
         "id": "c2",
         "label": "Full economic integration — embrace the future",
         "metrics": {
-          "sovereign": -20,
+          "externalIndependence": -20,
           "economy": 15,
           "unity": -15,
           "social": 2,

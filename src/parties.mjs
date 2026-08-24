@@ -6,12 +6,12 @@ export const PARTY_ARCHETYPES = {
   liberal: {
     label: 'Liberal / centrist federalist',
     // ideal bands per metric: [min, max] the caucus tolerates on core issues
-    ideals: { unity: [45, 100], rights: [50, 100], sovereign: [40, 80] },
+    ideals: { unity: [45, 100], rights: [50, 100], externalIndependence: [40, 80], selfDetermination: [40, 80] },
     credibility: 60,
   },
   tory: {
     label: 'Progressive conservative',
-    ideals: { economy: [55, 100], sovereign: [45, 85] },   // fiscal capacity, decentralization
+    ideals: { economy: [55, 100], externalIndependence: [45, 85] },   // fiscal capacity, strategic control
     credibility: 60,
   },
   socialDemocrat: {
@@ -21,7 +21,7 @@ export const PARTY_ARCHETYPES = {
   },
   quebecNationalist: {
     label: 'Quebec nationalist',
-    ideals: { sovereign: [60, 100], rights: [45, 90] },
+    ideals: { selfDetermination: [60, 100], rights: [45, 90] },
     credibility: 50,
   },
   regionalPopulist: {

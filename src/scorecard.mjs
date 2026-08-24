@@ -7,7 +7,7 @@ import { METRIC_IDS } from './schema.mjs';
 // Public, inspectable weights — deliberately NOT hidden (backlog acceptance:
 // "the end screen explains what each score measures and does not hide weights").
 export const COMMONWEALTH_WEIGHTS = {
-  unity: 1, economy: 1, rights: 1, enviro: 1, sovereign: 1, social: 1,
+  unity: 1, economy: 1, rights: 1, enviro: 1, externalIndependence: 0.5, selfDetermination: 0.5, social: 1,
 };
 
 /**

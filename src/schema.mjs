@@ -3,7 +3,7 @@
 // No build step: browser imports it via <script type="module">, Node via import.
 
 /**
- * @typedef {'unity'|'economy'|'rights'|'enviro'|'sovereign'|'social'} MetricId
+ * @typedef {'unity'|'economy'|'rights'|'enviro'|'externalIndependence'|'selfDetermination'|'social'} MetricId
  * @typedef {'unemployment'|'debtToGdp'|'growthIndex'} FinancialIndicatorId
  * @typedef {'BC'|'Prairies'|'Ontario'|'Quebec'|'Atlantic'|'North'} RegionId
  *
@@ -54,7 +54,7 @@
 // - confidence: confidence-partner deltas are recorded on choices but not applied to state.
 // - alters: alters[] is validated for referential integrity but has no runtime effect yet.
 
-export const METRIC_IDS = ['unity', 'economy', 'rights', 'enviro', 'sovereign', 'social'];
+export const METRIC_IDS = ['unity', 'economy', 'rights', 'enviro', 'externalIndependence', 'selfDetermination', 'social'];
 export const FINANCIAL_IDS = ['unemployment', 'debtToGdp', 'growthIndex'];
 export const REGION_IDS = ['BC', 'Prairies', 'Ontario', 'Quebec', 'Atlantic', 'North'];
 export const EVENT_TYPES = ['universal', 'altered', 'conditional', 'party', 'reactive'];

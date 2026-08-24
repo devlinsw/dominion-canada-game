@@ -930,7 +930,8 @@ const METRICS = [
   { id: 'economy',  label: 'Economy',          color: '#2a9d8f' },
   { id: 'rights',   label: 'Rights & Liberties', color: '#4fd1c5' },
   { id: 'enviro',   label: 'Environment',     color: '#2a9d8f' },
-  { id: 'sovereign',label: 'Sovereignty',     color: '#d62828' },
+  { id: 'externalIndependence', label: 'External Independence', color: '#d62828' },
+  { id: 'selfDetermination', label: 'Self-Determination', color: '#e76f51' },
   { id: 'social',   label: 'Social Wellbeing', color: '#f4a261' },
   { id: 'approval', label: 'Approval',        color: '#d62828' },
 ];
@@ -946,7 +947,7 @@ const DECISIONS = [
       {
         label: "Pass the Official Languages Act",
         desc: "Make English and French equal in every federal institution. The civil service, the courts, Parliament — fully bilingual.",
-        effects: { unity: +12, rights: +5, approval: +3, sovereign: +5, social: -2 },
+        effects: {selfDetermination: +5, unity: +12, rights: +5, approval: +3, social: -2 },
         consequence: "The Official Languages Act passes with bipartisan support. For the first time, francophones see themselves reflected in the federal state. Quebec newspapers call it <em>'the end of colonization.'</em> But the West grumbles about cost and bureaucracy.",
       },
       {
@@ -958,7 +959,7 @@ const DECISIONS = [
       {
         label: "Go further — dual federalism",
         desc: "Not just bilingualism, but structural decentralization. Give Quebec special status within confederation.",
-        effects: { unity: +6, approval: -5, sovereign: -3, social: +2, rights: +2 },
+        effects: { unity: +6, approval: -5, selfDetermination: +3, social: +2, rights: +2 },
         consequence: "You propose 'asymmetric federalism' — Quebec gets special powers. English Canada reacts with fury. The Globe and Mail calls it 'the beginning of the end of Canada.' Quebec intellectuals are cautiously optimistic.",
       },
     ],
@@ -972,19 +973,19 @@ const DECISIONS = [
       {
         label: "Invoke the War Measures Act",
         desc: "Martial law. Mass arrests. Military in the streets of Montreal. The polls say 89% of Canadians support it.",
-        effects: { approval: +15, unity: +2, rights: -10, social: -5, sovereign: +3 },
+        effects: {selfDetermination: -3, approval: +15, unity: +2, rights: -10, social: -5 },
         consequence: "October 16, 4 AM. The tanks roll into Montreal. 497 people are arrested, most without charges. Laporte's body is found in the trunk of a car. The crisis ends decisively — the FLQ is broken. Trudeau's <em>'Just watch me'</em> becomes the most famous phrase in Canadian political history. But the civil liberties cost is severe: 497 people detained without charge, precedent set, and the phrase 'preventive arrest' enters the Canadian vocabulary.",
       },
       {
         label: "Use police and negotiation only",
         desc: "No martial law. Work with Quebec police, negotiate with the FLQ, uphold civil liberties even under pressure.",
-        effects: { approval: -8, rights: +8, unity: -5, social: +3, sovereign: -3 },
+        effects: {selfDetermination: +3, approval: -8, rights: +8, unity: -5, social: +3 },
         consequence: "You refuse martial law. The negotiation drags on for weeks. Laporte is still murdered. The public is split — some call you brave for defending liberty, others call you weak. But the War Measures precedent is never set, and the Charter of Rights, when it comes, is built on a foundation you protected.",
       },
       {
         label: "Invoke the Act but with a sunset clause",
         desc: "Emergency powers for 30 days only, with judicial oversight. A middle path.",
-        effects: { approval: +5, rights: -4, unity: -1, social: -2, sovereign: +1 },
+        effects: {selfDetermination: -1, approval: +5, rights: -4, unity: -1, social: -2 },
         consequence: "A compromise: temporary emergency powers with parliamentary review. Some arrests, but fewer and more targeted. Both sides are dissatisfied, which may mean you got it right — or that you lacked the courage of either conviction. The crisis resolves slowly, and both the civil liberties camp and the law-and-order camp remember what you didn't do.",
       },
     ],
@@ -1004,7 +1005,7 @@ const DECISIONS = [
       {
         label: "Bilingualism is enough — reject multiculturalism",
         desc: "Canada is two founding peoples. Adding more complicates the compact.",
-        effects: { social: -5, unity: +5, approval: -3, rights: -3, economy: +5, sovereign: +2 },
+        effects: {selfDetermination: -2, social: -5, unity: +5, approval: -3, rights: -3, economy: +5 },
         consequence: "You reject the multicultural framework. Canada stays officially bicultural. Immigrant communities feel unseen. Internationally, Canada is just another Western country. But the compact with Quebec is clearer — two peoples, one country — and Quebec's anxiety about dilution eases. The word 'multicultural' never enters the Canadian vocabulary. <em>But the economy benefits from the simplicity — one language regime, one set of rules.</em>",
       },
       {
@@ -1048,13 +1049,13 @@ const DECISIONS = [
       {
         label: "Yes — Canada must not be embarrassed",
         desc: "Federal funding to complete the stadium. National prestige at stake.",
-        effects: { approval: +5, unity: +5, economy: -8, social: +3, sovereign: +2 },
+        effects: { approval: +5, unity: +5, economy: -8, social: +3, selfDetermination: -2 },
         consequence: "The Games are spectacular. Nadia Comăneci scores her perfect 10. The world sees a modern, confident Canada. But the Big Owe — the Olympic Stadium debt — won't be paid off until <em>2006</em>. Thirty years.",
       },
       {
         label: "No — let Montreal handle its own mess",
         desc: "Federalism means provincial responsibility. Quebec wanted the Games, Quebec can pay.",
-        effects: { approval: -5, unity: -8, economy: +3, sovereign: -2 },
+        effects: { approval: -5, unity: -8, economy: +3, selfDetermination: 2 },
         consequence: "You refuse the bailout. Montreal scrambles. The Games happen but the optics are terrible — a half-finished tower, austerity across the city. Quebec remembers. <em>'Ottawa let us humiliate ourselves on the world stage.'</em>",
       },
     ],
@@ -1068,19 +1069,19 @@ const DECISIONS = [
       {
         label: "Accept the moratorium — listen to the land",
         desc: "Ten-year pause. Indigenous land rights come first. The pipeline waits.",
-        effects: { enviro: +12, rights: +8, social: +5, economy: -5, unity: +3, sovereign: +3 },
+        effects: {selfDetermination: +3, enviro: +12, rights: +8, social: +5, economy: -5, unity: +3 },
         consequence: "You accept the Berger report. The Mackenzie Valley pipeline is shelved for a decade. Indigenous leaders see, for the first time, a federal government that listens. <em>The North stays North — tundra, caribou, and the people who have lived there for ten thousand years. The oil stays in the ground. But so do the jobs, the roads, the connection to the south.</em>",
       },
       {
         label: "Build the pipeline — the North needs development",
         desc: "Approve the route. Economic development for Indigenous communities. Resource sovereignty.",
-        effects: { enviro: -12, economy: +8, rights: -5, social: +2, unity: -3, sovereign: +5 },
+        effects: {externalIndependence: +5, selfDetermination: -3, enviro: -12, economy: +8, rights: -5, social: +2, unity: -3 },
         consequence: "You override Berger and approve the pipeline. Construction begins. Jobs flow into the North — but so does the disruption: permafrost damage, caribou decline, communities fractured between those who benefit and those who lose. <em>The Dene Council calls it 'a second colonization.' But the Arctic is connected, and Canada's resource sovereignty is extended to the ice.</em>",
       },
       {
         label: "Build it with Indigenous co-ownership",
         desc: "Approve the pipeline but require Indigenous equity stake and revenue sharing.",
-        effects: { enviro: -4, economy: +5, rights: +5, social: +6, unity: +4, sovereign: +3 },
+        effects: {externalIndependence: +2, selfDetermination: +3, enviro: -4, economy: +5, rights: +5, social: +6, unity: +4 },
         consequence: "You approve the pipeline — but with a 33% Indigenous equity stake and binding revenue-sharing. The Dene and Inuit become co-owners, not stakeholders. <em>Development happens — but on terms that share the wealth and the decisions. It's slower, costlier, and more complex. But the North builds it together, or not at all.</em>",
       },
     ],
@@ -1094,19 +1095,19 @@ const DECISIONS = [
       {
         label: "Implement the NEP fully",
         desc: "Canadianize the oil industry. Price controls, foreign ownership limits, federal revenue share.",
-        effects: { economy: -5, approval: -3, unity: -12, sovereign: +8, social: +5 },
+        effects: {externalIndependence: +8, selfDetermination: -3, economy: -5, approval: -3, unity: -12, social: +5 },
         consequence: "The NEP passes. Eastern Canadians get relief at the pump. But Alberta erupts. Western alienation reaches its peak — bumper stickers appear: <em>'Let the Eastern Bastards Freeze in the Dark.'</em> Investment flees. Alberta's unemployment jumps from 4% to 12%. The wound will not heal for a generation.",
       },
       {
         label: "Negotiate a revenue-sharing deal with provinces",
         desc: "Compromise. Federal-provincial agreement on sharing the boom without confiscating it.",
-        effects: { economy: +3, unity: +2, approval: +3, sovereign: +3, social: +2 },
+        effects: {externalIndependence: +2, selfDetermination: +3, economy: +3, unity: +2, approval: +3, social: +2 },
         consequence: "You negotiate rather than impose. Lougheed grumbles but agrees to a revenue-sharing formula. Alberta keeps its boom, the rest of Canada gets some benefit. It's unglamorous — but it works. <em>The NEP never happens. Western alienation stays at a simmer instead of a boil.</em>",
       },
       {
         label: "Let the market sort it out",
         desc: "No federal intervention. Alberta keeps its money; Eastern Canada pays market prices.",
-        effects: { economy: +5, unity: -5, approval: -5, sovereign: -8, social: -5 },
+        effects: {externalIndependence: -8, economy: +5, unity: -5, approval: -5, social: -5 },
         consequence: "You do nothing. Alberta booms. But Eastern Canada and manufacturing provinces are crushed by energy costs. The regional wealth gap widens dramatically. <em>'Canada' becomes a thinner idea — a customs union, not a community.</em>",
       },
     ],
@@ -1122,21 +1123,21 @@ const DECISIONS = [
       {
         label: "Campaign hard — 'My country is my country'",
         desc: "Personal appeals, emotional speeches, promise constitutional renewal. Fight for Canada.",
-        effects: { unity: +8, approval: +5, sovereign: +3 },
+        effects: {selfDetermination: +3, unity: +8, approval: +5 },
         consequence: "You throw yourself into the campaign. The <em>'Non'</em> side wins with 59.6%. In your victory speech, you promise to renew the constitution — to bring Quebec willingly into the Canadian fold. It's the high-water mark of your career.",
         result: "win",
       },
       {
         label: "Let Quebecers decide for themselves",
         desc: "This is Quebec's democratic right. A freer process means a more legitimate result, whichever way it goes.",
-        effects: { unity: -8, approval: -3, sovereign: +4, rights: +5, social: +2 },
+        effects: {selfDetermination: +4, unity: -8, approval: -3, rights: +5, social: +2 },
         consequence: "You refuse to campaign against Quebec's self-determination. The process is clean, the debate is genuine, and when the <em>'Non'</em> wins 60/40, the result has moral authority. Quebec stays — not because Ottawa pressured them, but because they chose to. The separatist movement is weakened by the legitimacy of the vote, not just by its outcome. <em>But you're blamed for not fighting hard enough, and a quarter of your caucus abstains.</em>",
         result: "lose",
       },
       {
         label: "YES — endorse sovereignty-association",
         desc: "Break with your own party. Campaign openly for a Yes that leads to negotiation, not rupture.",
-        effects: { unity: -18, sovereign: +8, rights: +2, approval: -6 },
+        effects: {selfDetermination: +8, unity: -18, rights: +2, approval: -6 },
         consequence: "You campaign for the <em>'Oui'</em>. Federalists are stunned; Quebec nationalists are suspicious of a Montreal federalist suddenly wearing their colours. The <em>'Non'</em> still wins — but far narrower than it should have been, and you are done as a national leader. <em>History will argue forever about what you were doing.</em>",
         result: "lose",
       },
@@ -1151,19 +1152,19 @@ const DECISIONS = [
       {
         label: "Patriate with the Charter — with or without Quebec",
         desc: "The Kitchen Accord: cut a deal with the other premiers, leave Quebec out. The Charter transforms Canada.",
-        effects: { rights: +12, sovereign: +10, unity: -8, approval: +3, social: +3 },
+        effects: {externalIndependence: +10, selfDetermination: -3, rights: +12, unity: -8, approval: +3, social: +3 },
         consequence: "April 17, 1982. Queen Elizabeth signs the Constitution Act on Parliament Hill. The Charter of Rights and Freedoms becomes the supreme law of the land. Canada is finally, fully sovereign. But Quebec never signs. <em>The wound from this night will never fully heal.</em> Still — the Charter becomes the most beloved document in Canadian life. Rights for all. Including the notwithstanding clause you had to accept to get it.",
       },
       {
         label: "Negotiate until Quebec agrees",
         desc: "No constitution without Quebec's consent. Even if it takes years.",
-        effects: { rights: +3, unity: +5, sovereign: +5, approval: -5 },
+        effects: {externalIndependence: +2, selfDetermination: +5, rights: +3, unity: +5, approval: -5 },
         consequence: "You refuse to proceed without Quebec. The patriation stalls. The British are annoyed — they don't want to be involved anymore. The constitutional question drags on for years, poisoning federal-provincial relations. But Quebec's consent, when it finally comes, is genuine. <em>Canada is whole — but the Charter is delayed, weakened, perhaps never born.</em>",
       },
       {
         label: "Patriate without the Charter",
         desc: "Bring the constitution home, but leave rights out of it. Let legislatures decide.",
-        effects: { sovereign: +10, rights: -8, unity: +2, approval: +2 },
+        effects: {externalIndependence: +10, selfDetermination: -2, rights: -8, unity: +2, approval: +2 },
         consequence: "You patriate the constitution — but without the Charter. The amending formula comes home, but the rights revolution doesn't happen. Canadian liberty stays at the mercy of legislatures. No notwithstanding clause drama — because there's no Charter to override. <em>Canada is sovereign but less free.</em>",
       },
     ],
@@ -1208,19 +1209,19 @@ const DECISIONS = [
       {
         label: "Support free trade — the deal is done",
         desc: "The FTA passes. Canada and the US eliminate tariffs. The economy integrates.",
-        effects: { economy: +10, sovereign: -10, unity: -3, approval: +3, social: -2 },
+        effects: {externalIndependence: -10, economy: +10, unity: -3, approval: +3, social: -2 },
         consequence: "Free trade passes. The Canadian economy booms — manufacturing, resources, services all grow. But the integration is deep and irreversible. Canadian culture becomes harder to distinguish from American. <em>The long argument about sovereignty shifts from 'independent from Britain' to 'independent from America.'</em>",
       },
       {
         label: "Oppose — renegotiate for cultural exemptions",
         desc: "Trade yes, but protect Canadian culture, water, and social programs.",
-        effects: { economy: +4, sovereign: +3, unity: +2, social: +3, approval: -2 },
+        effects: {externalIndependence: +3, economy: +4, unity: +2, social: +3, approval: -2 },
         consequence: "You insist on cultural exemptions and protections for Canadian industries. The FTA passes — but weaker, with carve-outs for broadcasting, publishing, and water. Trade grows, but Canada maintains cultural space. <em>A less dramatic boom, but a more Canadian one.</em>",
       },
       {
         label: "Kill the deal — build east-west trade instead",
         desc: "No free trade with the US. Strengthen internal Canadian trade and links.",
-        effects: { economy: -10, sovereign: +8, unity: +5, approval: -5, social: +3 },
+        effects: {externalIndependence: +8, economy: -10, unity: +5, approval: -5, social: +3 },
         consequence: "You kill free trade. The US is furious, and retaliates with softwood lumber tariffs. The Canadian economy suffers — but it stays independent. <em>The choice is stark: poorer but sovereign, or rich but assimilated. You chose the former.</em>",
       },
     ],
@@ -1246,7 +1247,7 @@ const DECISIONS = [
       {
         label: "Cut spending instead — no new tax",
         desc: "Austerity. Shrink government to close the deficit. Hard now, but room later.",
-        effects: { economy: +6, approval: +3, social: -10, unity: -5, rights: -2, sovereign: +2 },
+        effects: { economy: +6, approval: +3, social: -10, unity: -5, rights: -2 },
         consequence: "You cut spending instead. Programs shrink, transfers to provinces decline. The deficit narrows fast — faster than any new tax could manage. The fiscal room you create will matter when the 2008 crisis hits. But social services erode. <em>The Canada Health Act starts to fray at the edges. You bought fiscal resilience at the price of social resilience.</em>",
       },
     ],
@@ -1260,19 +1261,19 @@ const DECISIONS = [
       {
         label: "Campaign for a Yes — the deal is worth it",
         desc: "Make the broad constitutional bargain: Quebec inside, Indigenous self-government, reformed institutions.",
-        effects: { unity: +10, approval: -3, rights: -3, social: -2, sovereign: +2 },
+        effects: {selfDetermination: +2, unity: +10, approval: -3, rights: -3, social: -2 },
         consequence: "You push hard. After furious negotiation, all ten provinces ratify. Quebec signs the Constitution — 10 years late. The <em>'distinct society'</em> clause reshapes Canadian federalism. But critics warn it creates a tiered federation, and the backlash from Indigenous groups and equality advocates is fierce.",
       },
       {
         label: "Respect the No vote — return to ordinary politics",
         desc: "Canadians reject the package. Accept the verdict rather than forcing another constitutional marathon.",
-        effects: { unity: -6, approval: +1, rights: +3, social: +1, sovereign: +3 },
+        effects: {selfDetermination: +3, unity: -6, approval: +1, rights: +3, social: +1 },
         consequence: "The accord loses in the referendum. Quebec is wounded again; western reformers feel ignored; Indigenous leaders lose a route that had briefly looked real. But a direct democratic verdict carries a legitimacy Meech never had. <em>Canada moves on without a grand settlement — unresolved, but not imposed.</em>",
       },
       {
         label: "Return with a narrower settlement",
         desc: "Drop the omnibus package; negotiate Quebec recognition and Indigenous self-government separately.",
-        effects: { unity: +5, rights: +4, approval: -3, social: +2, sovereign: +1 },
+        effects: {selfDetermination: +1, unity: +5, rights: +4, approval: -3, social: +2 },
         consequence: "You respect the referendum but refuse to treat it as the end of constitutional politics. A narrower, slower process begins: Quebec recognition, Indigenous self-government, and Senate reform no longer held hostage to one another. <em>Less grand, less elegant — perhaps more survivable.</em>",
       },
     ],
@@ -1286,19 +1287,19 @@ const DECISIONS = [
       {
         label: "Close the fishery — the cod must recover",
         desc: "Moratorium on Northern cod. 40,000 jobs gone. The fish come first.",
-        effects: { enviro: +12, economy: -8, social: -8, unity: -3, approval: -3, sovereign: +2 },
+        effects: {externalIndependence: +2, enviro: +12, economy: -8, social: -8, unity: -3, approval: -3 },
         consequence: "You close the fishery. 40,000 people lose their jobs. The cod may take 30 years to recover — or never. Communities that have existed for 500 years face the end. But the ecosystem stabilizes, and the precedent is set: Canada will close a fishery before it destroys a species. <em>The Atlantic knows sacrifice. It also remembers who asked for it.</em>",
       },
       {
         label: "Keep the fishery open — let the communities survive",
         desc: "Smaller quotas, but keep fishing. The culture is worth more than the stock.",
-        effects: { enviro: -10, economy: +3, social: +5, unity: +2, approval: +5, sovereign: -2 },
+        effects: {externalIndependence: -2, enviro: -10, economy: +3, social: +5, unity: +2, approval: +5 },
         consequence: "You keep the fishery open with reduced quotas. The communities survive — for now. But the cod continues to crash. Within five years, the stock is functionally extinct. <em>The fishermen knew this. They asked you to stop. But the political cost of 40,000 job losses was too high, and the ecological cost of extinction was higher.</em>",
       },
       {
         label: "Close it — but buy the licences and invest in transition",
         desc: "Moratorium with full compensation, retraining, and aquaculture investment.",
-        effects: { enviro: +10, economy: -3, social: +3, unity: +4, approval: +2, sovereign: +3 },
+        effects: {externalIndependence: +3, enviro: +10, economy: -3, social: +3, unity: +4, approval: +2 },
         consequence: "You close the fishery — but you buy every licence at full value, fund retraining, and invest in aquaculture and tourism. The transition is painful but funded. The cod begins its long recovery. Communities shrink but don't die. <em>It's the most expensive option. It's also the only one where both the fish and the fishermen have a future.</em>",
       },
     ],
@@ -1338,25 +1339,25 @@ const DECISIONS = [
       {
         label: "Fight with everything — a passionate Canada",
         desc: "Rally the country. Emotional appeal. Promise a renewed federalism. A last-minute federal love letter to Quebec.",
-        effects: { unity: +10, approval: +5, sovereign: +5, social: +2 },
+        effects: {selfDetermination: +5, unity: +10, approval: +5, social: +2 },
         consequence: "You go all in. The federal rally in Montreal draws 50,000 people. A last-minute <em>'love-in'</em> for Canadian unity. The results come in: 50.58% Non, 49.42% Oui. <em>Canada survives by 53,000 votes.</em> Parizeau blames 'money and the ethnic vote' and resigns. You've kept the country together — by a razor's margin.",
       },
       {
         label: "Let Quebec decide — minimal federal involvement",
         desc: "This is Quebec's democratic right. A clean process, win or lose, is more legitimate than a coerced one.",
-        effects: { unity: -20, approval: -3, sovereign: +6, social: -5, rights: +8 },
+        effects: {selfDetermination: +6, unity: -20, approval: -3, social: -5, rights: +8 },
         consequence: "You stay distant. Without a strong federal voice, the <em>'Oui'</em> creeps ahead. On October 30, 1995, Quebec votes 51% to 49% for sovereignty. <em>Canada breaks apart. The largest country in the world becomes two nations overnight.</em> You are the last Prime Minister of a united Canada. But the process was clean — the world recognizes the legitimacy of the vote, and Quebec's independence, however painful, is built on consent rather than coercion. The History will not be kind. But it will be honest.",
       },
       {
         label: "YES — quietly hope for Oui",
         desc: "Your heart is with sovereignty, but your office is not. Say nothing, do nothing, let it happen.",
-        effects: { unity: -22, approval: -8, sovereign: +7, rights: +6 },
+        effects: {selfDetermination: +7, unity: -22, approval: -8, rights: +6 },
         consequence: "You neither campaign nor obstruct. Federal organizers wait for direction that never comes. The <em>'Oui'</em> carries — narrowly, chaotically, without a plan on either side. <em>You achieved what no Péquiste ever could: the end of Canada, by federal inattention.</em>",
       },
       {
         label: "Offer clear constitutional reform — the clarity path",
         desc: "Campaign for a clear question AND promise constitutional renewal if No wins.",
-        effects: { unity: +5, approval: +3, sovereign: +3, rights: +3 },
+        effects: {selfDetermination: +3, unity: +5, approval: +3, rights: +3 },
         consequence: "You make the case for clarity and offer a concrete post-NO plan: constitutional renewal, provincial powers, Indigenous recognition. It's a tighter margin — 51.5% Non — but the No side wins with a mandate. You've bought time. <em>Whether you use it is the question of your next term.</em>",
       },
     ],
@@ -1370,19 +1371,19 @@ const DECISIONS = [
       {
         label: "Ratify Kyoto — lead on climate",
         desc: "Commit to emission targets. Make Canada a climate leader.",
-        effects: { enviro: +12, economy: -5, approval: -2, sovereign: +3, social: +2 },
+        effects: {externalIndependence: +3, enviro: +12, economy: -5, approval: -2, social: +2 },
         consequence: "You ratify Kyoto. Canada is one of the first. The international community applauds. But Alberta's oil sands boom slows. <em>The targets prove impossible to meet — Canada will miss them badly. But the signal is sent: Canada takes climate seriously. The clean energy industry begins to grow.</em>",
       },
       {
         label: "Ratify with concessions for the energy sector",
         desc: "Sign Kyoto but with loopholes for oil sands and heavy industry.",
-        effects: { enviro: +4, economy: +2, approval: +2, sovereign: +1, social: 0 },
+        effects: {externalIndependence: +1, enviro: +4, economy: +2, approval: +2, social: 0 },
         consequence: "You sign with caveats. Canada is technically in Kyoto but effectively out. The oil sands continue to grow. <em>Canada has a climate policy on paper and an extraction economy in practice. The gap between the two becomes the defining contradiction of Canadian climate politics.</em>",
       },
       {
         label: "Don't ratify — the economy needs oil",
         desc: "Kyoto is unrealistic for a resource economy. Prioritize growth.",
-        effects: { enviro: -10, economy: +6, approval: +3, sovereign: -2, social: -2 },
+        effects: {externalIndependence: -2, enviro: -10, economy: +6, approval: +3, social: -2 },
         consequence: "You refuse Kyoto. The oil sands boom accelerates. Alberta's GDP explodes. But internationally, Canada becomes a climate laggard. <em>The world's polite polluter.</em> The environmental movement radicalizes. The cost of clean-up, deferred, grows every year.",
       },
     ],
@@ -1396,19 +1397,19 @@ const DECISIONS = [
       {
         label: "Pass the Civil Marriage Act",
         desc: "Legalize same-sex marriage across Canada. A Charter issue.",
-        effects: { rights: +10, social: +8, approval: -3, unity: -2, sovereign: +3 },
+        effects: {selfDetermination: +3, rights: +10, social: +8, approval: -3, unity: -2 },
         consequence: "July 20, 2005. The Civil Marriage Act passes. Canada becomes the fourth country to legalize same-sex marriage nationwide. The world notices — again, Canada as human rights leader. But social conservatives are furious. <em>It costs you seats in rural Canada. It gains you the moral arc of history.</em>",
       },
       {
         label: "Civil unions only — not marriage",
         desc: "Equal rights, different name. A compromise position.",
-        effects: { rights: +4, social: +4, approval: +2, unity: +1, sovereign: +1 },
+        effects: {selfDetermination: +1, rights: +4, social: +4, approval: +2, unity: +1 },
         consequence: "You propose civil unions — same rights, different word. The LGBTQ community feels betrayed by the compromise. Conservatives are still upset. <em>You've satisfied no one, which in Canadian politics means you've probably found the center.</em>",
       },
       {
         label: "Defend traditional marriage",
         desc: "Marriage is between a man and a woman. Use the notwithstanding clause if needed.",
-        effects: { rights: -10, social: -8, approval: +3, unity: +3, sovereign: -3 },
+        effects: {selfDetermination: -3, rights: -10, social: -8, approval: +3, unity: +3 },
         consequence: "You block same-sex marriage. The courts are overruled. The LGBTQ community is devastated — this was their moment, and you took it away. Internationally, Canada goes backwards. <em>By 2020, the courts will force the issue again. But a generation of LGBTQ Canadians will remember who stood in the door.</em>",
       },
     ],
@@ -1422,19 +1423,19 @@ const DECISIONS = [
       {
         label: "Stimulate — the Economic Action Plan",
         desc: "Massive infrastructure spending, auto bailouts, tax cuts. Deficit spending to fight the recession.",
-        effects: { economy: +5, social: +5, approval: +8, unity: +3, enviro: -2, sovereign: +2 },
+        effects: {externalIndependence: +2, economy: +5, social: +5, approval: +8, unity: +3, enviro: -2 },
         consequence: "You stimulate. The Economic Action Plan floods money into infrastructure, auto industry bailouts save GM and Chrysler plants in Ontario, and tax cuts put money in pockets. <em>Canada emerges from the recession faster than any other G7 country. The deficit balloons — but it's temporary, and the recovery is real.</em>",
       },
       {
         label: "Steady as she goes — modest support",
         desc: "Limited intervention. Let the market correct with some help.",
-        effects: { economy: +2, social: 0, approval: 0, unity: 0, sovereign: 0 },
+        effects: { economy: +2 },
         consequence: "You provide modest support — some auto industry assistance, some EI enhancements. The recession is longer and deeper than it needs to be. <em>Canada recovers, but slower, with more pain. The deficit stays smaller, though.</em>",
       },
       {
         label: "Austerity — balance the budget through the recession",
         desc: "Cut spending to maintain fiscal discipline. Painful now, but the balance sheet will be clean for the recovery.",
-        effects: { economy: +3, social: -10, approval: -10, unity: -5, sovereign: +3, rights: -2 },
+        effects: {externalIndependence: +3, economy: +3, social: -10, approval: -10, unity: -5, rights: -2 },
         consequence: "You cut during the worst recession in 70 years. Auto plants close — 50,000 manufacturing jobs vanish. The economy contracts harder and longer. <em>But Canada emerges from the recession with the lowest debt-to-GDP ratio in the G7. The fiscal room you created funds the next decade of social spending. The people who paid for it — the unemployed, the laid-off, the precarious — will not forget. The balance sheet is clean. The social fabric is not.</em>",
       },
     ],
@@ -1448,19 +1449,19 @@ const DECISIONS = [
       {
         label: "Regulate and cap — transition starts now",
         desc: "Emissions cap on oil sands. Invest in clean energy transition. Slower boom, cleaner future.",
-        effects: { enviro: +10, economy: -5, approval: -5, unity: -5, social: +2, sovereign: +3 },
+        effects: {externalIndependence: +3, enviro: +10, economy: -5, approval: -5, unity: -5, social: +2 },
         consequence: "You impose an emissions cap and pivot federal investment toward clean energy. Alberta is furious — <em>'Ottawa is killing our economy again.'</em> The oil sands slow. But Canada's clean tech sector begins to flourish. By 2030, the bet looks smarter every year.",
       },
       {
         label: "Approve pipelines — let the boom continue",
         desc: "Build pipelines to tidewater. Maximize oil exports. Deal with emissions later.",
-        effects: { enviro: -12, economy: +10, approval: +3, unity: +3, social: -3, sovereign: -2 },
+        effects: {externalIndependence: -2, enviro: -12, economy: +10, approval: +3, unity: +3, social: -3 },
         consequence: "You approve the pipelines. The oil sands boom accelerates. Alberta's economy is on fire. Federal revenues pour in. But the emissions rise and rise. <em>By 2030, Canada has the highest per-capita emissions in the G7. The transition, when it finally comes, is brutal.</em>",
       },
       {
         label: "Clean growth strategy — diversify while extracting",
         desc: "Pipelines yes, but with carbon pricing and green investment simultaneously.",
-        effects: { enviro: +2, economy: +5, approval: +5, unity: +5, social: +3, sovereign: +2 },
+        effects: { enviro: +2, economy: +5, approval: +5, unity: +5, social: +3, externalIndependence: +2 },
         consequence: "You thread the needle — pipelines with carbon pricing, oil with green investment. Alberta gets its markets. Environmentalists get their transition. <em>It's expensive and complicated, but it's the Canadian way. Both sides are grumpy, which means it's probably right.</em>",
       },
     ],
@@ -1476,7 +1477,7 @@ const DECISIONS = [
       {
         label: "Promise a progressive era — climate, reconciliation, diversity",
         desc: "Carbon pricing, Indigenous reconciliation, gender parity, cannabis legalization, refugee welcome.",
-        effects: { rights: +5, social: +5, enviro: +3, approval: +5, unity: +2, sovereign: +2 },
+        effects: { rights: +5, social: +5, enviro: +3, approval: +5, unity: +2 },
         consequence: "You campaign on hope. Canada welcomes 25,000 Syrian refugees. You promise a gender-balanced cabinet. <em>'Because it's 2015.'</em> The country responds — you win a majority. The progressive era begins.",
         result: "win",
       },
@@ -1505,19 +1506,19 @@ const DECISIONS = [
       {
         label: "Legalize — regulate and tax",
         desc: "Legal recreational cannabis. Federal regulation, provincial retail. First major economy to do so.",
-        effects: { rights: +5, social: +5, approval: -2, economy: +3, sovereign: +3, unity: +1 },
+        effects: {selfDetermination: +3, rights: +5, social: +5, approval: -2, economy: +3, unity: +1 },
         consequence: "October 17, 2018. Cannabis is legal across Canada. The world watches — some appalled, some fascinated. Tax revenues begin flowing. Arrests plummet. <em>The black market shrinks but doesn't die. The youth usage rate is... mixed. But the criminalization of a generation ends.</em>",
       },
       {
         label: "Decriminalize only — no retail market",
         desc: "No criminal penalties, but no legal commercial market either. Avoids the corporate cannabis lobby.",
-        effects: { rights: +6, social: +3, approval: +2, economy: 0, sovereign: +4, unity: +2 },
+        effects: {selfDetermination: +4, rights: +6, social: +3, approval: +2, economy: 0, unity: +2 },
         consequence: "You decriminalize — no jail, no criminal record, but no stores either. The black market persists, but you avoid creating a for-profit cannabis lobby that will resist regulation for decades. <em>Less revenue, less corporate capture. The public health framework is cleaner. Canada doesn't export a model of commercial cannabis — it exports a model of harm reduction.</em>",
       },
       {
         label: "Keep it criminal — not now",
         desc: "The criminalization is wrong, but legalization is premature. Focus on sentencing reform instead.",
-        effects: { rights: +2, social: -3, approval: +3, economy: -3, sovereign: +2, unity: +3 },
+        effects: {selfDetermination: -2, rights: +2, social: -3, approval: +3, economy: -3, unity: +3 },
         consequence: "You keep cannabis criminal but reform sentencing — no more jail time for possession, records expunged retroactively. It's half a step. Arrests decline but don't end. The black market stays. <em>But you avoid normalizing commercial drug use, and the international community doesn't flinch. By 2030, the gap between Canada and the rest of the world is smaller — for better and for worse.</em>",
       },
     ],
@@ -1531,19 +1532,19 @@ const DECISIONS = [
       {
         label: "Hold firm — the price rises as planned",
         desc: "Stay the course. Carbon pricing is the most efficient climate tool.",
-        effects: { enviro: +8, economy: -3, approval: -5, unity: -5, sovereign: +3, social: +2 },
+        effects: {selfDetermination: +3, enviro: +8, economy: -3, approval: -5, unity: -5, social: +2 },
         consequence: "You hold firm. The carbon price rises. Most Canadians get more back in dividends than they pay — but perception lags reality. Alberta seethes. <em>Emissions begin to plateau. But the political cost is enormous, and the regional divide deepens.</em>",
       },
       {
         label: "Pause the increases — freeze at $50",
         desc: "Keep the price but stop the escalator. Compromise during affordability crisis.",
-        effects: { enviro: +3, economy: +2, approval: +3, unity: +2, sovereign: 0, social: 0 },
+        effects: { enviro: +3, economy: +2, approval: +3, unity: +2 },
         consequence: "You freeze the price at $50. Affordability concerns are acknowledged. Alberta is less angry. But the emissions target drifts further away. <em>The climate doesn't negotiate. But neither do voters.</em>",
       },
       {
         label: "Scrap the carbon tax — use regulations instead",
         desc: "No carbon price. Use industry-specific regulations to cut emissions.",
-        effects: { enviro: -5, economy: +5, approval: +5, unity: +5, sovereign: -2, social: -2 },
+        effects: {selfDetermination: -2, enviro: -5, economy: +5, approval: +5, unity: +5, social: -2 },
         consequence: "You scrap the tax. Alberta celebrates. But without a price signal, the clean transition stalls. <em>Regulations are slower, costlier, and less effective than a carbon price. The math is clear. The politics aren't.</em>",
       },
     ],
@@ -1557,19 +1558,19 @@ const DECISIONS = [
       {
         label: "Go big — CERB and massive support",
         desc: "Direct payments to every affected worker. Business wage subsidies. Lockdowns enforced.",
-        effects: { economy: -5, social: +10, approval: +10, unity: +5, rights: -3, sovereign: +3 },
+        effects: {selfDetermination: +3, economy: -5, social: +10, approval: +10, unity: +5, rights: -3 },
         consequence: "You go big. CERB sends $2,000/month to 8 million Canadians. Wage subsidies keep businesses alive. Lockdowns save lives — Canada's death rate is a fraction of the US. <em>The deficit hits $380 billion. But the social fabric holds. People remember: the government was there.</em>",
       },
       {
         label: "Moderate — targeted support only",
         desc: "Enhanced EI for the unemployed. Limited business aid. Softer restrictions.",
-        effects: { economy: -2, social: +3, approval: +3, unity: +2, rights: +2, sovereign: +1 },
+        effects: {selfDetermination: +1, economy: -2, social: +3, approval: +3, unity: +2, rights: +2 },
         consequence: "You provide targeted support — enhanced EI, some business help, but less than the moment demands. <em>The economic hit is smaller, but more people fall through the cracks. Recovery is slower. Some deaths that full lockdowns might have prevented.</em>",
       },
       {
         label: "Minimal — let people make their own choices",
         desc: "No lockdowns. Voluntary guidance. Protect the economy above all.",
-        effects: { economy: +3, social: -15, approval: -5, unity: -8, rights: +5, sovereign: -2 },
+        effects: {selfDetermination: -2, economy: +3, social: -15, approval: -5, unity: -8, rights: +5 },
         consequence: "You refuse lockdowns. <em>The virus spreads faster. Canada's death rate mirrors the US. Hospitals overflow. The economy takes a smaller hit — but at what cost? Some provinces defy you and lock down anyway, fracturing national unity.</em>",
       },
     ],
@@ -1583,19 +1584,19 @@ const DECISIONS = [
       {
         label: "Retaliate and diversify — 'Canada Strong'",
         desc: "Counter-tariffs on $60B of US goods. Diversify trade to Europe and Asia. Stand firm on sovereignty.",
-        effects: { sovereign: +12, economy: -5, approval: +10, unity: +10, social: -2, rights: +2 },
+        effects: {externalIndependence: +12, economy: -5, approval: +10, unity: +10, social: -2, rights: +2 },
         consequence: "You retaliate. $60 billion in counter-tariffs. <em>'Elbow up, Canada.'</em> The country rallies — Canadian flags fly everywhere, US products are boycotted, 'Buy Canadian' becomes a movement. Trade diversification accelerates: new deals with the EU and Pacific nations. <em>The economy takes a hit — but Canada finds its spine. Sovereignty isn't free, but it's not for sale either.</em>",
       },
       {
         label: "Negotiate — find a deal, avoid escalation",
         desc: "Seek a compromise. Offer concessions on border security and defence spending.",
-        effects: { sovereign: -8, economy: +5, approval: -5, unity: -5, social: 0, rights: -2 },
+        effects: {externalIndependence: -8, economy: +5, approval: -5, unity: -5, social: 0, rights: -2 },
         consequence: "You negotiate. Concessions on border security, defence spending commitments, a revised trade deal. <em>The tariffs ease. The economy recovers. But the word 'sovereignty' now has an asterisk. Canada is still independent — but it learned to flinch.</em>",
       },
       {
         label: "Full economic integration — embrace the future",
         desc: "Open negotiations for a customs union or deeper integration. The future is continental.",
-        effects: { sovereign: -20, economy: +15, approval: -8, unity: -15, social: +2, rights: -5 },
+        effects: {externalIndependence: -20, economy: +15, approval: -8, unity: -15, social: +2, rights: -5 },
         consequence: "You open the door to continental integration. The economic gains are real — seamless trade, shared markets, booming investment. But <em>Canada as a distinct nation, a separate country, begins to dissolve. The Maple Leaf stays on the flag. The meaning drains out of it.</em>",
       },
     ],
@@ -1663,8 +1664,8 @@ const TUNING = {
 };
 
 const SAVE_KEY = 'dominion.save.v1';
-const SCORE_METRICS = ['unity', 'economy', 'rights', 'enviro', 'sovereign', 'social'];
-const START_METRICS = () => ({ unity: 50, economy: 50, rights: 50, enviro: 50, sovereign: 50, social: 50, approval: 50 });
+const SCORE_METRICS = ['unity', 'economy', 'rights', 'enviro', 'externalIndependence', 'selfDetermination', 'social'];
+const START_METRICS = () => ({ unity: 50, economy: 50, rights: 50, enviro: 50, externalIndependence: 50, selfDetermination: 50, social: 50, approval: 50 });
 
 // ═══════════════════════════════════════════════════════════════
 //  PURE CORE — no DOM. Everything below the fold is rendering.
@@ -1728,9 +1729,11 @@ function applyEffects(metrics, effects) {
 // metrics below 15 count as 15 for scoring — the country still functions.
 const SCORE_FLOOR = 15;
 
+const SCORE_WEIGHTS = { externalIndependence: 0.5, selfDetermination: 0.5 };
 function finalScore(metrics) {
-  const vals = SCORE_METRICS.map(k => Math.max(SCORE_FLOOR, metrics[k]));
-  return vals.reduce((a, v) => a + v, 0) / SCORE_METRICS.length;
+  const total = SCORE_METRICS.reduce((a, k) => a + Math.max(SCORE_FLOOR, metrics[k]) * (SCORE_WEIGHTS[k] ?? 1), 0);
+  const wsum = SCORE_METRICS.reduce((a, k) => a + (SCORE_WEIGHTS[k] ?? 1), 0);
+  return total / wsum;
 }
 
 /** Play an arbitrary path through the real rules. Used for the baseline and the end-screen stat. */
@@ -2472,10 +2475,14 @@ function showEndScreen() {
     'Canada is a climate leader. Clean energy powers the future. The oil sands are transitioning. ',
     'Climate policy is muddled — some progress, some regression. The transition hasn\'t arrived. ',
     'The oil burns bright and the climate pays. Canada is a petro-state with polite manners. ');
-  narrative += line(m.sovereign,
+  narrative += line(m.externalIndependence,
     'Canada is proudly independent — from Britain, from America, from anyone. <em>A true north, strong and free.</em> ',
     'Canada is sovereign in name. In practice, it bends toward whoever is loudest. ',
-    '<em>Sovereignty has eroded. Canada is a province of someone else\'s empire — economically, culturally, or both.</em> ');
+    '<em>External independence has eroded. Canada is a province of someone else\'s empire — economically, culturally, or both.</em> ');
+  narrative += line(m.selfDetermination,
+    'Quebec, Indigenous nations, and provinces all feel they hold real power within Canada. The country holds by consent. ',
+    'Self-determination is contested — some nations feel heard, others merely tolerated. ',
+    '<em>The internal bargain has failed. Nations inside Canada no longer believe the federation represents them.</em> ');
   narrative += line(m.social,
     'Health care, education, housing — the social state is robust. Canadians are cared for. ',
     'The social state is functional but stretched. The cracks show in wait times and housing costs. ',

@@ -13,13 +13,13 @@ export const QUEBEC_1995_BRANCH = [
     needsUnlock: true,          // eligible only after the referendum Yes choice unlocks it
     requires: ['flag:quebecStatus=independent-negotiating'],
     priority: 5,                // constitutional/existential outranks everything else
-    metricsAffected: ['unity', 'economy', 'sovereign'],
+    metricsAffected: ['unity', 'economy'],
     choices: [
       {
         id: 'hardline',
         label: 'Hardline: insist on maximal federal terms',
         desc: 'Debt allocation, Indigenous territorial consent, and border questions are non-negotiable.',
-        metrics: { unity: -3, sovereign: 5 },
+        metrics: {unity: -3, selfDetermination: -3, },
         financial: { debtToGdp: 4 },
         setsFlags: { quebecStatus: 'independent' },
         isHistorical: false,
@@ -28,7 +28,7 @@ export const QUEBEC_1995_BRANCH = [
         id: 'partnership',
         label: 'Negotiate a partnership / confederal arrangement',
         desc: 'Offer Quebec an economic and monetary partnership in exchange for renewed federalism.',
-        metrics: { unity: 8, economy: 3, sovereign: 2 },
+        metrics: {unity: 8, economy: 3, selfDetermination: 2, },
         setsFlags: { quebecStatus: 'renewed-federalism' },
         isHistorical: false,
       },
@@ -52,7 +52,7 @@ export const QUEBEC_1995_REFERENDUM_V2 = {
       id: 'yes',
       label: 'YES — Quebec negotiates sovereignty',
       desc: 'The Yes side wins. Begin separation negotiations.',
-      metrics: { unity: -25, economy: -8, sovereign: 12 },
+      metrics: {unity: -25, economy: -8, selfDetermination: 12, },
       financial: { debtToGdp: 6, growthIndex: -10 },
       setsFlags: { quebecStatus: 'independent-negotiating' },
       unlocks: ['QUEBEC_NEGOTIATION_1996'],

@@ -62,16 +62,16 @@ test('negotiation is NOT eligible without the flag even if unlocked', () => {
 });
 
 test('party archetypes: caucus strain and non-confidence trigger', () => {
-  assert.deepEqual(caucusStrain('liberal', { unity: 60, rights: 60, sovereign: 50 }), [],
+  assert.deepEqual(caucusStrain('liberal', { unity: 60, rights: 60, externalIndependence: 50, selfDetermination: 50 }), [],
     'no strain inside ideal bands');
-  const strained = caucusStrain('liberal', { unity: 30, rights: 40, sovereign: 90 });
-  assert.equal(strained.length, 3);
+  const strained = caucusStrain('liberal', { unity: 30, rights: 40, externalIndependence: 90, selfDetermination: 90 });
+  assert.equal(strained.length, 4); // unity, rights, E, and S all violate liberal bands
 
   // healthy party does not face non-confidence despite some strain
   assert.equal(facesNonConfidence({ id: 'liberal', credibility: 60 },
-    { unity: 30, rights: 40, sovereign: 90 }), false,
+    { unity: 30, rights: 40, externalIndependence: 90, selfDetermination: 90 }), false,
     'high credibility absorbs strain');
   // eroded credibility + heavy strain triggers caucus revolt
   assert.equal(facesNonConfidence({ id: 'liberal', credibility: 20 },
-    { unity: 10, rights: 20, sovereign: 100 }), true);
+    { unity: 10, rights: 20, externalIndependence: 100, selfDetermination: 100 }), true);
 });

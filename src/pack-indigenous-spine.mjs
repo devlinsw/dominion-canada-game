@@ -48,7 +48,7 @@ export const INDIGENOUS_SPINE = [
     type: 'universal',
     actor: 'government',
     priority: 3,
-    metricsAffected: ['rights', 'sovereign', 'unity'],
+    metricsAffected: ['rights', 'unity'],
     requires: [],   // fires alongside patriation regardless of Quebec outcome
     context: 'The constitutional package is nearly complete. First Nations, Inuit, and Métis leaders demand that existing aboriginal and treaty rights be recognized and affirmed in the supreme law of the land — not left to ordinary legislation. Provincial premiers are wary; some want the section dropped entirely.',
     choices: [
@@ -56,7 +56,7 @@ export const INDIGENOUS_SPINE = [
         id: 'entrench_s35',
         label: 'Entrench section 35 — recognize and affirm existing rights',
         desc: 'Constitutional protection for aboriginal and treaty rights, now and hereafter.',
-        metrics: { rights: 5, sovereign: 2, unity: 2 },
+        metrics: {rights: 5, unity: 2, selfDetermination: 2, },
         setsFlags: { s35Recognized: true },
         isHistorical: true,
       },
@@ -64,7 +64,7 @@ export const INDIGENOUS_SPINE = [
         id: 'omit_s35',
         label: 'Leave it out — keep the package simple',
         desc: 'Rights can be protected by courts and statutes later. Don\'t complicate patriation.',
-        metrics: { rights: -4, sovereign: 1 },
+        metrics: {rights: -4, selfDetermination: -1, },
         setsFlags: { s35Recognized: false },
         isHistorical: false,
       },
@@ -113,7 +113,7 @@ export const INDIGENOUS_SPINE = [
     type: 'universal',
     actor: 'all-parties',
     priority: 1,
-    metricsAffected: ['rights', 'social', 'sovereign'],
+    metricsAffected: ['rights', 'social'],
     context: 'The Truth and Reconciliation Commission has concluded six years of testimony from survivors of the residential schools. Its 94 Calls to Action range from child-welfare reform to language protection to a papal apology. Survivors are watching to see whether this moment produces change or another shelved report.',
     choices: [
       {
